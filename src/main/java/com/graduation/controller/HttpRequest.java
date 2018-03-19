@@ -1,11 +1,16 @@
 package com.graduation.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
+import javax.json.JsonObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,18 +20,19 @@ public class HttpRequest {
     /**
      * 向指定URL发送GET方法的请求
      *
-     * @param url
-     *            发送请求的URL
-     * @param param
-     *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @param url   发送请求的URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url, String param) {
         String result = "";
         BufferedReader in = null;
         try {
-            String urlNameString = url + "?" + param;
-            URL realUrl = new URL(urlNameString);
+            StringBuffer urlNameString = new StringBuffer(url);
+            if (param != null && param.length() != 0) {
+                urlNameString.append("?" + param);
+            }
+            URL realUrl = new URL(urlNameString.toString());
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
             // 设置通用的请求属性
@@ -42,7 +48,6 @@ public class HttpRequest {
             for (String key : map.keySet()) {
                 System.out.println(key + "--->" + map.get(key));
             }
-            System.out.println("ETag--->" + map.get("Access-Control-Expose-Headers"));
             // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));
@@ -70,10 +75,8 @@ public class HttpRequest {
     /**
      * 向指定 URL 发送POST方法的请求
      *
-     * @param url
-     *            发送请求的 URL
-     * @param param
-     *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @param url   发送请求的 URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
     public static String sendPost(String url, String param) {
@@ -106,30 +109,54 @@ public class HttpRequest {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！"+e);
+            System.out.println("发送 POST 请求出现异常！" + e);
             e.printStackTrace();
         }
         //使用finally块来关闭输出流、输入流
-        finally{
-            try{
-                if(out!=null){
+        finally {
+            try {
+                if (out != null) {
                     out.close();
                 }
-                if(in!=null){
+                if (in != null) {
                     in.close();
                 }
-            }
-            catch(IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
         return result;
     }
 
-    public static void main(String args[]){
-        String url = "https://api.github.com/search/repositories";
-        String param = "q=language:python&sort=stars";
-        HttpRequest.sendGet(url,param);
+    public static JSONArray stringToJson(String var) {
+        if (var.substring(0, 1).equals("{")) {
+            var = "[" + var + "]";
+        }
+        return JSONArray.parseArray(var);
+    }
+
+    public static void main(String args[]) {
+//        String url = "https://api.github.com/users/Jokechu";
+//        String param = /*"q=language:python&sort=stars"*/"";
+//        HttpRequest.sendGet(url,param);
+
+        String string = "{\"name\":\"桔子桑\",\n" +
+                "  \"sex\":\"男\",\n" +
+                "  \"age\":18,\n" +
+                "\"grade\":{\"gname\":\"三年八班\",\n" +
+                "         \"gdesc\":\"初三年级八班\"\n" +
+                "         } \n" +
+                " }";
+
+        JSONArray jsonArray = stringToJson(string);
+        List<JSONObject> jsonObjectList = new ArrayList<JSONObject>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            jsonObjectList.add(jsonArray.getJSONObject(i));
+        }
+        System.out.println(jsonObjectList.size());
+        String grade = jsonObjectList.get(0).getString("grade");
+        //输出  张三 20
+        System.out.println(grade);
     }
 }
 
