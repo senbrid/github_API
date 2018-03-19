@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.graduation.dao.RepositoryMapper" >
+  <resultMap id="BaseResultMap" type="com.graduation.model.Repository" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="html_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="created_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="pushed_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="git_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ssh_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="clone_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="svn_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="size" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="star_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="watchers_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="forks_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="language" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="developerId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="parentId" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="sourceId" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, full_name, html_url, description, created_at, updated_at, pushed_at, git_url, 
+    ssh_url, clone_url, svn_url, size, star_count, watchers_count, forks_count, language, 
+    developerId, parentId, sourceId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.graduation.model.RepositoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_repository
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_repository
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.graduation.model.RepositoryExample" >
+    delete from tb_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.graduation.model.Repository" >
+    insert into tb_repository (id, name, full_name, 
+      html_url, description, created_at, 
+      updated_at, pushed_at, git_url, 
+      ssh_url, clone_url, svn_url, 
+      size, star_count, watchers_count, 
+      forks_count, language, developerId, 
+      parentId, sourceId)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
+      #{htmlUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{pushedAt,jdbcType=TIMESTAMP}, #{gitUrl,jdbcType=VARCHAR}, 
+      #{sshUrl,jdbcType=VARCHAR}, #{cloneUrl,jdbcType=VARCHAR}, #{svnUrl,jdbcType=VARCHAR}, 
+      #{size,jdbcType=INTEGER}, #{starCount,jdbcType=INTEGER}, #{watchersCount,jdbcType=INTEGER}, 
+      #{forksCount,jdbcType=INTEGER}, #{language,jdbcType=VARCHAR}, #{developerid,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=BIGINT}, #{sourceid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.graduation.model.Repository" >
+    insert into tb_repository
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="htmlUrl != null" >
+        html_url,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="pushedAt != null" >
+        pushed_at,
+      </if>
+      <if test="gitUrl != null" >
+        git_url,
+      </if>
+      <if test="sshUrl != null" >
+        ssh_url,
+      </if>
+      <if test="cloneUrl != null" >
+        clone_url,
+      </if>
+      <if test="svnUrl != null" >
+        svn_url,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="starCount != null" >
+        star_count,
+      </if>
+      <if test="watchersCount != null" >
+        watchers_count,
+      </if>
+      <if test="forksCount != null" >
+        forks_count,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="developerid != null" >
+        developerId,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="sourceid != null" >
+        sourceId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlUrl != null" >
+        #{htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushedAt != null" >
+        #{pushedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gitUrl != null" >
+        #{gitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sshUrl != null" >
+        #{sshUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cloneUrl != null" >
+        #{cloneUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="svnUrl != null" >
+        #{svnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="starCount != null" >
+        #{starCount,jdbcType=INTEGER},
+      </if>
+      <if test="watchersCount != null" >
+        #{watchersCount,jdbcType=INTEGER},
+      </if>
+      <if test="forksCount != null" >
+        #{forksCount,jdbcType=INTEGER},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="developerid != null" >
+        #{developerid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="sourceid != null" >
+        #{sourceid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.graduation.model.RepositoryExample" resultType="java.lang.Integer" >
+    select count(*) from tb_repository
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_repository
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullName != null" >
+        full_name = #{record.fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htmlUrl != null" >
+        html_url = #{record.htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pushedAt != null" >
+        pushed_at = #{record.pushedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gitUrl != null" >
+        git_url = #{record.gitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sshUrl != null" >
+        ssh_url = #{record.sshUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cloneUrl != null" >
+        clone_url = #{record.cloneUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svnUrl != null" >
+        svn_url = #{record.svnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=INTEGER},
+      </if>
+      <if test="record.starCount != null" >
+        star_count = #{record.starCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.watchersCount != null" >
+        watchers_count = #{record.watchersCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.forksCount != null" >
+        forks_count = #{record.forksCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.language != null" >
+        language = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.developerid != null" >
+        developerId = #{record.developerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=BIGINT},
+      </if>
+      <if test="record.sourceid != null" >
+        sourceId = #{record.sourceid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_repository
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      full_name = #{record.fullName,jdbcType=VARCHAR},
+      html_url = #{record.htmlUrl,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      pushed_at = #{record.pushedAt,jdbcType=TIMESTAMP},
+      git_url = #{record.gitUrl,jdbcType=VARCHAR},
+      ssh_url = #{record.sshUrl,jdbcType=VARCHAR},
+      clone_url = #{record.cloneUrl,jdbcType=VARCHAR},
+      svn_url = #{record.svnUrl,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=INTEGER},
+      star_count = #{record.starCount,jdbcType=INTEGER},
+      watchers_count = #{record.watchersCount,jdbcType=INTEGER},
+      forks_count = #{record.forksCount,jdbcType=INTEGER},
+      language = #{record.language,jdbcType=VARCHAR},
+      developerId = #{record.developerid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=BIGINT},
+      sourceId = #{record.sourceid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.graduation.model.Repository" >
+    update tb_repository
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlUrl != null" >
+        html_url = #{htmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushedAt != null" >
+        pushed_at = #{pushedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gitUrl != null" >
+        git_url = #{gitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sshUrl != null" >
+        ssh_url = #{sshUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cloneUrl != null" >
+        clone_url = #{cloneUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="svnUrl != null" >
+        svn_url = #{svnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="starCount != null" >
+        star_count = #{starCount,jdbcType=INTEGER},
+      </if>
+      <if test="watchersCount != null" >
+        watchers_count = #{watchersCount,jdbcType=INTEGER},
+      </if>
+      <if test="forksCount != null" >
+        forks_count = #{forksCount,jdbcType=INTEGER},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="developerid != null" >
+        developerId = #{developerid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="sourceid != null" >
+        sourceId = #{sourceid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.graduation.model.Repository" >
+    update tb_repository
+    set name = #{name,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      html_url = #{htmlUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      pushed_at = #{pushedAt,jdbcType=TIMESTAMP},
+      git_url = #{gitUrl,jdbcType=VARCHAR},
+      ssh_url = #{sshUrl,jdbcType=VARCHAR},
+      clone_url = #{cloneUrl,jdbcType=VARCHAR},
+      svn_url = #{svnUrl,jdbcType=VARCHAR},
+      size = #{size,jdbcType=INTEGER},
+      star_count = #{starCount,jdbcType=INTEGER},
+      watchers_count = #{watchersCount,jdbcType=INTEGER},
+      forks_count = #{forksCount,jdbcType=INTEGER},
+      language = #{language,jdbcType=VARCHAR},
+      developerId = #{developerid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=BIGINT},
+      sourceId = #{sourceid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

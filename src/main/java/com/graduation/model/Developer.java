@@ -1,86 +1,139 @@
 package com.graduation.model;
 
-/**
- * 用户实体类
- */
+import java.util.Date;
+
 public class Developer {
-    /**
-     *登录名
-     */
+    private Long id;
+
     private String login;
 
-    private int id;
-    /**
-     * 头像地址
-     */
-    private String avatar_url;
-    /**
-     * github首页地址
-     */
-    private String html_url;
-    /**
-     * 关注你的人
-     */
-    private String followers_url;
-    /**
-     * 你关注的人
-     */
-    private String following_url;
-    /**
-     * star过的列表
-     */
-    private String starred_url;
-    /**
-     * 仓库列表
-     */
-    private String repos_url;
-    /**
-     *用户姓名
-     */
     private String name;
-    /**
-     *公司
-     */
+
+    private String avatarUrl;
+
+    private String htmlUrl;
+
+    private String followersUrl;
+
+    private String followingUrl;
+
+    private String staredUrl;
+
+    private String reposUrl;
+
     private String company;
-    /**
-     *博客
-     */
+
     private String blog;
-    /**
-     *电子邮箱
-     */
+
     private String email;
-    /**
-     * 个人简介
-     */
+
     private String bio;
-    /**
-     * 公开的库个数
-     */
-    private String public_repos;
-    /**
-     *被关注个数
-     */
-    private String followers;
-    /**
-     *关注个数
-     */
-    private String following;
-    /**
-     *账号创建时间
-     */
-    private String created_at;
-    /**
-     *账号修改时间
-     */
-    private String updated_at;
+
+    private Integer publicRepos;
+
+    private Integer followers;
+
+    private Integer following;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    public Developer(Long id, String login, String name, String avatarUrl, String htmlUrl, String followersUrl, String followingUrl, String staredUrl, String reposUrl, String company, String blog, String email, String bio, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.login = login;
+        this.name = name;
+        this.avatarUrl = avatarUrl;
+        this.htmlUrl = htmlUrl;
+        this.followersUrl = followersUrl;
+        this.followingUrl = followingUrl;
+        this.staredUrl = staredUrl;
+        this.reposUrl = reposUrl;
+        this.company = company;
+        this.blog = blog;
+        this.email = email;
+        this.bio = bio;
+        this.publicRepos = publicRepos;
+        this.followers = followers;
+        this.following = following;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Developer() {
+        super();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login == null ? null : login.trim();
+    }
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl == null ? null : htmlUrl.trim();
+    }
+
+    public String getFollowersUrl() {
+        return followersUrl;
+    }
+
+    public void setFollowersUrl(String followersUrl) {
+        this.followersUrl = followersUrl == null ? null : followersUrl.trim();
+    }
+
+    public String getFollowingUrl() {
+        return followingUrl;
+    }
+
+    public void setFollowingUrl(String followingUrl) {
+        this.followingUrl = followingUrl == null ? null : followingUrl.trim();
+    }
+
+    public String getStaredUrl() {
+        return staredUrl;
+    }
+
+    public void setStaredUrl(String staredUrl) {
+        this.staredUrl = staredUrl == null ? null : staredUrl.trim();
+    }
+
+    public String getReposUrl() {
+        return reposUrl;
+    }
+
+    public void setReposUrl(String reposUrl) {
+        this.reposUrl = reposUrl == null ? null : reposUrl.trim();
     }
 
     public String getCompany() {
@@ -88,7 +141,7 @@ public class Developer {
     }
 
     public void setCompany(String company) {
-        this.company = company;
+        this.company = company == null ? null : company.trim();
     }
 
     public String getBlog() {
@@ -96,7 +149,7 @@ public class Developer {
     }
 
     public void setBlog(String blog) {
-        this.blog = blog;
+        this.blog = blog == null ? null : blog.trim();
     }
 
     public String getEmail() {
@@ -104,7 +157,7 @@ public class Developer {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     public String getBio() {
@@ -112,101 +165,46 @@ public class Developer {
     }
 
     public void setBio(String bio) {
-        this.bio = bio;
+        this.bio = bio == null ? null : bio.trim();
     }
 
-    public String getPublic_repos() {
-        return public_repos;
+    public Integer getPublicRepos() {
+        return publicRepos;
     }
 
-    public void setPublic_repos(String public_repos) {
-        this.public_repos = public_repos;
+    public void setPublicRepos(Integer publicRepos) {
+        this.publicRepos = publicRepos;
     }
 
-    public String getFollowers() {
+    public Integer getFollowers() {
         return followers;
     }
 
-    public void setFollowers(String followers) {
+    public void setFollowers(Integer followers) {
         this.followers = followers;
     }
 
-    public String getFollowing() {
+    public Integer getFollowing() {
         return following;
     }
 
-    public void setFollowing(String following) {
+    public void setFollowing(Integer following) {
         this.following = following;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getUpdated_at() {
-        return updated_at;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
-
-    public void setLogin(String login){
-        this.login = login;
-    }
-    public String getLogin(){
-        return this.login;
-    }
-    public void setId(int id){
-        this.id = id;
-    }
-    public int getId(){
-        return this.id;
-    }
-    public void setAvatar_url(String avatar_url){
-        this.avatar_url = avatar_url;
-    }
-    public String getAvatar_url(){
-        return this.avatar_url;
-    }
-
-    public void setHtml_url(String html_url){
-        this.html_url = html_url;
-    }
-    public String getHtml_url(){
-        return this.html_url;
-    }
-    public void setFollowers_url(String followers_url){
-        this.followers_url = followers_url;
-    }
-    public String getFollowers_url(){
-        return this.followers_url;
-    }
-    public void setFollowing_url(String following_url){
-        this.following_url = following_url;
-    }
-    public String getFollowing_url(){
-        return this.following_url;
-    }
-
-    public void setStarred_url(String starred_url){
-        this.starred_url = starred_url;
-    }
-    public String getStarred_url(){
-        return this.starred_url;
-    }
-
-    public void setRepos_url(String repos_url){
-        this.repos_url = repos_url;
-    }
-    public String getRepos_url(){
-        return this.repos_url;
-    }
-
 }
-
-

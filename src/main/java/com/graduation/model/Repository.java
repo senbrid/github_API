@@ -1,65 +1,80 @@
 package com.graduation.model;
 
-/**
- * 仓库实体类
- */
-public class Repository {
+import java.util.Date;
 
-    private int id;
+public class Repository {
+    private Long id;
 
     private String name;
 
-    private String full_name;
+    private String fullName;
 
-    private int developerId;
-    /**
-     * 仓库在github上的地址
-     */
-    private String html_url;
-    /**
-     * 项目简介
-     */
+    private String htmlUrl;
+
     private String description;
 
-    private String url;
+    private Date createdAt;
 
-    private String created_at;
+    private Date updatedAt;
 
-    private String updated_at;
+    private Date pushedAt;
 
-    private String pushed_at;
+    private String gitUrl;
 
-    private String git_url;
+    private String sshUrl;
 
-    private String ssh_url;
+    private String cloneUrl;
 
-    private String clone_url;
+    private String svnUrl;
 
-    private String svn_url;
+    private Integer size;
 
-    private int size;
+    private Integer starCount;
 
-    private int stargazers_count;
+    private Integer watchersCount;
 
-    private int watchers_count;
+    private Integer forksCount;
 
     private String language;
 
-    private int forks_count;
+    private Integer developerid;
 
-    private int forks;
+    private Long parentid;
 
-    private int watchers;
+    private Long sourceid;
 
-    private int parentId;
+    public Repository(Long id, String name, String fullName, String htmlUrl, String description, Date createdAt, Date updatedAt, Date pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, Integer developerid, Long parentid, Long sourceid) {
+        this.id = id;
+        this.name = name;
+        this.fullName = fullName;
+        this.htmlUrl = htmlUrl;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.pushedAt = pushedAt;
+        this.gitUrl = gitUrl;
+        this.sshUrl = sshUrl;
+        this.cloneUrl = cloneUrl;
+        this.svnUrl = svnUrl;
+        this.size = size;
+        this.starCount = starCount;
+        this.watchersCount = watchersCount;
+        this.forksCount = forksCount;
+        this.language = language;
+        this.developerid = developerid;
+        this.parentid = parentid;
+        this.sourceid = sourceid;
+    }
 
-    private int sourceId;
+    public Repository() {
+        super();
+    }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,31 +83,23 @@ public class Repository {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName == null ? null : fullName.trim();
     }
 
-    public int getDeveloperId() {
-        return developerId;
+    public String getHtmlUrl() {
+        return htmlUrl;
     }
 
-    public void setDeveloperId(int developerId) {
-        this.developerId = developerId;
-    }
-
-    public String getHtml_url() {
-        return html_url;
-    }
-
-    public void setHtml_url(String html_url) {
-        this.html_url = html_url;
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl == null ? null : htmlUrl.trim();
     }
 
     public String getDescription() {
@@ -100,95 +107,95 @@ public class Repository {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description == null ? null : description.trim();
     }
 
-    public String getUrl() {
-        return url;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public String getUpdated_at() {
-        return updated_at;
+    public Date getPushedAt() {
+        return pushedAt;
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+    public void setPushedAt(Date pushedAt) {
+        this.pushedAt = pushedAt;
     }
 
-    public String getPushed_at() {
-        return pushed_at;
+    public String getGitUrl() {
+        return gitUrl;
     }
 
-    public void setPushed_at(String pushed_at) {
-        this.pushed_at = pushed_at;
+    public void setGitUrl(String gitUrl) {
+        this.gitUrl = gitUrl == null ? null : gitUrl.trim();
     }
 
-    public String getGit_url() {
-        return git_url;
+    public String getSshUrl() {
+        return sshUrl;
     }
 
-    public void setGit_url(String git_url) {
-        this.git_url = git_url;
+    public void setSshUrl(String sshUrl) {
+        this.sshUrl = sshUrl == null ? null : sshUrl.trim();
     }
 
-    public String getSsh_url() {
-        return ssh_url;
+    public String getCloneUrl() {
+        return cloneUrl;
     }
 
-    public void setSsh_url(String ssh_url) {
-        this.ssh_url = ssh_url;
+    public void setCloneUrl(String cloneUrl) {
+        this.cloneUrl = cloneUrl == null ? null : cloneUrl.trim();
     }
 
-    public String getClone_url() {
-        return clone_url;
+    public String getSvnUrl() {
+        return svnUrl;
     }
 
-    public void setClone_url(String clone_url) {
-        this.clone_url = clone_url;
+    public void setSvnUrl(String svnUrl) {
+        this.svnUrl = svnUrl == null ? null : svnUrl.trim();
     }
 
-    public String getSvn_url() {
-        return svn_url;
-    }
-
-    public void setSvn_url(String svn_url) {
-        this.svn_url = svn_url;
-    }
-
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(Integer size) {
         this.size = size;
     }
 
-    public int getStargazers_count() {
-        return stargazers_count;
+    public Integer getStarCount() {
+        return starCount;
     }
 
-    public void setStargazers_count(int stargazers_count) {
-        this.stargazers_count = stargazers_count;
+    public void setStarCount(Integer starCount) {
+        this.starCount = starCount;
     }
 
-    public int getWatchers_count() {
-        return watchers_count;
+    public Integer getWatchersCount() {
+        return watchersCount;
     }
 
-    public void setWatchers_count(int watchers_count) {
-        this.watchers_count = watchers_count;
+    public void setWatchersCount(Integer watchersCount) {
+        this.watchersCount = watchersCount;
+    }
+
+    public Integer getForksCount() {
+        return forksCount;
+    }
+
+    public void setForksCount(Integer forksCount) {
+        this.forksCount = forksCount;
     }
 
     public String getLanguage() {
@@ -196,46 +203,30 @@ public class Repository {
     }
 
     public void setLanguage(String language) {
-        this.language = language;
+        this.language = language == null ? null : language.trim();
     }
 
-    public int getForks_count() {
-        return forks_count;
+    public Integer getDeveloperid() {
+        return developerid;
     }
 
-    public void setForks_count(int forks_count) {
-        this.forks_count = forks_count;
+    public void setDeveloperid(Integer developerid) {
+        this.developerid = developerid;
     }
 
-    public int getForks() {
-        return forks;
+    public Long getParentid() {
+        return parentid;
     }
 
-    public void setForks(int forks) {
-        this.forks = forks;
+    public void setParentid(Long parentid) {
+        this.parentid = parentid;
     }
 
-    public int getWatchers() {
-        return watchers;
+    public Long getSourceid() {
+        return sourceid;
     }
 
-    public void setWatchers(int watchers) {
-        this.watchers = watchers;
-    }
-
-    public int getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
-    }
-
-    public int getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(int sourceId) {
-        this.sourceId = sourceId;
+    public void setSourceid(Long sourceid) {
+        this.sourceid = sourceid;
     }
 }

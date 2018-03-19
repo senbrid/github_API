@@ -2,8 +2,9 @@ package com.graduation.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.json.JsonObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+@Controller
+@RequestMapping("/index")
 public class HttpRequest {
 
     /**
