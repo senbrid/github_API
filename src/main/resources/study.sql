@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2018-03-19 16:58:40
+Date: 2018-03-21 17:43:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_developer`;
 CREATE TABLE `tb_developer` (
-  `id` int(11) NOT NULL COMMENT 'id',
+  `id` bigint(20) NOT NULL COMMENT 'id',
   `login` varchar(255) DEFAULT NULL COMMENT '用户名',
   `name` varchar(255) DEFAULT NULL COMMENT '姓名',
   `avatar_url` varchar(255) DEFAULT NULL COMMENT '头像地址',
@@ -44,13 +44,14 @@ CREATE TABLE `tb_developer` (
 -- ----------------------------
 -- Records of tb_developer
 -- ----------------------------
+INSERT INTO `tb_developer` VALUES ('30211186', 'JokeChu', 'WestChu', 'https://avatars1.githubusercontent.com/u/30211186?v=4', 'https://github.com/JokeChu', 'https://api.github.com/users/JokeChu/followers', 'https://api.github.com/users/JokeChu/following{/other_user}', 'https://api.github.com/users/JokeChu/starred{/owner}{/repo}', 'https://api.github.com/users/JokeChu/repos', null, '', null, 'ChangSha of HuNan', '9', '0', '2', '2017-07-16 10:56:24', '2018-03-19 00:55:43');
 
 -- ----------------------------
 -- Table structure for tb_repository
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_repository`;
 CREATE TABLE `tb_repository` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL COMMENT '仓库名字',
   `full_name` varchar(255) DEFAULT NULL COMMENT '仓库全名',
   `html_url` varchar(255) DEFAULT NULL COMMENT '该仓库在github上的url',
@@ -67,9 +68,7 @@ CREATE TABLE `tb_repository` (
   `watchers_count` int(11) DEFAULT NULL COMMENT '关注数',
   `forks_count` int(11) DEFAULT NULL COMMENT '拷贝',
   `language` varchar(255) DEFAULT NULL,
-  `developerId` int(11) DEFAULT NULL COMMENT '开发者id',
-  `parentId` int(11) DEFAULT NULL COMMENT '上级',
-  `sourceId` int(11) DEFAULT NULL COMMENT '资源最上级',
+  `developerId` varchar(255) DEFAULT NULL COMMENT '开发者id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

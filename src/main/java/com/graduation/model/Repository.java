@@ -37,13 +37,9 @@ public class Repository {
 
     private String language;
 
-    private Integer developerid;
+    private String developerid;
 
-    private Long parentid;
-
-    private Long sourceid;
-
-    public Repository(Long id, String name, String fullName, String htmlUrl, String description, Date createdAt, Date updatedAt, Date pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, Integer developerid, Long parentid, Long sourceid) {
+    public Repository(Long id, String name, String fullName, String htmlUrl, String description, Date createdAt, Date updatedAt, Date pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, String developerid) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -62,8 +58,6 @@ public class Repository {
         this.forksCount = forksCount;
         this.language = language;
         this.developerid = developerid;
-        this.parentid = parentid;
-        this.sourceid = sourceid;
     }
 
     public Repository() {
@@ -206,27 +200,11 @@ public class Repository {
         this.language = language == null ? null : language.trim();
     }
 
-    public Integer getDeveloperid() {
+    public String getDeveloperid() {
         return developerid;
     }
 
-    public void setDeveloperid(Integer developerid) {
-        this.developerid = developerid;
-    }
-
-    public Long getParentid() {
-        return parentid;
-    }
-
-    public void setParentid(Long parentid) {
-        this.parentid = parentid;
-    }
-
-    public Long getSourceid() {
-        return sourceid;
-    }
-
-    public void setSourceid(Long sourceid) {
-        this.sourceid = sourceid;
+    public void setDeveloperid(String developerid) {
+        this.developerid = developerid == null ? null : developerid.trim();
     }
 }

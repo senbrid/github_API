@@ -1225,173 +1225,63 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidEqualTo(Integer value) {
+        public Criteria andDeveloperidEqualTo(String value) {
             addCriterion("developerId =", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotEqualTo(Integer value) {
+        public Criteria andDeveloperidNotEqualTo(String value) {
             addCriterion("developerId <>", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidGreaterThan(Integer value) {
+        public Criteria andDeveloperidGreaterThan(String value) {
             addCriterion("developerId >", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andDeveloperidGreaterThanOrEqualTo(String value) {
             addCriterion("developerId >=", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLessThan(Integer value) {
+        public Criteria andDeveloperidLessThan(String value) {
             addCriterion("developerId <", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLessThanOrEqualTo(Integer value) {
+        public Criteria andDeveloperidLessThanOrEqualTo(String value) {
             addCriterion("developerId <=", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidIn(List<Integer> values) {
+        public Criteria andDeveloperidLike(String value) {
+            addCriterion("developerId like", value, "developerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeveloperidNotLike(String value) {
+            addCriterion("developerId not like", value, "developerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeveloperidIn(List<String> values) {
             addCriterion("developerId in", values, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotIn(List<Integer> values) {
+        public Criteria andDeveloperidNotIn(List<String> values) {
             addCriterion("developerId not in", values, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidBetween(Integer value1, Integer value2) {
+        public Criteria andDeveloperidBetween(String value1, String value2) {
             addCriterion("developerId between", value1, value2, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotBetween(Integer value1, Integer value2) {
+        public Criteria andDeveloperidNotBetween(String value1, String value2) {
             addCriterion("developerId not between", value1, value2, "developerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidIsNull() {
-            addCriterion("parentId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidIsNotNull() {
-            addCriterion("parentId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidEqualTo(Long value) {
-            addCriterion("parentId =", value, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidNotEqualTo(Long value) {
-            addCriterion("parentId <>", value, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidGreaterThan(Long value) {
-            addCriterion("parentId >", value, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidGreaterThanOrEqualTo(Long value) {
-            addCriterion("parentId >=", value, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidLessThan(Long value) {
-            addCriterion("parentId <", value, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidLessThanOrEqualTo(Long value) {
-            addCriterion("parentId <=", value, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidIn(List<Long> values) {
-            addCriterion("parentId in", values, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidNotIn(List<Long> values) {
-            addCriterion("parentId not in", values, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidBetween(Long value1, Long value2) {
-            addCriterion("parentId between", value1, value2, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentidNotBetween(Long value1, Long value2) {
-            addCriterion("parentId not between", value1, value2, "parentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidIsNull() {
-            addCriterion("sourceId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidIsNotNull() {
-            addCriterion("sourceId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidEqualTo(Long value) {
-            addCriterion("sourceId =", value, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidNotEqualTo(Long value) {
-            addCriterion("sourceId <>", value, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidGreaterThan(Long value) {
-            addCriterion("sourceId >", value, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidGreaterThanOrEqualTo(Long value) {
-            addCriterion("sourceId >=", value, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidLessThan(Long value) {
-            addCriterion("sourceId <", value, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidLessThanOrEqualTo(Long value) {
-            addCriterion("sourceId <=", value, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidIn(List<Long> values) {
-            addCriterion("sourceId in", values, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidNotIn(List<Long> values) {
-            addCriterion("sourceId not in", values, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidBetween(Long value1, Long value2) {
-            addCriterion("sourceId between", value1, value2, "sourceid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSourceidNotBetween(Long value1, Long value2) {
-            addCriterion("sourceId not between", value1, value2, "sourceid");
             return (Criteria) this;
         }
     }
