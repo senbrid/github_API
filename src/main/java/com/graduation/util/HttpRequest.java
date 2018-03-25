@@ -144,7 +144,7 @@ public class HttpRequest {
         for (int i = 0; i < jsonArray.size(); i++) {
             if(jsonArray.getJSONObject(i).getString("owner") != null){
                 JSONObject object = JSONObject.parseObject(jsonArray.getJSONObject(i).getString("owner"));
-                jsonArray.getJSONObject(i).put("owner_login",object.getString("login"));
+                jsonArray.getJSONObject(i).put("ownerId",object.getString("login"));
             }
             jsonObjectList.add(jsonArray.getJSONObject(i));
         }
@@ -225,7 +225,7 @@ public class HttpRequest {
             repository.setWatchersCount(jsonObjectList.get(i).getInteger("watchers_count"));
             repository.setForksCount(jsonObjectList.get(i).getInteger("forks_count"));
             repository.setLanguage(jsonObjectList.get(i).getString("language"));
-            repository.setDeveloperid(jsonObjectList.get(i).getString("ownerid"));
+            repository.setDeveloperid(jsonObjectList.get(i).getString("ownerId"));
             repositoryList.add(repository);
         }
         return repositoryList;
