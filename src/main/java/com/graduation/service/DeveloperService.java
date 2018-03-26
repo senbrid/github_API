@@ -12,5 +12,5 @@ public interface DeveloperService {
      * @author Joke
      * Date 2018年3月21日15:36:35
      */
-    int addDeveloper(List<Developer> developerList);
+    int addDeveloperByListPO(List<Developer> developerList);
 }

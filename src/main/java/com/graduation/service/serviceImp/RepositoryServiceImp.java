@@ -20,7 +20,7 @@ public class RepositoryServiceImp implements RepositoryService {
      * @author Joke
      * Date 2018年3月21日15:36:35
      */
-    public int addRepository(List<Repository> repositoryList) {
+    public int addRepositoryByListPO(List<Repository> repositoryList) {
         int count = 0;
         for(Repository repository : repositoryList){
             count += repositoryMapper.insert(repository);

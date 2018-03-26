@@ -12,6 +12,6 @@ public interface RepositoryService {
      * @author Joke
      * Date 2018年3月21日15:36:35
      */
-    int addRepository(List<Repository> repositorySList);
+    int addRepositoryByListPO(List<Repository> repositorySList);
 }
 

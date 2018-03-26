@@ -20,7 +20,7 @@ public class DeveloperServiceImp implements DeveloperService {
      * @author Joke
      * Date 2018年3月21日15:36:35
      */
-    public int addDeveloper(List<Developer> developerList) {
+    public int addDeveloperByListPO(List<Developer> developerList) {
         int count = 0;
         for(Developer developer : developerList){
             count += developerMapper.insert(developer);
