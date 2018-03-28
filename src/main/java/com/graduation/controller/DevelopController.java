@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.graduation.model.Developer;
 import com.graduation.service.DeveloperService;
 import com.graduation.util.JSONParse;
+import com.graduation.util.URLBuilder;
 import com.graduation.util.URLRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,18 +23,21 @@ public class DevelopController {
 
     /**
      * 添加用户数据（使用AJAX异步）
-     * @param login
      */
-    @RequestMapping(value = "/add/{login}",method= RequestMethod.GET)
-    public void addDeveloper(@PathVariable("login")String login){
-        String url = "https://api.github.com/users/" + login;
-        String param = "";
+    @RequestMapping(value = "/add",method= RequestMethod.GET)
+    public void addDeveloper(){
+        String param = "tom&sort=flowers&order=desc";
+        String url = URLBuilder.urlSearchBuilder(1, param);
         //获取网页返回的字符串
         String str = URLRequest.sendGet(url);
         //字符串转json
         List<JSONObject> list = JSONParse.stringToJson(str);
-        List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(list);
+        //把JSON数据封装到实体类List
+        List<Developer> developerList = JSONParse.listJSONObjectToListDeveloperSearch(list);
+        System.out.println(developerList.size());
+        //批量添加数据接口
         int count = developerService.addDeveloperByListPO(developerList);
-        System.out.println("成功添加"+count+"条数据。");
+        //int count = repositoryService.addRepositoryByListPO(repositoryList);
+        System.out.println("成功添加" + count + "条数据。");
  }
 }

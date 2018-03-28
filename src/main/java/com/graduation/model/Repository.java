@@ -9,8 +9,6 @@ public class Repository {
 
     private String fullName;
 
-    private String htmlUrl;
-
     private String description;
 
     private Date createdAt;
@@ -18,14 +16,6 @@ public class Repository {
     private Date updatedAt;
 
     private Date pushedAt;
-
-    private String gitUrl;
-
-    private String sshUrl;
-
-    private String cloneUrl;
-
-    private String svnUrl;
 
     private Integer size;
 
@@ -39,19 +29,14 @@ public class Repository {
 
     private String developerid;
 
-    public Repository(Long id, String name, String fullName, String htmlUrl, String description, Date createdAt, Date updatedAt, Date pushedAt, String gitUrl, String sshUrl, String cloneUrl, String svnUrl, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, String developerid) {
+    public Repository(Long id, String name, String fullName, String description, Date createdAt, Date updatedAt, Date pushedAt, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, String developerid) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
-        this.htmlUrl = htmlUrl;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.pushedAt = pushedAt;
-        this.gitUrl = gitUrl;
-        this.sshUrl = sshUrl;
-        this.cloneUrl = cloneUrl;
-        this.svnUrl = svnUrl;
         this.size = size;
         this.starCount = starCount;
         this.watchersCount = watchersCount;
@@ -88,14 +73,6 @@ public class Repository {
         this.fullName = fullName == null ? null : fullName.trim();
     }
 
-    public String getHtmlUrl() {
-        return htmlUrl;
-    }
-
-    public void setHtmlUrl(String htmlUrl) {
-        this.htmlUrl = htmlUrl == null ? null : htmlUrl.trim();
-    }
-
     public String getDescription() {
         return description;
     }
@@ -126,38 +103,6 @@ public class Repository {
 
     public void setPushedAt(Date pushedAt) {
         this.pushedAt = pushedAt;
-    }
-
-    public String getGitUrl() {
-        return gitUrl;
-    }
-
-    public void setGitUrl(String gitUrl) {
-        this.gitUrl = gitUrl == null ? null : gitUrl.trim();
-    }
-
-    public String getSshUrl() {
-        return sshUrl;
-    }
-
-    public void setSshUrl(String sshUrl) {
-        this.sshUrl = sshUrl == null ? null : sshUrl.trim();
-    }
-
-    public String getCloneUrl() {
-        return cloneUrl;
-    }
-
-    public void setCloneUrl(String cloneUrl) {
-        this.cloneUrl = cloneUrl == null ? null : cloneUrl.trim();
-    }
-
-    public String getSvnUrl() {
-        return svnUrl;
-    }
-
-    public void setSvnUrl(String svnUrl) {
-        this.svnUrl = svnUrl == null ? null : svnUrl.trim();
     }
 
     public Integer getSize() {

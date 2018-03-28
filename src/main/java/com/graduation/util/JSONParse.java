@@ -40,11 +40,14 @@ public class JSONParse {
      * @param UTCString
      * @return date
      */
-    public static Date UTCStringtODate(String UTCString) {
+    public static Date UTCStringtODate(String UTCString){
 
         SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         Date date = null;
         try {
+            if(UTCString==null || UTCString.isEmpty()){
+                return null;
+            }
             date = utcFormat.parse(UTCString);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -66,11 +69,6 @@ public class JSONParse {
             developer.setId(jsonObjectList.get(i).getLong("id"));
             developer.setName(jsonObjectList.get(i).getString("name"));
             developer.setAvatarUrl(jsonObjectList.get(i).getString("avatar_url"));
-            developer.setHtmlUrl(jsonObjectList.get(i).getString("html_url"));
-            developer.setFollowersUrl(jsonObjectList.get(i).getString("followers_url"));
-            developer.setFollowingUrl(jsonObjectList.get(i).getString("following_url"));
-            developer.setStaredUrl(jsonObjectList.get(i).getString("starred_url"));
-            developer.setReposUrl(jsonObjectList.get(i).getString("repos_url"));
             developer.setCompany(jsonObjectList.get(i).getString("company"));
             developer.setBlog(jsonObjectList.get(i).getString("blog"));
             developer.setEmail(jsonObjectList.get(i).getString("email"));
@@ -81,6 +79,21 @@ public class JSONParse {
             developer.setCreatedAt(UTCStringtODate(jsonObjectList.get(i).getString("created_at")));
             developer.setUpdatedAt(UTCStringtODate(jsonObjectList.get(i).getString("updated_at")));
             developerList.add(developer);
+        }
+        return developerList;
+    }
+
+    /**
+     * JSON list 转换成 Developer list Search
+     *
+     * @param list
+     * @return List<Developer>
+     */
+    public static List<Developer> listJSONObjectToListDeveloperSearch(List<JSONObject> list) {
+        List<Developer> developerList = new ArrayList<Developer>();
+        for (int j = 0; j < list.size(); j++) {
+            List<JSONObject> jsonObjectList = stringToJson(list.get(j).getString("items"));
+            developerList = listJSONObjectToListDeveloper(jsonObjectList);
         }
         return developerList;
     }
@@ -98,15 +111,10 @@ public class JSONParse {
             repository.setId(jsonObjectList.get(i).getLong("id"));
             repository.setName(jsonObjectList.get(i).getString("name"));
             repository.setFullName(jsonObjectList.get(i).getString("full_name"));
-            repository.setHtmlUrl(jsonObjectList.get(i).getString("html_url"));
             repository.setDescription(jsonObjectList.get(i).getString("description"));
             repository.setCreatedAt(UTCStringtODate(jsonObjectList.get(i).getString("created_at")));
             repository.setUpdatedAt(UTCStringtODate(jsonObjectList.get(i).getString("updated_at")));
             repository.setPushedAt(UTCStringtODate(jsonObjectList.get(i).getString("pushed_at")));
-            repository.setGitUrl(jsonObjectList.get(i).getString("git_url"));
-            repository.setSshUrl(jsonObjectList.get(i).getString("ssh_url"));
-            repository.setCloneUrl(jsonObjectList.get(i).getString("clone_url"));
-            repository.setSvnUrl(jsonObjectList.get(i).getString("svn_url"));
             repository.setSize(jsonObjectList.get(i).getInteger("size"));
             repository.setStarCount(jsonObjectList.get(i).getInteger("stargazers_count"));
             repository.setWatchersCount(jsonObjectList.get(i).getInteger("watchers_count"));
@@ -122,34 +130,13 @@ public class JSONParse {
      * JSON list 转换成 Repository list Search
      *
      * @param list
-     * @return List<Developer>
+     * @return List<Repository>
      */
     public static List<Repository> listJSONObjectToListRepositorySearch(List<JSONObject> list) {
         List<Repository> repositoryList = new ArrayList<Repository>();
         for (int j = 0; j < list.size(); j++) {
             List<JSONObject> jsonObjectList = stringToJson(list.get(j).getString("items"));
-            for (int i = 0; i < jsonObjectList.size(); i++) {
-                Repository repository = new Repository();
-                repository.setId(jsonObjectList.get(i).getLong("id"));
-                repository.setName(jsonObjectList.get(i).getString("name"));
-                repository.setFullName(jsonObjectList.get(i).getString("full_name"));
-                repository.setHtmlUrl(jsonObjectList.get(i).getString("html_url"));
-                repository.setDescription(jsonObjectList.get(i).getString("description"));
-                repository.setCreatedAt(UTCStringtODate(jsonObjectList.get(i).getString("created_at")));
-                repository.setUpdatedAt(UTCStringtODate(jsonObjectList.get(i).getString("updated_at")));
-                repository.setPushedAt(UTCStringtODate(jsonObjectList.get(i).getString("pushed_at")));
-                repository.setGitUrl(jsonObjectList.get(i).getString("git_url"));
-                repository.setSshUrl(jsonObjectList.get(i).getString("ssh_url"));
-                repository.setCloneUrl(jsonObjectList.get(i).getString("clone_url"));
-                repository.setSvnUrl(jsonObjectList.get(i).getString("svn_url"));
-                repository.setSize(jsonObjectList.get(i).getInteger("size"));
-                repository.setStarCount(jsonObjectList.get(i).getInteger("stargazers_count"));
-                repository.setWatchersCount(jsonObjectList.get(i).getInteger("watchers_count"));
-                repository.setForksCount(jsonObjectList.get(i).getInteger("forks_count"));
-                repository.setLanguage(jsonObjectList.get(i).getString("language"));
-                repository.setDeveloperid(jsonObjectList.get(i).getString("ownerId"));
-                repositoryList.add(repository);
-            }
+            repositoryList = listJSONObjectToListRepository(jsonObjectList);
         }
         return repositoryList;
     }

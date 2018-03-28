@@ -7,11 +7,6 @@
       <arg column="login" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="avatar_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="html_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="followers_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="following_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="stared_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="repos_url" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="company" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="blog" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -82,9 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, login, name, avatar_url, html_url, followers_url, following_url, stared_url, 
-    repos_url, company, blog, email, bio, public_repos, followers, following, created_at, 
-    updated_at
+    id, login, name, avatar_url, company, blog, email, bio, public_repos, followers, 
+    following, created_at, updated_at
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.graduation.model.DeveloperExample" >
     select
@@ -118,19 +112,15 @@
   </delete>
   <insert id="insert" parameterType="com.graduation.model.Developer" >
     insert into tb_developer (id, login, name, 
-      avatar_url, html_url, followers_url, 
-      following_url, stared_url, repos_url, 
-      company, blog, email, 
-      bio, public_repos, followers, 
-      following, created_at, updated_at
-      )
+      avatar_url, company, blog, 
+      email, bio, public_repos, 
+      followers, following, created_at, 
+      updated_at)
     values (#{id,jdbcType=BIGINT}, #{login,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{avatarUrl,jdbcType=VARCHAR}, #{htmlUrl,jdbcType=VARCHAR}, #{followersUrl,jdbcType=VARCHAR}, 
-      #{followingUrl,jdbcType=VARCHAR}, #{staredUrl,jdbcType=VARCHAR}, #{reposUrl,jdbcType=VARCHAR}, 
-      #{company,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{bio,jdbcType=VARCHAR}, #{publicRepos,jdbcType=INTEGER}, #{followers,jdbcType=INTEGER}, 
-      #{following,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{avatarUrl,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{bio,jdbcType=VARCHAR}, #{publicRepos,jdbcType=INTEGER}, 
+      #{followers,jdbcType=INTEGER}, #{following,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.graduation.model.Developer" >
     insert into tb_developer
@@ -146,21 +136,6 @@
       </if>
       <if test="avatarUrl != null" >
         avatar_url,
-      </if>
-      <if test="htmlUrl != null" >
-        html_url,
-      </if>
-      <if test="followersUrl != null" >
-        followers_url,
-      </if>
-      <if test="followingUrl != null" >
-        following_url,
-      </if>
-      <if test="staredUrl != null" >
-        stared_url,
-      </if>
-      <if test="reposUrl != null" >
-        repos_url,
       </if>
       <if test="company != null" >
         company,
@@ -202,21 +177,6 @@
       </if>
       <if test="avatarUrl != null" >
         #{avatarUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="htmlUrl != null" >
-        #{htmlUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="followersUrl != null" >
-        #{followersUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="followingUrl != null" >
-        #{followingUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="staredUrl != null" >
-        #{staredUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="reposUrl != null" >
-        #{reposUrl,jdbcType=VARCHAR},
       </if>
       <if test="company != null" >
         #{company,jdbcType=VARCHAR},
@@ -268,21 +228,6 @@
       <if test="record.avatarUrl != null" >
         avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
       </if>
-      <if test="record.htmlUrl != null" >
-        html_url = #{record.htmlUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.followersUrl != null" >
-        followers_url = #{record.followersUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.followingUrl != null" >
-        following_url = #{record.followingUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.staredUrl != null" >
-        stared_url = #{record.staredUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.reposUrl != null" >
-        repos_url = #{record.reposUrl,jdbcType=VARCHAR},
-      </if>
       <if test="record.company != null" >
         company = #{record.company,jdbcType=VARCHAR},
       </if>
@@ -321,11 +266,6 @@
       login = #{record.login,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
-      html_url = #{record.htmlUrl,jdbcType=VARCHAR},
-      followers_url = #{record.followersUrl,jdbcType=VARCHAR},
-      following_url = #{record.followingUrl,jdbcType=VARCHAR},
-      stared_url = #{record.staredUrl,jdbcType=VARCHAR},
-      repos_url = #{record.reposUrl,jdbcType=VARCHAR},
       company = #{record.company,jdbcType=VARCHAR},
       blog = #{record.blog,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
@@ -350,21 +290,6 @@
       </if>
       <if test="avatarUrl != null" >
         avatar_url = #{avatarUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="htmlUrl != null" >
-        html_url = #{htmlUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="followersUrl != null" >
-        followers_url = #{followersUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="followingUrl != null" >
-        following_url = #{followingUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="staredUrl != null" >
-        stared_url = #{staredUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="reposUrl != null" >
-        repos_url = #{reposUrl,jdbcType=VARCHAR},
       </if>
       <if test="company != null" >
         company = #{company,jdbcType=VARCHAR},
@@ -401,11 +326,6 @@
     set login = #{login,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
-      html_url = #{htmlUrl,jdbcType=VARCHAR},
-      followers_url = #{followersUrl,jdbcType=VARCHAR},
-      following_url = #{followingUrl,jdbcType=VARCHAR},
-      stared_url = #{staredUrl,jdbcType=VARCHAR},
-      repos_url = #{reposUrl,jdbcType=VARCHAR},
       company = #{company,jdbcType=VARCHAR},
       blog = #{blog,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

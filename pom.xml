@@ -18,7 +18,7 @@
     <mybatis.version>3.2.8</mybatis.version>
 
     <!-- mysql驱动版本号 -->
-    <mysql-driver.version>5.1.29</mysql-driver.version>
+    <mysql-driver.version>5.1.5</mysql-driver.version>
 
     <!-- log4j日志包版本号 -->
     <slf4j.version>1.7.18</slf4j.version>
@@ -202,6 +202,14 @@
           <overwrite>true</overwrite>
         </configuration>
       </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.6</source>
+                <target>1.6</target>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
 </project>

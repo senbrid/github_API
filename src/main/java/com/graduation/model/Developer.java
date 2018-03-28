@@ -11,16 +11,6 @@ public class Developer {
 
     private String avatarUrl;
 
-    private String htmlUrl;
-
-    private String followersUrl;
-
-    private String followingUrl;
-
-    private String staredUrl;
-
-    private String reposUrl;
-
     private String company;
 
     private String blog;
@@ -39,16 +29,11 @@ public class Developer {
 
     private Date updatedAt;
 
-    public Developer(Long id, String login, String name, String avatarUrl, String htmlUrl, String followersUrl, String followingUrl, String staredUrl, String reposUrl, String company, String blog, String email, String bio, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt) {
+    public Developer(Long id, String login, String name, String avatarUrl, String company, String blog, String email, String bio, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt) {
         this.id = id;
         this.login = login;
         this.name = name;
         this.avatarUrl = avatarUrl;
-        this.htmlUrl = htmlUrl;
-        this.followersUrl = followersUrl;
-        this.followingUrl = followingUrl;
-        this.staredUrl = staredUrl;
-        this.reposUrl = reposUrl;
         this.company = company;
         this.blog = blog;
         this.email = email;
@@ -94,46 +79,6 @@ public class Developer {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
-    }
-
-    public String getHtmlUrl() {
-        return htmlUrl;
-    }
-
-    public void setHtmlUrl(String htmlUrl) {
-        this.htmlUrl = htmlUrl == null ? null : htmlUrl.trim();
-    }
-
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
-
-    public void setFollowersUrl(String followersUrl) {
-        this.followersUrl = followersUrl == null ? null : followersUrl.trim();
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public void setFollowingUrl(String followingUrl) {
-        this.followingUrl = followingUrl == null ? null : followingUrl.trim();
-    }
-
-    public String getStaredUrl() {
-        return staredUrl;
-    }
-
-    public void setStaredUrl(String staredUrl) {
-        this.staredUrl = staredUrl == null ? null : staredUrl.trim();
-    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public void setReposUrl(String reposUrl) {
-        this.reposUrl = reposUrl == null ? null : reposUrl.trim();
     }
 
     public String getCompany() {

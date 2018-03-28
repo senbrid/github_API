@@ -14,6 +14,8 @@ public interface RepositoryMapper {
 
     int insert(Repository record);
 
+    int insertBatch(List<Repository> recordList);
+
     int insertSelective(Repository record);
 
     List<Repository> selectByExample(RepositoryExample example);
