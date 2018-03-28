@@ -134,7 +134,7 @@
         watchers_count, forks_count, language,
         developerId)
         values
-        <foreach collection="repositorys" item="repository" separator=",">
+        <foreach collection="list" item="repository" separator=",">
             (#{repository.id,jdbcType=BIGINT}, #{repository.name,jdbcType=VARCHAR}, #{repository.fullName,jdbcType=VARCHAR},
             #{repository.description,jdbcType=VARCHAR}, #{repository.createdAt,jdbcType=TIMESTAMP}, #{repository.updatedAt,jdbcType=TIMESTAMP},
             #{repository.pushedAt,jdbcType=TIMESTAMP}, #{repository.size,jdbcType=INTEGER}, #{repository.starCount,jdbcType=INTEGER},
