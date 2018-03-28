@@ -82,6 +82,9 @@
     id, name, full_name, description, created_at, updated_at, pushed_at, size, star_count, 
     watchers_count, forks_count, language, developerId
   </sql>
+    <update id="preDo">
+        set names utf8mb4
+    </update>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.graduation.model.RepositoryExample">
         select
         <if test="distinct">
@@ -131,7 +134,7 @@
         watchers_count, forks_count, language,
         developerId)
         values
-        <foreach collection="list" item="repository" index="index" separator=",">
+        <foreach collection="repositorys" item="repository" separator=",">
             (#{repository.id,jdbcType=BIGINT}, #{repository.name,jdbcType=VARCHAR}, #{repository.fullName,jdbcType=VARCHAR},
             #{repository.description,jdbcType=VARCHAR}, #{repository.createdAt,jdbcType=TIMESTAMP}, #{repository.updatedAt,jdbcType=TIMESTAMP},
             #{repository.pushedAt,jdbcType=TIMESTAMP}, #{repository.size,jdbcType=INTEGER}, #{repository.starCount,jdbcType=INTEGER},

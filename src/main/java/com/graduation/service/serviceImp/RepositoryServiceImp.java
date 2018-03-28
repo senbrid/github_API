@@ -21,10 +21,12 @@ public class RepositoryServiceImp implements RepositoryService {
      * Date 2018年3月21日15:36:35
      */
     public int addRepositoryByListPO(List<Repository> repositoryList) {
+        repositoryMapper.preDo();
         return repositoryMapper.insertBatch(repositoryList);
     }
 
     public int addRepositoryByPO(Repository repository) {
+        repositoryMapper.preDo();
         return repositoryMapper.insert(repository);
     }
 }

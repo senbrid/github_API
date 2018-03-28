@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RepositoryMapper {
+
+    void preDo();
+
     int countByExample(RepositoryExample example);
 
     int deleteByExample(RepositoryExample example);
@@ -14,7 +17,7 @@ public interface RepositoryMapper {
 
     int insert(Repository record);
 
-    int insertBatch(List<Repository> recordList);
+    int insertBatch(List<Repository> repositories);
 
     int insertSelective(Repository record);
 

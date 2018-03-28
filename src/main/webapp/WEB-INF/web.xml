@@ -41,6 +41,10 @@
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
 
+  <!-- 加载Spring框架中的log4j监听器Log4jConfigListener -->
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
 
   <!-- spring mvc servlet-->
   <servlet>
