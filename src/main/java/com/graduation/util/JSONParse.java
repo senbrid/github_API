@@ -141,4 +141,16 @@ public class JSONParse {
         return repositoryList;
     }
 
+    /**
+     * 将对象序列化为JSON文本
+     *
+     * @date: 2018年3月29日16:05:17
+     * @param object
+     * @return
+     */
+    public static String toJSONString(List<JSONObject> object) {
+
+        return null;
+    }
+
 }

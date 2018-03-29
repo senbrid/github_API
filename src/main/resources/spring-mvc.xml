@@ -32,9 +32,9 @@
     </bean>
 
     <!--logger -->
-    <bean id="loggerService" class="com.graduation.logger.LoggerService" />
-    <bean id="logAspectBean" class="com.graduation.logger.AdminLogger"/>
-    <bean id="logAspect" class="com.graduation.logger.LogAnnotationAspect"/>
+    <!--<bean id="loggerService" class="com.graduation.logger.LoggerService" />-->
+    <!--<bean id="logAspectBean" class="com.graduation.logger.AdminLogger"/>-->
+    <!--<bean id="logAspect" class="com.graduation.logger.LogAnnotationAspect"/>-->
     <aop:aspectj-autoproxy/>
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->

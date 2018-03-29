@@ -15,5 +15,7 @@ public interface RepositoryService {
     int addRepositoryByListPO(List<Repository> repositoryList);
 
     int addRepositoryByPO(Repository repository);
+
+    List<Repository> queryAllData();
 }
 

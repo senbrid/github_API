@@ -25,7 +25,7 @@ public class RepositoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public void addRepository() throws Exception {
-        String param = "language:c&sort=stars&order=desc";
+        String param = "language:javascript&sort=stars&order=desc";
         String url = URLBuilder.urlSearchBuilder(0, param);
         //获取网页返回的字符串
         String str = URLRequest.sendGet(url);

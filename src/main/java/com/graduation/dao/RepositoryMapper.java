@@ -9,6 +9,8 @@ public interface RepositoryMapper {
 
     void preDo();
 
+    List<Repository> selectAll();
+
     int countByExample(RepositoryExample example);
 
     int deleteByExample(RepositoryExample example);

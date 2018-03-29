@@ -85,6 +85,11 @@
     <update id="preDo">
         set names utf8mb4
     </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_repository
+    </select>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.graduation.model.RepositoryExample">
         select
         <if test="distinct">
