@@ -1,5 +1,6 @@
 package com.graduation.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.graduation.model.Repository;
 import com.graduation.service.RepositoryService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,13 +31,14 @@ public class ViewController {
     @RequestMapping(value = "/queryData",method = RequestMethod.GET)
     @ResponseBody
     public String queryData() {
-//        List<Repository> repositories = repositoryService.queryAllData();
-//        System.out.println("size:" + repositories.size());
-        String json =  "[{"+"\"name\":\"JSON\""+","+"\"description\":\"我是第一条数据\""+","+"\"star_count\":\"3669\"" + "}"+","+"{"+"\"name\":\"JSON\""+","+"\"description\":\"我是第二条数据\""+","+"\"star_count\":\"9886\"" + "}]";
-        System.out.println("json:" + json);
-        JSONArray jsonArray = JSONArray.parseArray(json);
-        System.out.println("toJSONString:" + jsonArray.toJSONString());
-        return jsonArray.toJSONString();
+
+        List<Repository> repositories = repositoryService.queryAllData();
+        //System.out.println("size:" + repositories.size());
+
+        //把对象集合转换成json
+        String json = JSON.toJSONString(repositories);
+        System.out.println("json1:\n" + json);
+        return json;
     }
 
     /**

@@ -68,16 +68,17 @@
     <div class="container jumbotron">
         <div class="row">
             <div class="col-xs-12">
-                <h1>GitHubHOME<img src="http://www.bootcdn.cn/assets/img/bootcdn.png" alt="BootCDN logo" class=hidden></h1>
+                <h1>GitHubHOME<img src="http://www.bootcdn.cn/assets/img/bootcdn.png" alt="BootCDN logo" class=hidden>
+                </h1>
                 <p>稳定、快速、免费的GitHub开源项目服务<br><span class=package-amount>共收录了 <strong>3348</strong> 个热门开源项目</span></p>
                 <div class="search-wraper" role="search">
                     <div class=form-group>
                         <%--<input class="form-control search clearable" placeholder="搜索开源库，例如：java"--%>
-                                                 <%--autocomplete=on autofocus tabindex=0 autocorrect=off--%>
-                                                 <%--autocapitalize=off spellcheck=false>--%>
-                            <input type="text" class="form-control input-lg clearable" placeholder="搜索开源库，例如：java"
-                                   style="text-align: center"
-                            autocomplete=on autofocus tabindex=0 spellcheck=false>
+                        <%--autocomplete=on autofocus tabindex=0 autocorrect=off--%>
+                        <%--autocapitalize=off spellcheck=false>--%>
+                        <input type="text" class="form-control input-lg clearable" placeholder="搜索开源库，例如：java"
+                               style="text-align: center"
+                               autocomplete=on autofocus tabindex=0 spellcheck=false>
                         <i class="fa fa-search"></i></div>
                     <button onclick="query()">点我测试</button>
                 </div>
@@ -89,16 +90,16 @@
     <div class=container>
         <div class="list-group packages" id="common-packages">
             <div id="body">
-            <%--<a href="" class="package list-group-item" target=_blank onclick="">--%>
+                <%--<a href="" class="package list-group-item" target=_blank onclick="">--%>
                 <%--<div class="row">--%>
-                    <%--<div class="col-md-3"><h4 class=package-name>bootstrap</h4></div>--%>
-                    <%--<div class="col-md-9 hidden-xs"><p class="package-description">Bootstrap--%>
-                        <%--是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的--%>
-                        <%--WEB 项目。</p></div>--%>
-                    <%--<div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12"><span><i class="fa fa-star"></i> 122947</span>--%>
-                    <%--</div>--%>
+                <%--<div class="col-md-3"><h4 class=package-name>bootstrap</h4></div>--%>
+                <%--<div class="col-md-9 hidden-xs"><p class="package-description">Bootstrap--%>
+                <%--是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的--%>
+                <%--WEB 项目。</p></div>--%>
+                <%--<div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12"><span><i class="fa fa-star"></i> 122947</span>--%>
                 <%--</div>--%>
-            <%--</a>--%>
+                <%--</div>--%>
+                <%--</a>--%>
             </div>
             <a href="" class="package list-group-item all-packages" target=_blank
                onclick="_hmt.push(['_trackEvent', 'packages', 'click', 'all'])">所有开源项目列表</a></div>
@@ -120,20 +121,16 @@
             data: "",    //参数值
             type: "GET",   //请求方式
             success: function (data) {
-                var object = eval("("+data+")");
+                var object = eval("(" + data + ")");
                 var html = "";
-                for(var i in object){
+                for (var i in object) {
                     html += "<a href=\"\" class=\"package list-group-item\" target=_blank onclick=\"\">" +
-                        "<div class=\"row\">" +
-                        "<div class=\"col-md-3\"><h4 class=package-name>" + object[i].name + "</h4></div>" +
-                        "<div class=\"col-md-9 hidden-xs\"><p class=\"package-description\">" + object[i].description + "</p></div>" +
-                        "<div class=\"package-extra-info col-md-9 col-md-offset-3 col-xs-12\"><span><i class=\"fa fa-star\"></i> "+ object[i].star_count +"</span>\n" +
-                        "</div>\n" +
-                        "</div>\n" +
-                        "</a>";
+                        "<div class=\"row\"><div class=\"col-md-3\"><h4 class=package-name>" +
+                        object[i].name + "</h4></div><div class=\"col-md-9 hidden-xs\"><p class=\"package-description\">" +
+                        object[i].description + "</p></div><div class=\"package-extra-info col-md-9 col-md-offset-3 col-xs-12\"><span><i class=\"fa fa-star\"></i> " +
+                        object[i].starCount + "</span></div></div></a>";
                 }
                 $('#body').html(html);
-
             }
         });
     }
