@@ -1,21 +1,32 @@
 package com.graduation.service;
 
 import com.graduation.model.Repository;
+import com.graduation.model.RepositoryExample;
 
 import java.util.List;
 
 public interface RepositoryService {
     /**
-     * 添加仓库数据
+     * 批量添加仓库数据
      *
      * @param repositoryList
      * @author Joke
      * Date 2018年3月21日15:36:35
      */
     int addRepositoryByListPO(List<Repository> repositoryList);
-
+    /**
+     * 添加仓库数据
+     *
+     * @param repository
+     * @author Joke
+     * Date 2018年3月21日15:36:35
+     */
     int addRepositoryByPO(Repository repository);
 
-    List<Repository> queryAllData();
+    /**
+     * 按条件查询
+     * @return
+     */
+    List<Repository> queryData(RepositoryExample record);
 }
 
