@@ -50,11 +50,15 @@
 <jsp:include page="head.jsp"></jsp:include>
 <div class="packages-list-container" id="all-packages" style="margin-top: 100px">
     <div class="container">
-        <div><p style="color: gray">为您找到相关结果约<a style="color: red">18,500,000</a>个</p></div>
+        <div><p style="color: gray">为您找到相关结果约<a style="color: red" id="total">0</a>个</p></div>
         <div class="list-group packages" id="common-packages">
             <div id="body"></div>
-            <a href="" class="package list-group-item all-packages" target=_blank
-               onclick="_hmt.push(['_trackEvent', 'packages', 'click', 'all'])">所有开源项目列表</a></div>
+            <div class="pagination" style="float: left"><p style="color: gray"  id="pageText"></p></div>
+            <%--分页插件--%>
+            <nav aria-label="Page navigation" style="float: right">
+                <ul class="pagination" id="pagination"></ul>
+            </nav>
+        </div>
         <div class="list-group packages" id=search-results style="display: none"></div>
     </div>
 </div>
@@ -73,25 +77,39 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        query();
+        //query(1,"c");
+
     });
 
-    function query() {
+    $('#search').click(function () {
+        query(1,$('#text').val());
+    });
+
+    function query(page,text) {
+        $('#back-to-top').click();
         $.ajax({
             url: "/view/queryData",    //请求的url地址
             dataType: "json",   //返回格式为json
             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: "",    //参数值
+            data: {"page":page,"text":text},    //参数值
             type: "GET",   //请求方式
             success: function (data) {
                 var object = eval("(" + data + ")");
+                $('#total').html(object.total);
+                $('#pageText').html("当前是第 "+object.pageNum+" 页,共 "+object.size+" 条数据,总共 "+object.pages+" 页,总共 "+object.total+" 条数据");
+                var page = "<li><a onclick=\"query("+object.prePage+","+"\'"+text+"')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+                for (var j = 1;j <= object.pages; j++) {
+                    page += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                }
+                page += "<li><a onclick=\"query("+object.nextPage+","+"\'"+text+"')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+                $('#pagination').html(page);
                 var html = "";
-                for (var i in object) {
+                for (var i in object.list) {
                     html += "<a href=\"\" class=\"package list-group-item\" target=_blank onclick=\"\">" +
                         "<div class=\"row\"><div class=\"col-md-3\"><h4 class=package-name>" +
-                        object[i].name + "</h4></div><div class=\"col-md-9 hidden-xs\"><p class=\"package-description\">" +
-                        object[i].description + "</p></div><div class=\"package-extra-info col-md-9 col-md-offset-3 col-xs-12\"><span><i class=\"fa fa-star\"></i> " +
-                        object[i].starCount + "</span></div></div></a>";
+                        object.list[i].name + "</h4></div><div class=\"col-md-9 hidden-xs\"><p class=\"package-description\">" +
+                        object.list[i].description + "</p></div><div class=\"package-extra-info col-md-9 col-md-offset-3 col-xs-12\"><span><i class=\"fa fa-star\"></i> " +
+                        object.list[i].starCount + "</span></div></div></a>";
                 }
                 $('#body').html(html);
             }

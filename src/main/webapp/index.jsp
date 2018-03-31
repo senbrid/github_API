@@ -70,7 +70,7 @@
             <div class="col-xs-12">
                 <h1>GitHubHOME<img src="http://www.bootcdn.cn/assets/img/bootcdn.png" alt="BootCDN logo" class=hidden>
                 </h1>
-                <p>稳定、快速、免费的GitHub开源项目服务<br><span class=package-amount>共收录了 <strong>3348</strong> 个热门开源项目</span></p>
+                <p>稳定、快速、免费的GitHub开源项目服务<br><span class=package-amount>共收录了 <strong id="count">0</strong> 个热门开源项目</span></p>
                 <div class="search-wraper" role="search">
                     <div class=form-group>
                         <%--<input class="form-control search clearable" placeholder="搜索开源库，例如：java"--%>
@@ -121,8 +121,24 @@
 
 <script>
     $(document).ready(function(){
+        queryTotalRepos();
         query();
     });
+
+//    加载收录总项目条数
+    function queryTotalRepos() {
+        $.ajax({
+            url: "/repository/queryTotalRepos",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+            data: "",    //参数值
+            type: "GET",   //请求方式
+            success: function (data) {
+                $('#count').html(data);
+            }
+        });
+    }
+
     function query() {
         $.ajax({
             url: "/view/queryData",    //请求的url地址

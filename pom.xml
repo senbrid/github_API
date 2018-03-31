@@ -206,6 +206,12 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.7.4</version>
     </dependency>
+    <!-- mybatis分页插件pageHelper -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>github</finalName>

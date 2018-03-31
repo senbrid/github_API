@@ -26,10 +26,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" style="margin-left: 300px">
                 <div class="form-group">
-                    <input type="text" style="width: 300px" class="form-control" placeholder="Search">
+                    <input type="text" style="width: 300px" class="form-control" placeholder="请输入关键词" id="text">
                     <span></span>
                 </div>
-                <button type="submit" class="btn btn-default">Search</button>
+                <button type="button" class="btn btn-default" id="search">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'api'])"

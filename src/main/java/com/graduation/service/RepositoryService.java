@@ -28,5 +28,11 @@ public interface RepositoryService {
      * @return
      */
     List<Repository> queryData(RepositoryExample record);
+
+    /**
+     * 按条件统计项目数量
+     * @return int
+     */
+    Integer queryDataTotal(RepositoryExample record);
 }
 

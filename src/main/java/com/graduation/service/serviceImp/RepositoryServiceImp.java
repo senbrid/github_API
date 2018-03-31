@@ -50,4 +50,17 @@ public class RepositoryServiceImp implements RepositoryService {
         List<Repository> repositories = repositoryMapper.selectByExample(record);
         return repositories;
     }
+
+    /**
+     * 按条件统计项目数量
+     *
+     * @param record
+     * @return int
+     */
+    @Override
+    public Integer queryDataTotal(RepositoryExample record) {
+        repositoryMapper.preDo();
+        Integer repositoryCount = repositoryMapper.countByExample(record);
+        return repositoryCount;
+    }
 }

@@ -1,6 +1,8 @@
 package com.graduation.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.graduation.model.Repository;
 import com.graduation.model.RepositoryExample;
 import com.graduation.service.RepositoryService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -22,25 +25,35 @@ public class ViewController {
     @Autowired
     RepositoryService repositoryService;
 
+    /**
+     * 页面跳转
+     * @return
+     */
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index() {
         return "index";
     }
 
+    /**
+     * 分页查询数据
+     * @param page
+     * @return
+     */
     @RequestMapping(value = "/queryData",method = RequestMethod.GET)
     @ResponseBody
-    public String queryData() {
+    public String queryData(@RequestParam(value="page",defaultValue = "1") Integer page,
+                            @RequestParam(value="text",defaultValue = "java") String text) {
 
         RepositoryExample repositoryExample = new RepositoryExample();
         RepositoryExample.Criteria criteria = repositoryExample.createCriteria();
-        criteria.andLanguageEqualTo("java");
+        criteria.andLanguageEqualTo(text);
+        //分页查询
+        PageHelper.startPage(page,10);
         List<Repository> repositories = repositoryService.queryData(repositoryExample);
-        System.out.println("size:" + repositories.size());
-
+        //封装查询的结果集
+        PageInfo<Repository> pageInfo = new PageInfo<Repository>(repositories);
         //把对象集合转换成json
-        String json = JSON.toJSONString(repositories);
-        System.out.println("data:" + json);
-        return json;
+        return JSON.toJSONString(pageInfo);
     }
 
     /**

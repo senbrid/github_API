@@ -32,8 +32,8 @@
     </bean>
 
     <!--logger -->
-    <!--<bean id="loggerService" class="com.graduation.logger.LoggerService" />-->
-    <!--<bean id="logAspectBean" class="com.graduation.logger.AdminLogger"/>-->
+    <bean id="loggerService" class="com.graduation.logger.LoggerService" />
+    <bean id="logAspectBean" class="com.graduation.logger.AdminLogger"/>
     <!--<bean id="logAspect" class="com.graduation.logger.LogAnnotationAspect"/>-->
     <aop:aspectj-autoproxy/>
 
