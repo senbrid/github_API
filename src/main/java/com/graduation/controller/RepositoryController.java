@@ -25,7 +25,7 @@ public class RepositoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public void addRepository() throws Exception {
-        String param = "language:javascript&sort=stars&order=desc";
+        String param = "language:java&sort=stars&order=desc";
         String url = URLBuilder.urlSearchBuilder(0, param);
         //获取网页返回的字符串
         String str = URLRequest.sendGet(url);
@@ -35,11 +35,6 @@ public class RepositoryController {
         List<Repository> repositoryList = JSONParse.listJSONObjectToListRepositorySearch(list);
         System.out.println(repositoryList.size());
         //批量添加数据接口
-//        int count = 0;
-//        for (Repository repository : repositoryList) {
-//            System.out.println("description:" + repository.getDescription());
-//            count += repositoryService.addRepositoryByPO(repository);
-//        }
         int count = repositoryService.addRepositoryByListPO(repositoryList);
         System.out.println("成功添加" + count + "条数据。");
     }

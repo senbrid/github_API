@@ -33,7 +33,7 @@ public class ViewController {
 
         RepositoryExample repositoryExample = new RepositoryExample();
         RepositoryExample.Criteria criteria = repositoryExample.createCriteria();
-        criteria.andLanguageEqualTo("python");
+        criteria.andLanguageEqualTo("java");
         List<Repository> repositories = repositoryService.queryData(repositoryExample);
         System.out.println("size:" + repositories.size());
 

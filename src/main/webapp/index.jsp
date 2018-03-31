@@ -80,7 +80,6 @@
                                style="text-align: center"
                                autocomplete=on autofocus tabindex=0 spellcheck=false>
                         <i class="fa fa-search"></i></div>
-                    <button onclick="query()">点我测试</button>
                 </div>
             </div>
         </div>
@@ -112,7 +111,18 @@
 </footer>
 <a href=# id=back-to-top><i class="fa fa-angle-up"></i></a>
 
+<script src=https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js></script>
+<script src=https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js></script>
+<script src=https://cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js></script>
+<script src=https://cdn.bootcss.com/clipboard.js/1.5.16/clipboard.min.js></script>
+<script src=https://cdn.bootcss.com/localforage/1.4.2/localforage.min.js></script>
+<script src=https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js></script>
+<script src="http://www.bootcdn.cn/assets/js/site.min.js?1521768396907"></script>
+
 <script>
+    $(document).ready(function(){
+        query();
+    });
     function query() {
         $.ajax({
             url: "/view/queryData",    //请求的url地址
@@ -136,13 +146,5 @@
     }
 </script>
 
-
-<script src=https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js></script>
-<script src=https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js></script>
-<script src=https://cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js></script>
-<script src=https://cdn.bootcss.com/clipboard.js/1.5.16/clipboard.min.js></script>
-<script src=https://cdn.bootcss.com/localforage/1.4.2/localforage.min.js></script>
-<script src=https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js></script>
-<script src="http://www.bootcdn.cn/assets/js/site.min.js?1521768396907"></script>
 </body>
 </html>
