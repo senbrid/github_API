@@ -42,11 +42,11 @@ public class ViewController {
     @RequestMapping(value = "/queryData",method = RequestMethod.GET)
     @ResponseBody
     public String queryData(@RequestParam(value="page",defaultValue = "1") Integer page,
-                            @RequestParam(value="text",defaultValue = "java") String text) {
+                            @RequestParam(value="text",defaultValue = "") String text) {
 
         RepositoryExample repositoryExample = new RepositoryExample();
         RepositoryExample.Criteria criteria = repositoryExample.createCriteria();
-        criteria.andLanguageEqualTo(text);
+        criteria.andDescriptionLike("%" + text + "%");
         //分页查询
         PageHelper.startPage(page,10);
         List<Repository> repositories = repositoryService.queryData(repositoryExample);
