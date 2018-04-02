@@ -45,28 +45,84 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <style>
+        html,body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            position: relative;
+            min-height: 100%;
+        }
+        #body{
+            margin-top: 100px;
+            padding-bottom: 101px;
+        }
+        #footer{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 101px;
+        }
+    </style>
 </head>
 <body class="home-template">
-<jsp:include page="head.jsp"></jsp:include>
-<div class="packages-list-container" id="all-packages" style="margin-top: 100px">
-    <div class="container">
-        <div><p style="color: gray">为您找到相关结果约<a style="color: red" id="total">0</a>个</p></div>
-        <div class="list-group packages" id="common-packages">
-            <div id="body"></div>
+<div id="container">
+    <%--引入导航栏--%>
+    <jsp:include page="head.jsp"></jsp:include>
+    <div id="body" class="packages-list-container">
+        <div class="container">
+            <div><p style="color: gray">为您找到相关结果约<a style="color: red" id="total">0</a>个</p></div>
+            <div class="list-group packages" id="common-packages">
+                <div id="content">
+                    <%--test--%>
+                    <div class="package list-group-item">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a href="#" class="package-name" style="float: right">
+                                    <img class="media-object" src="https://avatars1.githubusercontent.com/u/21178421?s=64&v=4"
+                                         style="height: 32px;width: 32px" alt="用户头像">
+                                </a>
+                            </div>
+                            <div class="col-md-9 hidden-xs">
+                                <a class="package-name" href="#">
+                                    <b>gtihub/github</b>
+                                </a>
+                                <br/>
+                                <p class="package-description">
+                                abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+                                abcdefghijklmnopqrstuvwxyz
+                                </p>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-default" type="submit">Download</button>
+                            </div>
+                        </div>
+                        <div class="package-extra-info col-md-12 col-md-offset-1 col-xs-12">
+                            <span><i class="fa fa-star">366</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span><i class="fa fa-star">366</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span><i class="fa fa-star">366</i></span>
+                        </div>
+                    </div>
+                    <%--test--%>
+                </div>
+            </div>
             <div class="pagination" style="float: left"><p style="color: gray"  id="pageText"></p></div>
             <%--分页插件--%>
             <nav aria-label="Page navigation" style="float: right">
                 <ul class="pagination" id="pagination"></ul>
             </nav>
+            <ul id='bp-element'></ul>
         </div>
         <div class="list-group packages" id=search-results style="display: none"></div>
     </div>
+    <div id="footer" class="footer hidden-print navbar-fixed-bottom">
+        <div class=copy-right><span>&copy; 2013-2018</span> <a
+                href=http://www.miibeian.gov.cn/ target=_blank>京ICP备11008151号</a> <span>京公网安备11010802014853</span></div>
+    </div>
+    <a href=# id=back-to-top><i class="fa fa-angle-up"></i></a>
 </div>
-<footer id="footer" class="footer hidden-print">
-    <div class=copy-right><span>&copy; 2013-2018</span> <a
-            href=http://www.miibeian.gov.cn/ target=_blank>京ICP备11008151号</a> <span>京公网安备11010802014853</span></div>
-</footer>
-<a href=# id=back-to-top><i class="fa fa-angle-up"></i></a>
 <script src=https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js></script>
 <script src=https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js></script>
 <script src=https://cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js></script>
@@ -74,11 +130,30 @@
 <script src=https://cdn.bootcss.com/localforage/1.4.2/localforage.min.js></script>
 <script src=https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js></script>
 <script src="http://www.bootcdn.cn/assets/js/site.min.js?1521768396907"></script>
+<script src="././WEB-INF/assets/js/bootstrap-paginator.js"></script>
 
 <script type="text/javascript">
+
+    $('#bp-element').bootstrapPaginator({
+             currentPage: 1,//当前的请求页面。
+             totalPages: 20,//一共多少页。
+             size:"normal",//应该是页眉的大小。
+             bootstrapMajorVersion: 3,//bootstrap的版本要求。
+             alignment:"right",
+             numberOfPages:10,//一页列出多少数据。
+             itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
+                 switch (type) {
+                     case "first": return "首页";
+                         case "prev": return "上一页";
+                         case "next": return "下一页";
+                         case "last": return "末页";
+                         case "page": return page;
+                         }
+             }
+     });
+
     $(document).ready(function(){
         //query(1,"c");
-
     });
 
     $('#search').click(function () {
@@ -105,13 +180,22 @@
                 $('#pagination').html(page);
                 var html = "";
                 for (var i in object.list) {
-                    html += "<a href=\"\" class=\"package list-group-item\" target=_blank onclick=\"\">" +
-                        "<div class=\"row\"><div class=\"col-md-3\"><h4 class=package-name>" +
-                        object.list[i].name + "</h4></div><div class=\"col-md-9 hidden-xs\"><p class=\"package-description\">" +
-                        object.list[i].description + "</p></div><div class=\"package-extra-info col-md-9 col-md-offset-3 col-xs-12\"><span><i class=\"fa fa-star\"></i> " +
-                        object.list[i].starCount + "</span></div></div></a>";
+                    html += "<div class=\"package list-group-item\">"+
+                    "<div class=\"row\"><div class=\"col-md-1\">"+
+                    "<a href=\"#\" class=\"package-name\" style=\"float:right\">"+
+                    "<img class=\"media-object\" src=\"https://avatars1.githubusercontent.com/u/21178421?s=64&v=4\" style=\"height: 32px;width: 32px\" alt=\"用户头像\">"+
+                    "</a></div><div class=\"col-md-9 hidden-xs\">"+
+                    "<a class=\"package-name\" href=\"#\"><b>"+ object.list[i].fullName +
+                    "</b></a><br/><p class=\"package-description\">"+ object.list[i].description +
+                    "</p></div>" +
+                    "<div class=\"col-md-1\"><button class=\"btn btn-default\" type=\"submit\">Download</button></div>" +
+                    "</div><div class=\"package-extra-info col-md-12 col-md-offset-1 col-xs-12\">"+
+                    "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                    "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                    "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span></div></div>";
+
                 }
-                $('#body').html(html);
+                $('#content').html(html);
             }
         });
     }
