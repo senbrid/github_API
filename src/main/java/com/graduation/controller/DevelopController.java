@@ -26,7 +26,7 @@ public class DevelopController {
      */
     @RequestMapping(value = "/add",method= RequestMethod.GET)
     public void addDeveloper(){
-        String param = "tom&sort=flowers&order=desc";
+        String param = "joke&sort=flowers&order=desc";
         String url = URLBuilder.urlSearchBuilder(1, param);
         //获取网页返回的字符串
         String str = URLRequest.sendGet(url);

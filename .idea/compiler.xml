@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="github" target="1.6" />
+      <module name="github" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

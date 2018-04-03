@@ -14,6 +14,8 @@ public interface DeveloperMapper {
 
     int insert(Developer record);
 
+    int insertBatch(List<Developer> developerList);
+
     int insertSelective(Developer record);
 
     List<Developer> selectByExample(DeveloperExample example);

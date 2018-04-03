@@ -122,6 +122,21 @@
       #{followers,jdbcType=INTEGER}, #{following,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into tb_developer (id, login, name,
+    avatar_url, company, blog,
+    email, bio, public_repos,
+    followers, following, created_at,
+    updated_at)
+    values
+    <foreach collection="list" item="developer" separator=",">
+      (#{developer.id,jdbcType=BIGINT}, #{developer.login,jdbcType=VARCHAR}, #{developer.name,jdbcType=VARCHAR},
+      #{developer.avatarUrl,jdbcType=VARCHAR}, #{developer.company,jdbcType=VARCHAR}, #{developer.blog,jdbcType=VARCHAR},
+      #{developer.email,jdbcType=VARCHAR}, #{developer.bio,jdbcType=VARCHAR}, #{developer.publicRepos,jdbcType=INTEGER},
+      #{developer.followers,jdbcType=INTEGER}, #{developer.following,jdbcType=INTEGER}, #{developer.createdAt,jdbcType=TIMESTAMP},
+      #{developer.updatedAt,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="com.graduation.model.Developer" >
     insert into tb_developer
     <trim prefix="(" suffix=")" suffixOverrides="," >

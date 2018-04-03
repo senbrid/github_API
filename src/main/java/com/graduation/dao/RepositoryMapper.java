@@ -3,6 +3,8 @@ package com.graduation.dao;
 import com.graduation.model.Repository;
 import com.graduation.model.RepositoryExample;
 import java.util.List;
+
+import com.graduation.model.RepositoryVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface RepositoryMapper {

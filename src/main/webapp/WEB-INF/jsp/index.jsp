@@ -216,7 +216,7 @@
                     html += "<div class=\"package list-group-item\">"+
                     "<div class=\"row\"><div class=\"col-md-1\">"+
                     "<a href=\"#\" class=\"package-name\" style=\"float:right\">"+
-                    "<img class=\"media-object\" src=\"https://avatars1.githubusercontent.com/u/21178421?s=64&v=4\" style=\"height: 32px;width: 32px\" alt=\"用户头像\">"+
+                    "<img class=\"media-object\" src="+ object.list[i].avatarUrl+ '&s=64' +" style=\"height: 32px;width: 32px\" alt=\"用户头像\">"+
                     "</a></div><div class=\"col-md-9 hidden-xs\">"+
                     "<a class=\"package-name\" href=\"#\"><b>"+ object.list[i].fullName +
                     "</b></a><br/><p class=\"package-description\">"+ object.list[i].description +

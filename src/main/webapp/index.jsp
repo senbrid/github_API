@@ -144,17 +144,26 @@
             url: "/view/queryData",    //请求的url地址
             dataType: "json",   //返回格式为json
             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: "",    //参数值
+            data: {"page":page,"text":text},    //参数值
             type: "GET",   //请求方式
             success: function (data) {
                 var object = eval("(" + data + ")");
                 var html = "";
-                for (var i in object) {
-                    html += "<a href=\"\" class=\"package list-group-item\" target=_blank onclick=\"\">" +
-                        "<div class=\"row\"><div class=\"col-md-3\"><h4 class=package-name>" +
-                        object[i].name + "</h4></div><div class=\"col-md-9 hidden-xs\"><p class=\"package-description\">" +
-                        object[i].description + "</p></div><div class=\"package-extra-info col-md-9 col-md-offset-3 col-xs-12\"><span><i class=\"fa fa-star\"></i> " +
-                        object[i].starCount + "</span></div></div></a>";
+                for (var i in object.list) {
+                    html += "<div class=\"package list-group-item\">"+
+                        "<div class=\"row\"><div class=\"col-md-1\">"+
+                        "<a href=\"#\" class=\"package-name\" style=\"float:right\">"+
+                        "<img class=\"media-object\" src=\"https://avatars1.githubusercontent.com/u/21178421?s=64&v=4\" style=\"height: 32px;width: 32px\" alt=\"用户头像\">"+
+                        "</a></div><div class=\"col-md-9 hidden-xs\">"+
+                        "<a class=\"package-name\" href=\"#\"><b>"+ object.list[i].fullName +
+                        "</b></a><br/><p class=\"package-description\">"+ object.list[i].description +
+                        "</p></div>" +
+                        "<div class=\"col-md-1\"><button class=\"btn btn-default\" type=\"submit\">Download</button></div>" +
+                        "</div><div class=\"package-extra-info col-md-12 col-md-offset-1 col-xs-12\">"+
+                        "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                        "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                        "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span></div></div>";
+
                 }
                 $('#body').html(html);
             }

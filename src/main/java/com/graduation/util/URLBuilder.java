@@ -8,7 +8,7 @@ public class URLBuilder {
      * @return String类型的URL地址
      */
     public static String urlUserBuilder(String userName) {
-        String result = "https://api.github.com/users" + userName;
+        String result = "https://api.github.com/users/" + userName;
         return result;
     }
 
