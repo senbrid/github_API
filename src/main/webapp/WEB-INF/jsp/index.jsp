@@ -68,9 +68,11 @@
     </style>
 </head>
 <body class="home-template">
-<div id="container">
-    <%--引入导航栏--%>
+<%--引入导航栏--%>
+<div id="head">
     <jsp:include page="head.jsp"></jsp:include>
+</div>
+<div id="container">
     <div id="body" class="packages-list-container">
         <div class="container">
             <div><p style="color: gray">为您找到相关结果约<a style="color: red" id="total">0</a>个</p></div>
@@ -130,27 +132,9 @@
 <script src=https://cdn.bootcss.com/localforage/1.4.2/localforage.min.js></script>
 <script src=https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js></script>
 <script src="http://www.bootcdn.cn/assets/js/site.min.js?1521768396907"></script>
-<script src="././WEB-INF/assets/js/bootstrap-paginator.js"></script>
+<script src="/assets/js/bootstrap-paginator.js"></script>
 
 <script type="text/javascript">
-
-    $('#bp-element').bootstrapPaginator({
-             currentPage: 1,//当前的请求页面。
-             totalPages: 20,//一共多少页。
-             size:"normal",//应该是页眉的大小。
-             bootstrapMajorVersion: 3,//bootstrap的版本要求。
-             alignment:"right",
-             numberOfPages:10,//一页列出多少数据。
-             itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
-                 switch (type) {
-                     case "first": return "首页";
-                         case "prev": return "上一页";
-                         case "next": return "下一页";
-                         case "last": return "末页";
-                         case "page": return page;
-                         }
-             }
-     });
 
     $(document).ready(function(){
         //query(1,"c");
@@ -170,14 +154,63 @@
             type: "GET",   //请求方式
             success: function (data) {
                 var object = eval("(" + data + ")");
+                var pagination = "";
                 $('#total').html(object.total);
-                $('#pageText').html("当前是第 "+object.pageNum+" 页,共 "+object.size+" 条数据,总共 "+object.pages+" 页,总共 "+object.total+" 条数据");
-                var page = "<li><a onclick=\"query("+object.prePage+","+"\'"+text+"')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
-                for (var j = 1;j <= object.pages; j++) {
-                    page += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                $('#pageText').html("当前是第 " + object.pageNum + " 页,共 " + object.size + " 条数据,总共 " + object.pages + " 页,总共 " + object.total + " 条数据");
+                if (object.hasPreviousPage) {
+                    pagination = "<li><a onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                 }
-                page += "<li><a onclick=\"query("+object.nextPage+","+"\'"+text+"')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
-                $('#pagination').html(page);
+                if(object.pages > 5){
+                    if(object.pageNum>3){
+                        if(object.pageNum <= (object.pages-2)){
+                            pagination += "<li><a>...</a></li>";
+                            for(var j = (object.pageNum-2);j<=(object.pageNum+2);j++) {
+                                if(j === object.pageNum) {
+                                    pagination += "<li class='active'><a>" + j + "</a></li>";
+                                }
+                                else{
+                                    pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
+                                }
+                            }
+                            if(object.pageNum < (object.pages-2)) {
+                                pagination += "<li><a>...</a></li>";
+                            }
+                        }else{
+                            pagination += "<li><a>...</a></li>";
+                            for(var j = (object.pages-4);j<=object.pages;j++) {
+                                if(j === object.pageNum) {
+                                    pagination += "<li class='active'><a>" + j + "</a></li>";
+                                }
+                                else{
+                                    pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
+                                }
+                            }
+                        }
+
+                    }else{
+                        for (var j = 1;j <= 5; j++) {
+                            if(j === object.pageNum){
+                                pagination += "<li class='active'><a>"+j+"</a></li>";
+                            }else{
+                                pagination += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                            }
+                        }
+                        pagination += "<li><a>...</a></li>";
+                    }
+                }
+                else {
+                    for (var j = 1;j <= object.pages; j++) {
+                        if(j === object.pageNum){
+                            pagination += "<li class='active'><a>"+j+"</a></li>";
+                        }else{
+                            pagination += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                        }
+                    }
+                }
+                if(object.hasNextPage) {
+                    pagination += "<li><a onclick=\"query(" + object.nextPage + "," + "\'" + text + "')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+                }
+                $('#pagination').html(pagination);
                 var html = "";
                 for (var i in object.list) {
                     html += "<div class=\"package list-group-item\">"+
