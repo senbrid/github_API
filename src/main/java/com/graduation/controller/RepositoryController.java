@@ -31,7 +31,7 @@ public class RepositoryController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public void addRepository() throws Exception {
         String param = "language:java&sort=stars&order=desc";
-        String url = URLBuilder.urlSearchBuilder(0, param);
+        String url = URLBuilder.urlSearchRepoBuilder(param);
         //获取网页返回的字符串
         String str = URLRequest.sendGet(url);
         //字符串转json
@@ -41,7 +41,7 @@ public class RepositoryController {
 
         StringBuilder result = new StringBuilder();
         for(Repository repository : repositoryList){
-            result.append(URLRequest.sendGet(URLBuilder.urlUserBuilder(repository.getDeveloperid())));
+            result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getDeveloperid())));
         }
         //字符串转json
         List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
@@ -58,12 +58,12 @@ public class RepositoryController {
 
     /**
      * 根据id属性的值去掉对象列表里重复的对象
-     * @param persons
+     * @param developers
      * @return
      */
-    public static List<Developer> removeDupliById(List<Developer> persons) {
+    public static List<Developer> removeDupliById(List<Developer> developers) {
         Set<Developer> personSet = new TreeSet<>((o1, o2) -> o1.getId().compareTo(o2.getId()));
-        personSet.addAll(persons);
+        personSet.addAll(developers);
 
         return new ArrayList<>(personSet);
     }

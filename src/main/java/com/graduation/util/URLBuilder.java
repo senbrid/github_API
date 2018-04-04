@@ -7,39 +7,39 @@ public class URLBuilder {
      * @param userName nama user.
      * @return String类型的URL地址
      */
-    public static String urlUserBuilder(String userName) {
-        String result = "https://api.github.com/users/" + userName;
-        return result;
+    public static String urlDeveBuilder(String userName) {
+        return "https://api.github.com/users/" + userName;
     }
 
     /**
-     * 通过 用户名和项目名 构建仓库URL
+     * 通过 用户名和项目名 构建URL
      *
      * @param repoName
      * @return String类型的URL地址
      */
     public static String urlRepoBuilder(String userName, String repoName) {
-        String result = "https://api.github.com/repos/" + userName + repoName;
-        return result;
+        return "https://api.github.com/repos/" + userName + repoName;
     }
 
     /**
-     * 通过 搜索选项 构建仓库URL
+     * 通过 搜索开发者 构建URL
      *
-     * @param searchType,params
+     * @param params
      * @return String类型的URL地址
      */
-    public static String urlSearchBuilder(int searchType, String params) {
-        String search = null;
-        switch (searchType) {
-            case 0:
-                search = "repositories?q=" + params;
-                break;
-            case 1:
-                search = "users?q=" + params;
-                break;
-        }
-        String result = "https://api.github.com/search/" + search;
-        return result;
+    public static String urlSearchDeveBuilder(String params) {
+
+        return "https://api.github.com/search/users?q=" + params;
+    }
+
+    /**
+     * 通过 搜索项目 构建URL
+     *
+     * @param params
+     * @return String类型的URL地址
+     */
+    public static String urlSearchRepoBuilder(String params) {
+
+        return "https://api.github.com/search/repositories?q=" + params;
     }
 }
