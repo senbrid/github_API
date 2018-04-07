@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%
+    String base = request.getContextPath();
+    System.out.println(base);
+%>
 <!DOCTYPE html>
 <html lang=zh-CN>
 <head>
@@ -7,11 +10,7 @@
     <meta http-equiv=X-UA-Compatible content="IE=edge">
     <meta name=viewport content="width=device-width,initial-scale=1">
     <title>我的Github - 开源项目免费服务</title>
-    <meta name=description
-          content="Bootstrap 中文网开源项目免费 CDN 加速服务 - 我们致力于为 Bootstrap、jQuery、Angular、Vue.js 一样优秀的开源项目提供稳定、快速、免费的 CDN 加速服务。BootCDN 是运营时间最长、用户量最大、最早同时支持 HTTPS（SSL）和 HTTP/2.0 协议的中立免费 CDN 。">
-    <meta name=keywords content="">
-    <meta name=author content=Bootstrap中文网>
-    <meta name=founder content=王赛>
+    <meta name=descriptioncontent="">
     <link href=https://cdn.bootcss.com rel=dns-prefetch>
     <link href=https://api.bootcdn.cn rel=dns-prefetch>
     <link href=https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css rel=stylesheet>
@@ -128,7 +127,7 @@
 //    加载收录总项目条数
     function queryTotalRepos() {
         $.ajax({
-            url: "/repository/queryTotalRepos",    //请求的url地址
+            url: "<%=base%>/repository/queryTotalRepos",    //请求的url地址
             dataType: "json",   //返回格式为json
             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
             data: "",    //参数值
@@ -141,7 +140,7 @@
 
     function query() {
         $.ajax({
-            url: "/view/queryData",    //请求的url地址
+            url: "<%=base%>/view/queryData",    //请求的url地址
             dataType: "json",   //返回格式为json
             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
             data: {"page":page,"text":text},    //参数值
