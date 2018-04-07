@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String base = request.getContextPath();
+%>
 <html>
 <head></head>
 <body>
@@ -19,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="color: white;font-size: 30px"><b>GitHubHOME</b></a>
+            <a class="navbar-brand" href="<%=base%>" style="color: white;font-size: 30px"><b>GitHubHOME</b></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

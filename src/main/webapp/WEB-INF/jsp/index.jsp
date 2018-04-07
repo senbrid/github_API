@@ -8,46 +8,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     String base = request.getContextPath();
-    System.out.println(base);
 %>
 <!DOCTYPE html>
-<html lang=zh-CN>
+<html lang="zh-CN">
 <head>
-    <meta charset=utf-8>
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <meta name=viewport content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>我的Github - 开源项目免费服务</title>
-    <meta name=description content="">
-    <meta name=keywords content="">
-    <meta name=author content="">
-    <meta name=founder content="">
-    <link href=https://cdn.bootcss.com rel=dns-prefetch>
-    <link href=https://api.bootcdn.cn rel=dns-prefetch>
-    <link href=https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css rel=stylesheet>
-    <link href=https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet>
-    <link href="http://www.bootcdn.cn/assets/css/site.min.css?1521768396907" rel=stylesheet>
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]--><!--[if IE 9]>
-    <script src="https://cdn.bootcss.com/geopattern/1.2.3/js/base64.min.js"></script>
-    <script src="https://cdn.bootcss.com/geopattern/1.2.3/js/typedarray.min.js"></script>
-    <![endif]-->
-    <link rel=apple-touch-icon-precomposed sizes=144x144
+    <link href="https://cdn.bootcss.com" rel=dns-prefetch>
+    <link href="https://api.bootcdn.cn" rel=dns-prefetch>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://www.bootcdn.cn/assets/css/site.min.css?1521768396907" rel="stylesheet">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
           href="http://www.bootcdn.cn/assets/ico/apple-touch-icon-144-precomposed.png?1521768396907">
     <link rel="shortcut icon" href="http://www.bootcdn.cn/assets/ico/favicon.ico?1521768396907">
-    <script type="text/javascript">
-        var build = 1521768396907;
-    </script>
-    <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?24aff315392dc2c9b2805cfa4d8e101a";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
     <style>
         html,body{
             height: 100%;
@@ -92,27 +68,23 @@
         <div class="list-group packages" id=search-results style="display: none"></div>
     </div>
     <div id="footer" class="footer hidden-print navbar-fixed-bottom">
-        <div class=copy-right><span>&copy; 2013-2018</span> <a
-                href=http://www.miibeian.gov.cn/ target=_blank>京ICP备11008151号</a> <span>京公网安备11010802014853</span></div>
+        <div class="copy-right"><span>&copy; 2013-2018</span> <a
+                href="http://www.miibeian.gov.cn/" target=_blank>京ICP备11008151号</a> <span>京公网安备11010802014853</span></div>
     </div>
-    <a href=# id=back-to-top><i class="fa fa-angle-up"></i></a>
+    <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 </div>
-<script src=https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js></script>
-<script src=https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js></script>
-<script src=https://cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js></script>
-<script src=https://cdn.bootcss.com/clipboard.js/1.5.16/clipboard.min.js></script>
-<script src=https://cdn.bootcss.com/localforage/1.4.2/localforage.min.js></script>
-<script src=https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js></script>
-<script src="http://www.bootcdn.cn/assets/js/site.min.js?1521768396907"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
     $(document).ready(function(){
-        //query(1,"c");
+        query(1,'${key}');
     });
 
     $('#search').click(function () {
-        query(1,$('#text').val());
+        var q = $('#text').val();
+        window.location.href = "<%=base%>/view/index?q=" + q;
     });
 
     function query(page,text) {

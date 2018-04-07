@@ -9,10 +9,8 @@ import com.graduation.service.RepositoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,8 @@ public class ViewController {
      * @return
      */
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String index() {
+    public String index(@RequestParam(value="q") String q,ModelMap map) {
+        map.put("key",q);
         return "index";
     }
 
