@@ -27,6 +27,18 @@ public class DeveloperServiceImp implements DeveloperService {
     }
 
     /**
+     * 批量更新数据
+     *
+     * @param developerList
+     * @author Joke
+     * Date 2018年3月22日16:06:39
+     */
+    @Override
+    public int updateDeveloperByListPO(List<Developer> developerList) {
+        return developerMapper.updateBatch(developerList);
+    }
+
+    /**
      * 按条件查询
      *
      * @param example

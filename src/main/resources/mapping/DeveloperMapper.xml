@@ -367,4 +367,27 @@
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+         separator=";" 代表着每次循环完，在sql后面放一个分号
+         item="cus" 循环List的每条的结果集
+         collection="list" list 即为 map传过来的参数key -->
+    <foreach collection="list" separator=";" item="dev">
+      update tb_developer
+      set login = #{dev.login,jdbcType=VARCHAR},
+      name = #{dev.name,jdbcType=VARCHAR},
+      avatar_url = #{dev.avatarUrl,jdbcType=VARCHAR},
+      company = #{dev.company,jdbcType=VARCHAR},
+      blog = #{dev.blog,jdbcType=VARCHAR},
+      email = #{dev.email,jdbcType=VARCHAR},
+      bio = #{dev.bio,jdbcType=VARCHAR},
+      public_repos = #{dev.publicRepos,jdbcType=INTEGER},
+      followers = #{dev.followers,jdbcType=INTEGER},
+      following = #{dev.following,jdbcType=INTEGER},
+      created_at = #{dev.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{dev.updatedAt,jdbcType=TIMESTAMP},
+      updated = #{dev.updated,jdbcType=TIMESTAMP}
+      where id = #{dev.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
 </mapper>

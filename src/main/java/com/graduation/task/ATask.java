@@ -34,7 +34,7 @@ public class ATask {
         long begin = System.currentTimeMillis();
         //执行你需要操作的定时任务
         try {
-            String param = "language:java&sort=stars&order=desc&per_page=100";
+            String param = "language:ruby&sort=stars&order=desc&per_page=100";
             String url = URLBuilder.urlSearchRepoBuilder(param);
             //获取网页返回的字符串
             String str = URLRequest.sendGet(url);
@@ -87,9 +87,24 @@ public class ATask {
         try {
             DeveloperExample developerExample = new DeveloperExample();
             DeveloperExample.Criteria criteria = developerExample.createCriteria();
-            criteria.andUpdatedLessThan(new Date(new Date().getTime() - 1000 * 60 * 10));
+            Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 5);
+            logger.info("date:" + date);
+            criteria.andUpdatedLessThan(date);
             List<Developer> developerList = developerService.getDeveloperByExample(developerExample);
-            System.out.println(developerList.size());
+            logger.info("size:" + developerList.size());
+            if (!developerList.isEmpty()) {
+                StringBuilder result = new StringBuilder();
+                for (Developer developer : developerList) {
+                    result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(developer.getLogin())));
+                }
+                //字符串转json
+                List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
+                //把JSON数据封装到实体类List
+                List<Developer> developers = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
+                int count = developerService.updateDeveloperByListPO(developers);
+                logger.info("更新 "+count+" 条数据");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

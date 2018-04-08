@@ -22,9 +22,9 @@ public class URLRequest {
         BufferedReader in = null;
         try {
             if(url.contains("?")){
-                url += "&access_token=86b353f00b725bcba37a6098e7eaaaad64eb193e";
+                url += "&access_token=fb38bcd26a6cd71f66270fa75c32ea6bb41ef5c3";
             }else {
-                url += "?access_token=86b353f00b725bcba37a6098e7eaaaad64eb193e";
+                url += "?access_token=fb38bcd26a6cd71f66270fa75c32ea6bb41ef5c3";
             }
             URL realUrl = new URL(url);
             // 打开和URL之间的连接

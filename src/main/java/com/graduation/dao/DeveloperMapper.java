@@ -18,6 +18,8 @@ public interface DeveloperMapper {
 
     int insertBatch(List<Developer> developerList);
 
+    int updateBatch(List<Developer> developerList);
+
     int insertSelective(Developer record);
 
     List<Developer> selectByExample(DeveloperExample example);
