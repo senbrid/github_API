@@ -2,7 +2,6 @@ package com.graduation.service;
 
 import com.graduation.model.Repository;
 import com.graduation.model.RepositoryExample;
-import com.graduation.model.RepositoryVO;
 
 import java.util.List;
 
@@ -35,5 +34,10 @@ public interface RepositoryService {
      * @return int
      */
     Integer queryDataTotal(RepositoryExample record);
+    /**
+     * 按主键查询
+     * @return
+     */
+    Repository getDataById(Long id);
 }
 

@@ -29,7 +29,9 @@ public class Developer {
 
     private Date updatedAt;
 
-    public Developer(Long id, String login, String name, String avatarUrl, String company, String blog, String email, String bio, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt) {
+    private Date updated;
+
+    public Developer(Long id, String login, String name, String avatarUrl, String company, String blog, String email, String bio, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt,Date updated) {
         this.id = id;
         this.login = login;
         this.name = name;
@@ -43,6 +45,7 @@ public class Developer {
         this.following = following;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.updated = updated;
     }
 
     public Developer() {
@@ -151,5 +154,13 @@ public class Developer {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

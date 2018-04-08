@@ -38,4 +38,16 @@ public class DeveloperServiceImp implements DeveloperService {
 
         return developerMapper.selectByExample(example);
     }
+
+    /**
+     * 根据开发者ID查询开发者
+     *
+     * @param id
+     * @author Joke
+     * Date 2018年4月3日12:00:37
+     */
+    @Override
+    public Developer getDeveloperById(Long id) {
+        return developerMapper.selectByPrimaryKey(id);
+    }
 }

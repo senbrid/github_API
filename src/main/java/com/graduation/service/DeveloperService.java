@@ -22,4 +22,12 @@ public interface DeveloperService {
      * Date 2018年4月3日12:00:37
      */
     List<Developer> getDeveloperByExample(DeveloperExample example);
+    /**
+     * 根据开发者ID查询开发者
+     *
+     * @param id
+     * @author Joke
+     * Date 2018年4月3日12:00:37
+     */
+    Developer getDeveloperById(Long id);
 }

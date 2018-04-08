@@ -16,6 +16,7 @@
       <arg column="following" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="created_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updated" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -78,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, login, name, avatar_url, company, blog, email, bio, public_repos, followers, 
-    following, created_at, updated_at
+    following, created_at, updated_at, updated
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.graduation.model.DeveloperExample" >
     select
@@ -115,26 +116,26 @@
       avatar_url, company, blog, 
       email, bio, public_repos, 
       followers, following, created_at, 
-      updated_at)
+      updated_at, updated)
     values (#{id,jdbcType=BIGINT}, #{login,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{avatarUrl,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{bio,jdbcType=VARCHAR}, #{publicRepos,jdbcType=INTEGER}, 
       #{followers,jdbcType=INTEGER}, #{following,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{updatedAt,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertBatch" parameterType="java.util.List">
     insert into tb_developer (id, login, name,
     avatar_url, company, blog,
     email, bio, public_repos,
     followers, following, created_at,
-    updated_at)
+    updated_at, updated)
     values
     <foreach collection="list" item="developer" separator=",">
       (#{developer.id,jdbcType=BIGINT}, #{developer.login,jdbcType=VARCHAR}, #{developer.name,jdbcType=VARCHAR},
       #{developer.avatarUrl,jdbcType=VARCHAR}, #{developer.company,jdbcType=VARCHAR}, #{developer.blog,jdbcType=VARCHAR},
       #{developer.email,jdbcType=VARCHAR}, #{developer.bio,jdbcType=VARCHAR}, #{developer.publicRepos,jdbcType=INTEGER},
       #{developer.followers,jdbcType=INTEGER}, #{developer.following,jdbcType=INTEGER}, #{developer.createdAt,jdbcType=TIMESTAMP},
-      #{developer.updatedAt,jdbcType=TIMESTAMP})
+      #{developer.updatedAt,jdbcType=TIMESTAMP},#{developer.updated,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.graduation.model.Developer" >
@@ -179,6 +180,9 @@
       <if test="updatedAt != null" >
         updated_at,
       </if>
+      <if test="updated != null" >
+        updated,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -219,6 +223,9 @@
       </if>
       <if test="updatedAt != null" >
         #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -270,6 +277,9 @@
       <if test="record.updatedAt != null" >
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.updated != null" >
+        updated = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -289,7 +299,8 @@
       followers = #{record.followers,jdbcType=INTEGER},
       following = #{record.following,jdbcType=INTEGER},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      updated = #{record.updated,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -333,6 +344,9 @@
       <if test="updatedAt != null" >
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="updated != null" >
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -349,7 +363,8 @@
       followers = #{followers,jdbcType=INTEGER},
       following = #{following,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

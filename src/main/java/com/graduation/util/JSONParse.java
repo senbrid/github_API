@@ -27,7 +27,7 @@ public class JSONParse {
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.getJSONObject(i).getString("owner") != null) {
                 JSONObject object = JSONObject.parseObject(jsonArray.getJSONObject(i).getString("owner"));
-                jsonArray.getJSONObject(i).put("ownerId", object.getString("login"));
+                jsonArray.getJSONObject(i).put("ownerId", object.getString("id"));
             }
             jsonObjectList.add(jsonArray.getJSONObject(i));
         }
@@ -78,6 +78,7 @@ public class JSONParse {
             developer.setFollowing(jsonObjectList.get(i).getInteger("following"));
             developer.setCreatedAt(UTCStringtODate(jsonObjectList.get(i).getString("created_at")));
             developer.setUpdatedAt(UTCStringtODate(jsonObjectList.get(i).getString("updated_at")));
+            developer.setUpdated(new Date());
             developerList.add(developer);
         }
         return developerList;
@@ -120,7 +121,8 @@ public class JSONParse {
             repository.setWatchersCount(jsonObjectList.get(i).getInteger("watchers_count"));
             repository.setForksCount(jsonObjectList.get(i).getInteger("forks_count"));
             repository.setLanguage(jsonObjectList.get(i).getString("language"));
-            repository.setDeveloperid(jsonObjectList.get(i).getString("ownerId"));
+            repository.setDeveloperid(jsonObjectList.get(i).getLong("ownerId"));
+            repository.setUpdated(new Date());
             repositoryList.add(repository);
         }
         return repositoryList;
@@ -139,18 +141,6 @@ public class JSONParse {
             repositoryList = listJSONObjectToListRepository(jsonObjectList);
         }
         return repositoryList;
-    }
-
-    /**
-     * 将对象序列化为JSON文本
-     *
-     * @date: 2018年3月29日16:05:17
-     * @param object
-     * @return
-     */
-    public static String toJSONString(List<JSONObject> object) {
-
-        return null;
     }
 
 }

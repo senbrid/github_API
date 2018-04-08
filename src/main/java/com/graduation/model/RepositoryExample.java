@@ -305,76 +305,6 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionIsNull() {
-            addCriterion("description is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIsNotNull() {
-            addCriterion("description is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionEqualTo(String value) {
-            addCriterion("description =", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotEqualTo(String value) {
-            addCriterion("description <>", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionGreaterThan(String value) {
-            addCriterion("description >", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
-            addCriterion("description >=", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLessThan(String value) {
-            addCriterion("description <", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLessThanOrEqualTo(String value) {
-            addCriterion("description <=", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLike(String value) {
-            addCriterion("description like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotLike(String value) {
-            addCriterion("description not like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIn(List<String> values) {
-            addCriterion("description in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotIn(List<String> values) {
-            addCriterion("description not in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionBetween(String value1, String value2) {
-            addCriterion("description between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotBetween(String value1, String value2) {
-            addCriterion("description not between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
         public Criteria andCreatedAtIsNull() {
             addCriterion("created_at is null");
             return (Criteria) this;
@@ -795,6 +725,76 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andDescriptionIsNull() {
+            addCriterion("description is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIsNotNull() {
+            addCriterion("description is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionEqualTo(String value) {
+            addCriterion("description =", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotEqualTo(String value) {
+            addCriterion("description <>", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThan(String value) {
+            addCriterion("description >", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("description >=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThan(String value) {
+            addCriterion("description <", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("description <=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLike(String value) {
+            addCriterion("description like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotLike(String value) {
+            addCriterion("description not like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIn(List<String> values) {
+            addCriterion("description in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotIn(List<String> values) {
+            addCriterion("description not in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionBetween(String value1, String value2) {
+            addCriterion("description between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotBetween(String value1, String value2) {
+            addCriterion("description not between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
         public Criteria andLanguageIsNull() {
             addCriterion("language is null");
             return (Criteria) this;
@@ -875,63 +875,113 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidEqualTo(String value) {
+        public Criteria andDeveloperidEqualTo(Long value) {
             addCriterion("developerId =", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotEqualTo(String value) {
+        public Criteria andDeveloperidNotEqualTo(Long value) {
             addCriterion("developerId <>", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidGreaterThan(String value) {
+        public Criteria andDeveloperidGreaterThan(Long value) {
             addCriterion("developerId >", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidGreaterThanOrEqualTo(String value) {
+        public Criteria andDeveloperidGreaterThanOrEqualTo(Long value) {
             addCriterion("developerId >=", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLessThan(String value) {
+        public Criteria andDeveloperidLessThan(Long value) {
             addCriterion("developerId <", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLessThanOrEqualTo(String value) {
+        public Criteria andDeveloperidLessThanOrEqualTo(Long value) {
             addCriterion("developerId <=", value, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLike(String value) {
-            addCriterion("developerId like", value, "developerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeveloperidNotLike(String value) {
-            addCriterion("developerId not like", value, "developerid");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeveloperidIn(List<String> values) {
+        public Criteria andDeveloperidIn(List<Long> values) {
             addCriterion("developerId in", values, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotIn(List<String> values) {
+        public Criteria andDeveloperidNotIn(List<Long> values) {
             addCriterion("developerId not in", values, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidBetween(String value1, String value2) {
+        public Criteria andDeveloperidBetween(Long value1, Long value2) {
             addCriterion("developerId between", value1, value2, "developerid");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotBetween(String value1, String value2) {
+        public Criteria andDeveloperidNotBetween(Long value1, Long value2) {
             addCriterion("developerId not between", value1, value2, "developerid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateIsNull() {
+            addCriterion("update is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateIsNotNull() {
+            addCriterion("update is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateEqualTo(Date value) {
+            addCriterion("update =", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateNotEqualTo(Date value) {
+            addCriterion("update <>", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateGreaterThan(Date value) {
+            addCriterion("update >", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("update >=", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateLessThan(Date value) {
+            addCriterion("update <", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateLessThanOrEqualTo(Date value) {
+            addCriterion("update <=", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateIn(List<Date> values) {
+            addCriterion("update in", values, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateNotIn(List<Date> values) {
+            addCriterion("update not in", values, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateBetween(Date value1, Date value2) {
+            addCriterion("update between", value1, value2, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateNotBetween(Date value1, Date value2) {
+            addCriterion("update not between", value1, value2, "update");
             return (Criteria) this;
         }
     }

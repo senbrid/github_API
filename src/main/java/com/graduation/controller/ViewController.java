@@ -59,12 +59,9 @@ public class ViewController {
             RepositoryVO repositoryVO = new RepositoryVO();
             //复制对象属性数据
             BeanUtils.copyProperties(repository,repositoryVO);
-            //创建查询条件
-            DeveloperExample developerExample = new DeveloperExample();
-            DeveloperExample.Criteria criteria1 = developerExample.createCriteria();
-            criteria1.andLoginEqualTo(repository.getDeveloperid());
-            List<Developer> developerList = developerService.getDeveloperByExample(developerExample);
-            repositoryVO.setAvatarUrl(developerList.get(0).getAvatarUrl());
+
+            Developer developer = developerService.getDeveloperById(repository.getDeveloperid());
+            repositoryVO.setAvatarUrl(developer.getAvatarUrl());
             repositoryVOList.add(repositoryVO);
         }
         //封装查询的结果集

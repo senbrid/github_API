@@ -15,7 +15,8 @@
             <arg column="watchers_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="forks_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="language" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="developerId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="developerId" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="updated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         </constructor>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -80,7 +81,7 @@
     </sql>
     <sql id="Base_Column_List">
     id, name, full_name, description, created_at, updated_at, pushed_at, size, star_count, 
-    watchers_count, forks_count, language, developerId
+    watchers_count, forks_count, language, developerId, updated
   </sql>
     <update id="preDo">
         set names utf8mb4
@@ -125,26 +126,26 @@
       description, created_at, updated_at, 
       pushed_at, size, star_count, 
       watchers_count, forks_count, language, 
-      developerId)
+      developerId,updated)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
       #{pushedAt,jdbcType=TIMESTAMP}, #{size,jdbcType=INTEGER}, #{starCount,jdbcType=INTEGER}, 
       #{watchersCount,jdbcType=INTEGER}, #{forksCount,jdbcType=INTEGER}, #{language,jdbcType=VARCHAR}, 
-      #{developerid,jdbcType=VARCHAR})
+      #{developerid,jdbcType=BIGINT}, #{updated,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertBatch" parameterType="java.util.List">
         insert into tb_repository (id, name, full_name,
         description, created_at, updated_at,
         pushed_at, size, star_count,
         watchers_count, forks_count, language,
-        developerId)
+        developerId,updated)
         values
         <foreach collection="list" item="repository" separator=",">
             (#{repository.id,jdbcType=BIGINT}, #{repository.name,jdbcType=VARCHAR}, #{repository.fullName,jdbcType=VARCHAR},
             #{repository.description,jdbcType=VARCHAR}, #{repository.createdAt,jdbcType=TIMESTAMP}, #{repository.updatedAt,jdbcType=TIMESTAMP},
             #{repository.pushedAt,jdbcType=TIMESTAMP}, #{repository.size,jdbcType=INTEGER}, #{repository.starCount,jdbcType=INTEGER},
             #{repository.watchersCount,jdbcType=INTEGER}, #{repository.forksCount,jdbcType=INTEGER}, #{repository.language,jdbcType=VARCHAR},
-            #{repository.developerid,jdbcType=VARCHAR})
+            #{repository.developerid,jdbcType=BIGINT}, #{repository.updated,jdbcType=TIMESTAMP})
         </foreach>
     </insert>
     <insert id="insertSelective" parameterType="com.graduation.model.Repository">
@@ -189,6 +190,9 @@
             <if test="developerid != null">
                 developerId,
             </if>
+            <if test="updated != null">
+                updated,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -228,7 +232,10 @@
                 #{language,jdbcType=VARCHAR},
             </if>
             <if test="developerid != null">
-                #{developerid,jdbcType=VARCHAR},
+                #{developerid,jdbcType=BIGINT},
+            </if>
+            <if test="updated != null">
+                #{updated,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -278,7 +285,10 @@
                 language = #{record.language,jdbcType=VARCHAR},
             </if>
             <if test="record.developerid != null">
-                developerId = #{record.developerid,jdbcType=VARCHAR},
+                developerId = #{record.developerid,jdbcType=BIGINT},
+            </if>
+            <if test="record.updated != null">
+                update = #{record.updated,jdbcType=TIMESTAMP},
             </if>
         </set>
         <if test="_parameter != null">
@@ -299,7 +309,8 @@
         watchers_count = #{record.watchersCount,jdbcType=INTEGER},
         forks_count = #{record.forksCount,jdbcType=INTEGER},
         language = #{record.language,jdbcType=VARCHAR},
-        developerId = #{record.developerid,jdbcType=VARCHAR}
+        developerId = #{record.developerid,jdbcType=BIGINT},
+        updated = #{record.updated,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -341,7 +352,10 @@
                 language = #{language,jdbcType=VARCHAR},
             </if>
             <if test="developerid != null">
-                developerId = #{developerid,jdbcType=VARCHAR},
+                developerId = #{developerid,jdbcType=BIGINT},
+            </if>
+            <if test="updated != null">
+                updated = #{updated,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
@@ -359,7 +373,8 @@
       watchers_count = #{watchersCount,jdbcType=INTEGER},
       forks_count = #{forksCount,jdbcType=INTEGER},
       language = #{language,jdbcType=VARCHAR},
-      developerId = #{developerid,jdbcType=VARCHAR}
+      developerId = #{developerid,jdbcType=BIGINT},
+      updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

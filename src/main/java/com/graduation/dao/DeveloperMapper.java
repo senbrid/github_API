@@ -1,8 +1,10 @@
 package com.graduation.dao;
 
 import com.graduation.model.Developer;
-import com.graduation.model.DeveloperExample;
+
 import java.util.List;
+
+import com.graduation.model.DeveloperExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface DeveloperMapper {

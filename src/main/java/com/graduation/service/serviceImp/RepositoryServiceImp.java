@@ -3,7 +3,6 @@ package com.graduation.service.serviceImp;
 import com.graduation.dao.RepositoryMapper;
 import com.graduation.model.Repository;
 import com.graduation.model.RepositoryExample;
-import com.graduation.model.RepositoryVO;
 import com.graduation.service.RepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +62,16 @@ public class RepositoryServiceImp implements RepositoryService {
         repositoryMapper.preDo();
         Integer repositoryCount = repositoryMapper.countByExample(record);
         return repositoryCount;
+    }
+
+    /**
+     * 按主键查询
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Repository getDataById(Long id) {
+        return repositoryMapper.selectByPrimaryKey(id);
     }
 }

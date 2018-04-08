@@ -27,9 +27,11 @@ public class Repository {
 
     private String language;
 
-    private String developerid;
+    private Long developerid;
 
-    public Repository(Long id, String name, String fullName, String description, Date createdAt, Date updatedAt, Date pushedAt, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, String developerid) {
+    private Date updated;
+
+    public Repository(Long id, String name, String fullName, String description, Date createdAt, Date updatedAt, Date pushedAt, Integer size, Integer starCount, Integer watchersCount, Integer forksCount, String language, Long developerid,Date updated) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -43,6 +45,7 @@ public class Repository {
         this.forksCount = forksCount;
         this.language = language;
         this.developerid = developerid;
+        this.updated = updated;
     }
 
     public Repository() {
@@ -145,11 +148,19 @@ public class Repository {
         this.language = language == null ? null : language.trim();
     }
 
-    public String getDeveloperid() {
+    public Long getDeveloperid() {
         return developerid;
     }
 
-    public void setDeveloperid(String developerid) {
-        this.developerid = developerid == null ? null : developerid.trim();
+    public void setDeveloperid(Long developerid) {
+        this.developerid = developerid;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

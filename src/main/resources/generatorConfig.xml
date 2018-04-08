@@ -8,7 +8,7 @@
     <properties resource="jdbc.properties"></properties>
 
     <!--指定特定数据库的jdbc驱动jar包的位置-->
-    <classPathEntry location="C:\Users\Joke\.m2\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>
+    <classPathEntry location="C:\Users\93587\.m2\repository\mysql\mysql-connector-java\5.1.5\mysql-connector-java-5.1.5.jar"/>
 
     <context id="default" targetRuntime="MyBatis3">
 
@@ -38,7 +38,7 @@
             targetProject     指定在该项目下所在的路径
         -->
         <javaModelGenerator targetPackage="com.graduation.model"
-                            targetProject="src/main/java">
+                            targetProject="src/test">
 
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
@@ -52,7 +52,7 @@
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
         <sqlMapGenerator targetPackage="mapper"
-                         targetProject="src/main/java">
+                         targetProject="src/test">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
@@ -62,33 +62,12 @@
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
         <javaClientGenerator targetPackage="com.graduation.dao"
-                             targetProject="src/main/java" type="XMLMAPPER">
+                             targetProject="src/test" type="ANNOTATEDMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
 
         <table tableName="tb_developer" domainObjectName="Developer"/>
-
         <table tableName="tb_repository" domainObjectName="Repository"/>
-        <!--<table tableName="configinfo" domainObjectName="Confinfo"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-        <!--<table tableName="grade" domainObjectName="Grade"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-        <!--<table tableName="gradelog" domainObjectName="Gradelog"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-        <!--<table tableName="reginfo" domainObjectName="Reginfo"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
     </context>
 </generatorConfiguration>

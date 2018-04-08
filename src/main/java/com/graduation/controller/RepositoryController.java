@@ -25,6 +25,7 @@ public class RepositoryController {
     private RepositoryService repositoryService;
     @Autowired
     private DeveloperService developerService;
+
     /**
      * 添加仓库项目数据（使用AJAX异步）
      */
@@ -40,15 +41,15 @@ public class RepositoryController {
         List<Repository> repositoryList = JSONParse.listJSONObjectToListRepositorySearch(list);
 
         StringBuilder result = new StringBuilder();
-        for(Repository repository : repositoryList){
-            result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getDeveloperid())));
+        for (Repository repository : repositoryList) {
+            //result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getDeveloperid())));
         }
         //字符串转json
         List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
         //把JSON数据封装到实体类List
         List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
 
-        System.out.println("size:"+removeDupliById(developerList).size());
+        System.out.println("size:" + removeDupliById(developerList).size());
         int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
         System.out.println("成功添加" + countInsert + "条开发者数据。");
         //批量添加数据接口
@@ -58,6 +59,7 @@ public class RepositoryController {
 
     /**
      * 根据id属性的值去掉对象列表里重复的对象
+     *
      * @param developers
      * @return
      */

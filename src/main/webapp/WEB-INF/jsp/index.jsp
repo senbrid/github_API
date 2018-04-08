@@ -71,7 +71,6 @@
         <div class="copy-right"><span>&copy; 2013-2018</span> <a
                 href="http://www.miibeian.gov.cn/" target=_blank>京ICP备11008151号</a> <span>京公网安备11010802014853</span></div>
     </div>
-    <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -88,7 +87,8 @@
     });
 
     function query(page,text) {
-        $('#back-to-top').click();
+        //以800的速度跳到页面最上端
+        $("html,body").animate({scrollTop:0}, 800);
         $.ajax({
             url: "<%=base%>/view/queryData",    //请求的url地址
             dataType: "json",   //返回格式为json

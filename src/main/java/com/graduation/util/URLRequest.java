@@ -22,9 +22,9 @@ public class URLRequest {
         BufferedReader in = null;
         try {
             if(url.contains("?")){
-                url += "&access_token=cfbf835e55ccf74b2cfb682737c65d677cd1c000";
+                url += "&access_token=86b353f00b725bcba37a6098e7eaaaad64eb193e";
             }else {
-                url += "?access_token=cfbf835e55ccf74b2cfb682737c65d677cd1c000";
+                url += "?access_token=86b353f00b725bcba37a6098e7eaaaad64eb193e";
             }
             URL realUrl = new URL(url);
             // 打开和URL之间的连接
@@ -39,9 +39,9 @@ public class URLRequest {
             // 获取所有响应头字段
             Map<String, List<String>> map = connection.getHeaderFields();
             // 遍历所有的响应头字段
-            for (String key : map.keySet()) {
-                System.out.println(key + "--->" + map.get(key));
-            }
+//            for (String key : map.keySet()) {
+//                System.out.println(key + "--->" + map.get(key));
+//            }
             // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));
