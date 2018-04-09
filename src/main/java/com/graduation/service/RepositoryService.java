@@ -22,12 +22,19 @@ public interface RepositoryService {
      * Date 2018年3月21日15:36:35
      */
     int addRepositoryByPO(Repository repository);
-
+    /**
+     * 修改仓库数据
+     *
+     * @param repository
+     * @author Joke
+     * Date 2018年4月9日10:12:43
+     */
+    int updateRepositoryById(Repository repository);
     /**
      * 按条件查询
      * @return
      */
-    List<Repository> queryData(RepositoryExample record);
+    List<Repository> queryRepositoryByExample(RepositoryExample record);
 
     /**
      * 按条件统计项目数量

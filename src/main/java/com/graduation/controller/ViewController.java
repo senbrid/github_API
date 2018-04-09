@@ -52,7 +52,7 @@ public class ViewController {
         criteria.andDescriptionLike("%" + text + "%");
         //分页查询
         PageHelper.startPage(page,10);
-        List<Repository> repositories = repositoryService.queryData(repositoryExample);
+        List<Repository> repositories = repositoryService.queryRepositoryByExample(repositoryExample);
         List<RepositoryVO> repositoryVOList = new ArrayList<RepositoryVO>();
         PageInfo<Repository> pInfo = new PageInfo<Repository>(repositories);
         for (Repository repository : repositories) {

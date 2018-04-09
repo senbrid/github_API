@@ -12,13 +12,13 @@ public class URLBuilder {
     }
 
     /**
-     * 通过 用户名和项目名 构建URL
+     * 通过 项目全名 构建URL
      *
-     * @param repoName
+     * @param name
      * @return String类型的URL地址
      */
-    public static String urlRepoBuilder(String userName, String repoName) {
-        return "https://api.github.com/repos/" + userName + repoName;
+    public static String urlRepoBuilder(String name) {
+        return "https://api.github.com/repos/" + name;
     }
 
     /**

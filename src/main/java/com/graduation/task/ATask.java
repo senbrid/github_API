@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.graduation.model.Developer;
 import com.graduation.model.DeveloperExample;
 import com.graduation.model.Repository;
+import com.graduation.model.RepositoryExample;
 import com.graduation.service.DeveloperService;
 import com.graduation.service.RepositoryService;
 import com.graduation.util.JSONParse;
@@ -30,7 +31,7 @@ public class ATask {
     //以一个固定延迟时间10分钟调用一次执行
     // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
     public void demo1() {
-        logger.info("定时任务 #获取数据# 开始");
+        logger.info(" #获取数据# 开始");
         long begin = System.currentTimeMillis();
         //执行你需要操作的定时任务
         try {
@@ -66,32 +67,30 @@ public class ATask {
                 int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
                 //批量添加数据
                 int count = repositoryService.addRepositoryByListPO(repositories);
-                logger.info("成功添加" + countInsert + "条开发者数据," + count + "条项目数据。");
+                logger.info(" #获取数据# 成功添加" + countInsert + "条开发者数据," + count + "条项目数据。");
             } else {
-                logger.info("没有获取到新数据。");
+                logger.info(" #获取数据# 没有获取到新数据。");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         long end = System.currentTimeMillis();
-        logger.info("定时任务 #获取数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
+        logger.info(" #获取数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 3)//@Scheduled 可以作为一个触发源添加到一个方法中
-    //以一个固定延迟时间10分钟调用一次执行
+    @Scheduled(fixedDelay = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
+    //以一个固定延迟时间1小时调用一次执行
     // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
     public void demo2() {
-        logger.info("定时任务 #更新数据# 开始");
+        logger.info(" #更新developer数据# 开始");
         long begin = System.currentTimeMillis();
         //执行你需要操作的定时任务
         try {
             DeveloperExample developerExample = new DeveloperExample();
             DeveloperExample.Criteria criteria = developerExample.createCriteria();
-            Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 5);
-            logger.info("date:" + date);
+            Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);
             criteria.andUpdatedLessThan(date);
             List<Developer> developerList = developerService.getDeveloperByExample(developerExample);
-            logger.info("size:" + developerList.size());
             if (!developerList.isEmpty()) {
                 StringBuilder result = new StringBuilder();
                 for (Developer developer : developerList) {
@@ -101,15 +100,56 @@ public class ATask {
                 List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
                 //把JSON数据封装到实体类List
                 List<Developer> developers = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
-                int count = developerService.updateDeveloperByListPO(developers);
-                logger.info("更新 "+count+" 条数据");
+                int count = 0;
+                for(Developer developer : developers){
+                    count += developerService.updateDeveloperById(developer);
+                }
+                logger.info(" #更新developer数据# 更新 "+count+" 条developer数据");
+            }else{
+                logger.info(" #更新developer数据# 没有developer数据需要更新");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         long end = System.currentTimeMillis();
-        logger.info("定时任务 #更新数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
+        logger.info(" #更新developer数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
+    }
+
+    @Scheduled(fixedDelay = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
+    //以一个固定延迟时间10分钟调用一次执行
+    // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
+    public void demo3() {
+        logger.info(" #更新repository数据# 开始");
+        long begin = System.currentTimeMillis();
+        //执行你需要操作的定时任务
+        try {
+            RepositoryExample repositoryExample = new RepositoryExample();
+            RepositoryExample.Criteria criteria = repositoryExample.createCriteria();
+            Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);
+            criteria.andUpdatedLessThan(date);
+            List<Repository> repositoryList = repositoryService.queryRepositoryByExample(repositoryExample);
+            if (!repositoryList.isEmpty()) {
+                StringBuilder result = new StringBuilder();
+                for (Repository repository : repositoryList) {
+                    result.append(URLRequest.sendGet(URLBuilder.urlRepoBuilder(repository.getFullName())));
+                }
+                //字符串转json
+                List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
+                //把JSON数据封装到实体类List
+                List<Repository> repositories = JSONParse.listJSONObjectToListRepository(jsonObjectList);
+                int count = 0;
+                for(Repository repository : repositories){
+                    count += repositoryService.updateRepositoryById(repository);
+                }
+                logger.info(" #更新repository数据# 更新 "+count+" 条repository数据");
+            }else{
+                logger.info(" #更新repository数据# 没有repository数据需要更新");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        long end = System.currentTimeMillis();
+        logger.info(" #更新repository数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
     }
 
 //    @Scheduled(fixedRate  = 5000)

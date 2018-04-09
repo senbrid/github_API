@@ -40,12 +40,24 @@ public class RepositoryServiceImp implements RepositoryService {
     }
 
     /**
+     * 修改仓库数据
+     *
+     * @param repository
+     * @author Joke
+     * Date 2018年4月9日10:12:43
+     */
+    @Override
+    public int updateRepositoryById(Repository repository) {
+        return repositoryMapper.updateByPrimaryKey(repository);
+    }
+
+    /**
      * 按条件查询数据
      * @param record
      * @return
      */
     @Override
-    public List<Repository> queryData(RepositoryExample record) {
+    public List<Repository> queryRepositoryByExample(RepositoryExample record) {
         repositoryMapper.preDo();
         List<Repository> repositories = repositoryMapper.selectByExample(record);
         return repositories;

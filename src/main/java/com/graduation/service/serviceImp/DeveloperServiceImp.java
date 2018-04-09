@@ -39,6 +39,18 @@ public class DeveloperServiceImp implements DeveloperService {
     }
 
     /**
+     * 按主键更新数据
+     *
+     * @param developer
+     * @author Joke
+     * Date 2018年4月9日09:28:07
+     */
+    @Override
+    public int updateDeveloperById(Developer developer) {
+        return developerMapper.updateByPrimaryKey(developer);
+    }
+
+    /**
      * 按条件查询
      *
      * @param example

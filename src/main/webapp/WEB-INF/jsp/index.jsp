@@ -79,8 +79,13 @@
 
     $(document).ready(function(){
         query(1,'${key}');
+        $("#text").keydown(function (e) {
+            if (e.keyCode == 13) {
+                var q = $("#text").val();
+                window.location.href = "<%=base%>/view/index?q=" + q;
+            }
+        });
     });
-
     $('#search').click(function () {
         var q = $('#text').val();
         window.location.href = "<%=base%>/view/index?q=" + q;

@@ -23,7 +23,15 @@ public interface DeveloperService {
      */
     int updateDeveloperByListPO(List<Developer> developerList);
     /**
-     * 根据开发者ID查询开发者头像地址
+     * 按主键更新数据
+     *
+     * @param developer
+     * @author Joke
+     * Date 2018年4月9日09:28:07
+     */
+    int updateDeveloperById(Developer developer);
+    /**
+     * 根据example查询开发者
      *
      * @param example
      * @author Joke
