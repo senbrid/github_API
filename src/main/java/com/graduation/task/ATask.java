@@ -27,58 +27,64 @@ public class ATask {
 
     private Logger logger = Logger.getLogger(ATask.class);
 
-    @Scheduled(fixedDelay = 1000 * 60 * 3)//@Scheduled 可以作为一个触发源添加到一个方法中
+    @Scheduled(fixedRate = 1000 * 60 * 30)//@Scheduled 可以作为一个触发源添加到一个方法中
     //以一个固定延迟时间10分钟调用一次执行
     // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
     public void demo1() {
         logger.info(" #获取数据# 开始");
         long begin = System.currentTimeMillis();
         //执行你需要操作的定时任务
-        try {
-            String param = "language:ruby&sort=stars&order=desc&per_page=100";
-            String url = URLBuilder.urlSearchRepoBuilder(param);
-            //获取网页返回的字符串
-            String str = URLRequest.sendGet(url);
-            //字符串转json
-            List<JSONObject> list = JSONParse.stringToJson(str);
-            //把JSON数据封装到实体类List
-            List<Repository> repositoryList = JSONParse.listJSONObjectToListRepositorySearch(list);
-            //去掉与数据库数据重复的数据
-            List<Repository> repositories = new ArrayList<>();
-            for (Repository repository : repositoryList) {
-                Repository repository1 = repositoryService.getDataById(repository.getId());
-                if (repository1 == null) {
-                    repositories.add(repository);
-                }
-            }
-            if (!repositories.isEmpty()) {
-                StringBuilder result = new StringBuilder();
-                for (Repository repository : repositories) {
-                    Developer developer = developerService.getDeveloperById(repository.getDeveloperid());
-                    if (developer == null) {
-                        result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getFullName().split("/")[0])));
+        String[] language = new String[]{"java","c","python","javascript"};
+        for (int i = 0; i < language.length; i++) {
+            try {
+                String param = "language:"+language[i]+"&sort=stars&per_page=100";
+                String url = URLBuilder.urlSearchRepoBuilder(param);
+                //获取网页返回的字符串
+                String str = URLRequest.sendGet(url);
+                //字符串转json
+                List<JSONObject> list = JSONParse.stringToJson(str);
+                //把JSON数据封装到实体类List
+                List<Repository> repositoryList = JSONParse.listJSONObjectToListRepositorySearch(list);
+                //去掉与数据库数据重复的数据
+                List<Repository> repositories = new ArrayList<>();
+                for (Repository repository : repositoryList) {
+                    //3天没更新的项目不添加到数据库
+                    if(repository.getUpdatedAt().getTime()  > (begin-1000*60*60*24*3)) {
+                        Repository repository1 = repositoryService.getDataById(repository.getId());
+                        if (repository1 == null) {
+                            repositories.add(repository);
+                        }
                     }
                 }
-                //字符串转json
-                List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
-                //把JSON数据封装到实体类List
-                List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
+                if (!repositories.isEmpty()) {
+                    StringBuilder result = new StringBuilder();
+                    for (Repository repository : repositories) {
+                        Developer developer = developerService.getDeveloperById(repository.getDeveloperid());
+                        if (developer == null) {
+                            result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getFullName().split("/")[0])));
+                        }
+                    }
+                    //字符串转json
+                    List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
+                    //把JSON数据封装到实体类List
+                    List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
 
-                int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
-                //批量添加数据
-                int count = repositoryService.addRepositoryByListPO(repositories);
-                logger.info(" #获取数据# 成功添加" + countInsert + "条开发者数据," + count + "条项目数据。");
-            } else {
-                logger.info(" #获取数据# 没有获取到新数据。");
+                    int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
+                    //批量添加数据
+                    int count = repositoryService.addRepositoryByListPO(repositories);
+                    logger.info(" #获取数据# 成功添加" + countInsert + "条开发者数据," + count + "条 "+language[i]+" 项目数据。");
+                } else {
+                    logger.info(" #获取数据# 没有获取到 "+language[i]+"项目 新数据。");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         long end = System.currentTimeMillis();
         logger.info(" #获取数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
+    @Scheduled(fixedRate = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
     //以一个固定延迟时间1小时调用一次执行
     // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
     public void demo2() {
@@ -115,7 +121,7 @@ public class ATask {
         logger.info(" #更新developer数据# 结束，共耗时：[" + (end - begin) + "]毫秒");
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
+    @Scheduled(fixedRate = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
     //以一个固定延迟时间10分钟调用一次执行
     // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
     public void demo3() {

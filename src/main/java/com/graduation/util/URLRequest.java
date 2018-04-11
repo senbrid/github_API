@@ -21,19 +21,19 @@ public class URLRequest {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try {
-            if(url.contains("?")){
-                url += "&access_token=fb38bcd26a6cd71f66270fa75c32ea6bb41ef5c3";
-            }else {
-                url += "?access_token=fb38bcd26a6cd71f66270fa75c32ea6bb41ef5c3";
-            }
+//            if(url.contains("?")){
+//                url += "&access_token=ef8dae6d1c237ff7eae15701fc2ad22a8cb0b58d";
+//            }else {
+//                url += "?access_token=ef8dae6d1c237ff7eae15701fc2ad22a8cb0b58d";
+//            }
             URL realUrl = new URL(url);
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
             // 设置通用的请求属性
             connection.setRequestProperty("accept", "application/vnd.github.v3+json");
             connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty("Authorization", "token ef8dae6d1c237ff7eae15701fc2ad22a8cb0b58d");
+            connection.setRequestProperty("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 建立实际的连接
             connection.connect();
             // 获取所有响应头字段
