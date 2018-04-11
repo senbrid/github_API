@@ -32,7 +32,7 @@ public class URLRequest {
             // 设置通用的请求属性
             connection.setRequestProperty("accept", "application/vnd.github.v3+json");
             connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("Authorization", "token ef8dae6d1c237ff7eae15701fc2ad22a8cb0b58d");
+            connection.setRequestProperty("Authorization", "token 31ea7e75e68219dc93c952f0ac15836a1cc4335d");
             connection.setRequestProperty("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 建立实际的连接
             connection.connect();
