@@ -83,8 +83,13 @@ public class ViewController {
      * @date 2018年3月29日11:02:31
      */
     @RequestMapping(value = "/reposDetails",method = RequestMethod.GET)
-    public String reposDetails() {
-
+    public String reposDetails(@RequestParam(value="id") Long id,ModelMap map) {
+        Repository repository = repositoryService.getDataById(id);
+        RepositoryVO repositoryVO = new RepositoryVO();
+        Developer developer = developerService.getDeveloperById(repository.getDeveloperid());
+        BeanUtils.copyProperties(repository,repositoryVO);
+        repositoryVO.setAvatarUrl(developer.getAvatarUrl());
+        map.put("repository",repositoryVO);
         return "reposDetail";
     }
 

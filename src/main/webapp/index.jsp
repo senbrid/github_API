@@ -33,11 +33,11 @@
                 <a href="" class="navbar-brand lead" style="font-size: 30px;margin-left: auto"><b>GitHubHOME</b></a>
             </div>
             <nav id="bs-navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="">API</a></li>
-                    <li><a href="">排行榜</a></li>
-                    <li><a href="">关于</a></li>
-                </ul>
+                <%--<ul class="nav navbar-nav navbar-right">--%>
+                    <%--<li><a href="">API</a></li>--%>
+                    <%--<li><a href="">排行榜</a></li>--%>
+                    <%--<li><a href="">关于</a></li>--%>
+                <%--</ul>--%>
             </nav>
         </div>
     </nav>
@@ -66,7 +66,7 @@
             <div id="body" style="height: 331px">
                 <div class="row" style="height: 61px">
                     <div style="height: 60px">
-                        <p style="font-size: 20px;display: inline-block">每日推荐</p>&nbsp;&nbsp;<a><i
+                        <p style="font-size: 20px;display: inline-block">每日推荐</p>&nbsp;&nbsp;<a onclick=""><i
                             class="glyphicon glyphicon-repeat"></i>换一批</a>
                     </div>
                 </div>

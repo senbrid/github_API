@@ -36,11 +36,11 @@
                         <div class="col-md-1">
                             <a href="#" class="package-name" style="float:right">
                                 <img class="media-object"
-                                     src="https://avatars1.githubusercontent.com/u/874086?v=4&amp;s=64"
-                                     style="height: 32px;width: 32px" alt="用户头像"></a></div>
+                                     src="${repository.avatarUrl}"
+                                     style="height: 64px;width: 64px" alt="用户头像"></a></div>
                         <div class="col-md-9 hidden-xs"><a class="package-name"
-                                                           href="#"><b>junit-team/junit4</b></a><br>
-                            <p class="package-description">A programmer-oriented testing framework for Java.</p></div>
+                                                           href="#"><b>${repository.fullName}</b></a><br>
+                            <p class="package-description">${repository.description}</p></div>
                         <div class="col-md-1"><a href="https://github.com/junit-team/junit4/archive/master.zip">
                             <button class="btn btn-default">Download</button>
                         </a></div>

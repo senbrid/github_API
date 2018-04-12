@@ -36,13 +36,13 @@
                 </div>
                 <button type="button" class="btn btn-default" id="search">Search</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'api'])"
-                       target=_blank>API</a></li>
-                <li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click','blog'])"
-                       target=_blank>排行榜</a></li>
-                <li><a style="color: white" href=#about onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'about'])">关于</a></li>
-            </ul>
+            <%--<ul class="nav navbar-nav navbar-right">--%>
+                <%--<li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'api'])"--%>
+                       <%--target=_blank>API</a></li>--%>
+                <%--<li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click','blog'])"--%>
+                       <%--target=_blank>排行榜</a></li>--%>
+                <%--<li><a style="color: white" href=#about onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'about'])">关于</a></li>--%>
+            <%--</ul>--%>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

@@ -155,7 +155,7 @@
                     "<a href=\"#\" class=\"package-name\" style=\"float:right\">"+
                     "<img class=\"media-object\" src="+ object.list[i].avatarUrl+ '&s=64' +" style=\"height: 32px;width: 32px\" alt=\"用户头像\">"+
                     "</a></div><div class=\"col-md-9 hidden-xs\">"+
-                    "<a class=\"package-name\" href=\"#\"><b>"+ object.list[i].fullName +
+                    "<a class=\"package-name\" href=\"/view/reposDetails?id="+object.list[i].id+"\"><b>"+ object.list[i].fullName +
                     "</b></a><br/><p class=\"package-description\">"+ object.list[i].description +
                     "</p></div>" +
                     "<div class=\"col-md-1\"><a href=\"https://github.com/"+object.list[i].fullName+"/archive/master.zip\"><button class=\"btn btn-default\">Download</button></a></div>" +
