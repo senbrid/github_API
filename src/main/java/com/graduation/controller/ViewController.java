@@ -50,6 +50,10 @@ public class ViewController {
         RepositoryExample repositoryExample = new RepositoryExample();
         RepositoryExample.Criteria criteria = repositoryExample.createCriteria();
         criteria.andDescriptionLike("%" + text + "%");
+        RepositoryExample.Criteria criteria2= repositoryExample.createCriteria();
+        criteria2.andFullNameLike("%" + text + "%");
+        repositoryExample.or(criteria2);
+        repositoryExample.setOrderByClause("star_count DESC");
         //分页查询
         PageHelper.startPage(page,10);
         List<Repository> repositories = repositoryService.queryRepositoryByExample(repositoryExample);
@@ -78,15 +82,13 @@ public class ViewController {
      * @return json
      * @date 2018年3月29日11:02:31
      */
-    @RequestMapping(value = "/getRepositoryData",method = RequestMethod.GET)
-    @ResponseBody
-    public String getRepositoryData() {
+    @RequestMapping(value = "/reposDetails",method = RequestMethod.GET)
+    public String reposDetails() {
 
-        return "index";
+        return "reposDetail";
     }
 
     @RequestMapping(value = "/getDeveloperData",method = RequestMethod.GET)
-    @ResponseBody
     public String getDeveloperData() {
 
         return "index";

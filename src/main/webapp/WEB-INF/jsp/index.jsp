@@ -79,21 +79,10 @@
 
     $(document).ready(function(){
         query(1,'${key}');
-        $("#text").keydown(function (e) {
-            if (e.keyCode == 13) {
-                var q = $("#text").val();
-                window.location.href = "<%=base%>/view/index?q=" + q;
-            }
-        });
     });
-    $('#search').click(function () {
-        var q = $('#text').val();
-        window.location.href = "<%=base%>/view/index?q=" + q;
-    });
-
     function query(page,text) {
         //以800的速度跳到页面最上端
-        $("html,body").animate({scrollTop:0}, 800);
+        $("html,body").animate({scrollTop:0}, 100);
         $.ajax({
             url: "<%=base%>/view/queryData",    //请求的url地址
             dataType: "json",   //返回格式为json
@@ -169,11 +158,10 @@
                     "<a class=\"package-name\" href=\"#\"><b>"+ object.list[i].fullName +
                     "</b></a><br/><p class=\"package-description\">"+ object.list[i].description +
                     "</p></div>" +
-                    "<div class=\"col-md-1\"><button class=\"btn btn-default\" type=\"submit\">Download</button></div>" +
+                    "<div class=\"col-md-1\"><a href=\"https://github.com/"+object.list[i].fullName+"/archive/master.zip\"><button class=\"btn btn-default\">Download</button></a></div>" +
                     "</div><div class=\"package-extra-info col-md-12 col-md-offset-1 col-xs-12\">"+
-                    "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                    "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                    "<span><i class=\"fa fa-star\">"+ object.list[i].starCount +"</i></span></div></div>";
+                    "<span><i class=\"fa fa-star\"></i>&nbsp;&nbsp;<label style='color: orange'>"+ object.list[i].starCount +"</label></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                    "<span><i class=\"fa fa-language\"></i>&nbsp;&nbsp;<label style='color: orange'>"+ object.list[i].language +"</label></span></div></div>";
 
                 }
                 $('#content').html(html);

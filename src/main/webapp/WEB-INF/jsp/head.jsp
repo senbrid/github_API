@@ -10,7 +10,10 @@
     String base = request.getContextPath();
 %>
 <html>
-<head></head>
+<head>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #27ae60;height: 70px">
     <div class="container" style="width: 62%;margin-top: 10px">
@@ -27,10 +30,9 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" style="margin-left: 300px">
+            <form class="navbar-form navbar-left" style="margin-left: 300px" action="<%=base%>/view/index" method="get" id="qq">
                 <div class="form-group">
-                    <input type="text" style="width: 300px" class="form-control" placeholder="请输入关键词" id="text">
-                    <span></span>
+                    <input type="text" style="width: 300px" class="form-control" placeholder="请输入关键词" id="text" name="q" autocomplete="on" autofocus tabindex="0" spellcheck="false">
                 </div>
                 <button type="button" class="btn btn-default" id="search">Search</button>
             </form>
@@ -44,5 +46,17 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<script>
+    $('#text').keydown(function (e) {
+        var q = $("#text").val();
+        if (e.keyCode == 13) {
+            $("#qq").submit();
+        }
+    });
+    $('#search').click(function () {
+        var q = $('#text').val();
+        window.location.href = "<%=base%>/view/index?q=" + q;
+    });
+</script>
 </body>
 </html>

@@ -57,6 +57,9 @@ public class ATask {
                     }
                 }
                 if (!repositories.isEmpty()) {
+                    //批量添加数据
+                    int count = repositoryService.addRepositoryByListPO(repositories);
+                    logger.info(" #获取数据# 成功添加" + count + "条 "+language[i]+" 项目数据。");
                     StringBuilder result = new StringBuilder();
                     for (Repository repository : repositories) {
                         Developer developer = developerService.getDeveloperById(repository.getDeveloperid());
@@ -64,15 +67,16 @@ public class ATask {
                             result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getFullName().split("/")[0])));
                         }
                     }
-                    //字符串转json
-                    List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
-                    //把JSON数据封装到实体类List
-                    List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
-
-                    int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
-                    //批量添加数据
-                    int count = repositoryService.addRepositoryByListPO(repositories);
-                    logger.info(" #获取数据# 成功添加" + countInsert + "条开发者数据," + count + "条 "+language[i]+" 项目数据。");
+                    if(!result.toString().isEmpty()){
+                        //字符串转json
+                        List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
+                        //把JSON数据封装到实体类List
+                        List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
+                        int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
+                        logger.info(" #获取数据# 成功添加" + countInsert + "条开发者数据。");
+                    }else {
+                        logger.info(" #获取数据# 没有获取到 "+language[i]+"项目 的开发者新数据。");
+                    }
                 } else {
                     logger.info(" #获取数据# 没有获取到 "+language[i]+"项目 新数据。");
                 }
