@@ -25,29 +25,84 @@
 <body class="home-template">
 <%--引入导航栏--%>
 <div id="head">
-    <%@ include file="head.jsp"%>
+    <%@ include file="head.jsp" %>
 </div>
 <div id="container">
     <div id="body" class="packages-list-container" style="margin-top: 100px">
         <div class="container">
+            <div><p style="color: gray">${repository.fullName} 详情：</p></div>
             <div class="list-group packages" id="common-packages">
-                <div class="package list-group-item" style="height: 650px">
+                <div class="package list-group-item" style="height: 190px;">
                     <div class="row">
-                        <div class="col-md-1">
-                            <a href="#" class="package-name" style="float:right">
-                                <img class="media-object"
-                                     src="${repository.avatarUrl}"
-                                     style="height: 64px;width: 64px" alt="用户头像"></a></div>
-                        <div class="col-md-9 hidden-xs"><a class="package-name"
-                                                           href="#"><b>${repository.fullName}</b></a><br>
-                            <p class="package-description">${repository.description}</p></div>
-                        <div class="col-md-1"><a href="https://github.com/junit-team/junit4/archive/master.zip">
-                            <button class="btn btn-default">Download</button>
-                        </a></div>
+                        <div class="col-md-2">
+                            <a href="javascript:void(0);" class="package-name">
+                                <img class="media-object" src="${developer.avatarUrl}" style="float:right;height: 100px;width: 100px" alt="用户头像">
+                            </a>
+                        </div>
+                        <div class="col-md-9 hidden-xs">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b class="package-name" style="font-size: 20px">${developer.login}</b>
+                                    <p style="color: gray">Github主页：<a href="http://github.com/${developer.login}" target="_blank">http://github.com/${developer.login}</a></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="nav nav-pills" role="tablist">
+                                        <li role="presentation"><a href="javascript:void(0);">公开仓库<span class="badge">${developer.publicRepos}</span></a></li>
+                                        <li role="presentation"><a href="javascript:void(0);">关注<span class="badge">${developer.following}</span></a></li>
+                                        <li role="presentation"><a href="javascript:void(0);">被关注<span class="badge">${developer.followers}</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="package-description">${developer.bio}</p>
+                            <div class="package-extra-info col-md-12 col-xs-12">
+                                <p><span class="glyphicon glyphicon-map-marker"/>${developer.company}</p>
+                                <p><span class="glyphicon glyphicon-link"/><a href="${developer.blog}" target="_blank">${developer.blog}</a></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="package-extra-info col-md-12 col-md-offset-1 col-xs-12"><span><i class="fa fa-star"></i>&nbsp;&nbsp;<label
-                            style="color: orange">6807</label></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><i
-                            class="fa fa-language"></i>&nbsp;&nbsp;<label style="color: orange">Java</label></span>
+                </div>
+                <div class="package list-group-item" style="height: 450px">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b class="package-name" style="float:right;font-size: 25px;color: #28a745">${repository.name}</b>
+                            <br>
+                        </div>
+                        <div class="col-md-2">
+                            <ul class="nav nav-pills" role="tablist">
+                                <li role="presentation"><a href="#">分支<span class="badge">3</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="nav nav-pills" role="tablist" style="float: right">
+                                <li role="presentation"><a href="#">Size<span class="badge">${repository.size}</span></a></li>
+                                <li role="presentation"><a href="#">star<span class="badge">${repository.starCount}</span></a></li>
+                                <li role="presentation"><a href="#">watch<span class="badge">${repository.watchersCount}</span></a></li>
+                                <li role="presentation"><a href="#">fork<span class="badge">${repository.forksCount}</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-1">
+                            <p style="color: gray">Github仓库主页：<a href="http://github.com/${repository.fullName}" target="_blank">http://github.com/${repository.fullName}</a></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-md-offset-1">
+                            <br>
+                            <p class="package-description">${repository.description}</p>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="https://github.com/${repository.fullName}/archive/master.zip">
+                                <button class="btn btn-default">Download</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-md-offset-1">
+                            <br>
+                            <p style="color: gray;font-size: 13px"><span class="glyphicon glyphicon-tags"></span> ${repository.language}</p>
+                            <p style="color: gray;font-size: 13px"><span class="glyphicon glyphicon-hourglass"></span> Updated On ${repository.updatedAt}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,108 +119,6 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        query(1, '${key}');
-        $("#text").keydown(function (e) {
-            if (e.keyCode == 13) {
-                var q = $("#text").val();
-                window.location.href = "<%=base%>/view/index?q=" + q;
-            }
-        });
-    });
-    $('#search').click(function () {
-        var q = $('#text').val();
-        window.location.href = "<%=base%>/view/index?q=" + q;
-    });
-
-    function query(page, text) {
-        //以800的速度跳到页面最上端
-        $("html,body").animate({scrollTop: 0}, 800);
-        $.ajax({
-            url: "<%=base%>/view/queryData",    //请求的url地址
-            dataType: "json",   //返回格式为json
-            async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {"page": page, "text": text},    //参数值
-            type: "GET",   //请求方式
-            success: function (data) {
-                var object = eval("(" + data + ")");
-                var pagination = "";
-                $('#total').html(object.total);
-                $('#pageText').html("当前是第 " + object.pageNum + " 页,共 " + object.size + " 条数据,总共 " + object.pages + " 页,总共 " + object.total + " 条数据");
-                if (object.hasPreviousPage) {
-                    pagination = "<li><a onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
-                }
-                if (object.pages > 5) {
-                    if (object.pageNum > 3) {
-                        if (object.pageNum <= (object.pages - 2)) {
-                            pagination += "<li><a>...</a></li>";
-                            for (var j = (object.pageNum - 2); j <= (object.pageNum + 2); j++) {
-                                if (j === object.pageNum) {
-                                    pagination += "<li class='active'><a>" + j + "</a></li>";
-                                }
-                                else {
-                                    pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
-                                }
-                            }
-                            if (object.pageNum < (object.pages - 2)) {
-                                pagination += "<li><a>...</a></li>";
-                            }
-                        } else {
-                            pagination += "<li><a>...</a></li>";
-                            for (var j = (object.pages - 4); j <= object.pages; j++) {
-                                if (j === object.pageNum) {
-                                    pagination += "<li class='active'><a>" + j + "</a></li>";
-                                }
-                                else {
-                                    pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
-                                }
-                            }
-                        }
-
-                    } else {
-                        for (var j = 1; j <= 5; j++) {
-                            if (j === object.pageNum) {
-                                pagination += "<li class='active'><a>" + j + "</a></li>";
-                            } else {
-                                pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
-                            }
-                        }
-                        pagination += "<li><a>...</a></li>";
-                    }
-                }
-                else {
-                    for (var j = 1; j <= object.pages; j++) {
-                        if (j === object.pageNum) {
-                            pagination += "<li class='active'><a>" + j + "</a></li>";
-                        } else {
-                            pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
-                        }
-                    }
-                }
-                if (object.hasNextPage) {
-                    pagination += "<li><a onclick=\"query(" + object.nextPage + "," + "\'" + text + "')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
-                }
-                $('#pagination').html(pagination);
-                var html = "";
-                for (var i in object.list) {
-                    html += "<div class=\"package list-group-item\">" +
-                        "<div class=\"row\"><div class=\"col-md-1\">" +
-                        "<a href=\"#\" class=\"package-name\" style=\"float:right\">" +
-                        "<img class=\"media-object\" src=" + object.list[i].avatarUrl + '&s=64' + " style=\"height: 32px;width: 32px\" alt=\"用户头像\">" +
-                        "</a></div><div class=\"col-md-9 hidden-xs\">" +
-                        "<a class=\"package-name\" href=\"#\"><b>" + object.list[i].fullName +
-                        "</b></a><br/><p class=\"package-description\">" + object.list[i].description +
-                        "</p></div>" +
-                        "<div class=\"col-md-1\"><a href=\"https://github.com/" + object.list[i].fullName + "/archive/master.zip\"><button class=\"btn btn-default\">Download</button></a></div>" +
-                        "</div><div class=\"package-extra-info col-md-12 col-md-offset-1 col-xs-12\">" +
-                        "<span><i class=\"fa fa-star\"></i>&nbsp;&nbsp;<label style='color: orange'>" + object.list[i].starCount + "</label></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                        "<span><i class=\"fa fa-language\"></i>&nbsp;&nbsp;<label style='color: orange'>" + object.list[i].language + "</label></span></div></div>";
-
-                }
-                $('#content').html(html);
-            }
-        });
-    }
 </script>
 </body>
 </html>

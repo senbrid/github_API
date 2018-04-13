@@ -48,14 +48,22 @@
 </nav>
 <script>
     $('#text').keydown(function (e) {
-        var q = $("#text").val();
         if (e.keyCode == 13) {
-            $("#qq").submit();
+            var q = $("#text").val();
+            if(q == null || q == ""){
+                alert("请输入关键字查询");
+            }else{
+                $("#qq").submit();
+            }
         }
     });
     $('#search').click(function () {
         var q = $('#text').val();
-        window.location.href = "<%=base%>/view/index?q=" + q;
+        if(q == null || q == ""){
+            alert("请输入关键字查询");
+        }else{
+            window.location.href = "<%=base%>/view/index?q=" + q;
+        }
     });
 </script>
 </body>

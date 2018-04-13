@@ -134,7 +134,11 @@
         $("#search").keydown(function (e) {
             if (e.keyCode == 13) {
                 var q = $("#search").val();
-                window.location.href = "<%=base%>/view/index?q=" + q;
+                if(q == null || q == ""){
+                    alert("请输入关键字查询");
+                }else{
+                    window.location.href = "<%=base%>/view/index?q=" + q;
+                }
             }
         });
     });

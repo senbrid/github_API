@@ -81,7 +81,7 @@
         query(1,'${key}');
     });
     function query(page,text) {
-        //以800的速度跳到页面最上端
+        //以100的速度跳到页面最上端
         $("html,body").animate({scrollTop:0}, 100);
         $.ajax({
             url: "<%=base%>/view/queryData",    //请求的url地址
@@ -94,8 +94,9 @@
                 var pagination = "";
                 $('#total').html(object.total);
                 $('#pageText').html("当前是第 " + object.pageNum + " 页,共 " + object.size + " 条数据,总共 " + object.pages + " 页,总共 " + object.total + " 条数据");
+                pagination = "<li><a onclick=\"query(" + 1 + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">首页</span></a></li>";
                 if (object.hasPreviousPage) {
-                    pagination = "<li><a onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+                    pagination += "<li><a onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                 }
                 if(object.pages > 5){
                     if(object.pageNum>3){
@@ -147,6 +148,7 @@
                 if(object.hasNextPage) {
                     pagination += "<li><a onclick=\"query(" + object.nextPage + "," + "\'" + text + "')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                 }
+                pagination += "<li><a onclick=\"query(" + object.pages + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">末页</span></a></li>";
                 $('#pagination').html(pagination);
                 var html = "";
                 for (var i in object.list) {
@@ -155,18 +157,21 @@
                     "<a href=\"#\" class=\"package-name\" style=\"float:right\">"+
                     "<img class=\"media-object\" src="+ object.list[i].avatarUrl+ '&s=64' +" style=\"height: 32px;width: 32px\" alt=\"用户头像\">"+
                     "</a></div><div class=\"col-md-9 hidden-xs\">"+
-                    "<a class=\"package-name\" href=\"/view/reposDetails?id="+object.list[i].id+"\"><b>"+ object.list[i].fullName +
+                    "<a class=\"package-name\" href='javascript:void(0)' onclick=\"toDetails("+object.list[i].id+")\"><b>"+ object.list[i].fullName +
                     "</b></a><br/><p class=\"package-description\">"+ object.list[i].description +
                     "</p></div>" +
                     "<div class=\"col-md-1\"><a href=\"https://github.com/"+object.list[i].fullName+"/archive/master.zip\"><button class=\"btn btn-default\">Download</button></a></div>" +
-                    "</div><div class=\"package-extra-info col-md-12 col-md-offset-1 col-xs-12\">"+
+                    "<div class=\"package-extra-info col-md-12 col-md-offset-1 col-xs-12\">"+
                     "<span><i class=\"fa fa-star\"></i>&nbsp;&nbsp;<label style='color: orange'>"+ object.list[i].starCount +"</label></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                    "<span><i class=\"fa fa-language\"></i>&nbsp;&nbsp;<label style='color: orange'>"+ object.list[i].language +"</label></span></div></div>";
-
+                    "<span><i class=\"fa fa-language\"></i>&nbsp;&nbsp;<label style='color: orange'>"+ object.list[i].language +"</label></span></div></div></div>";
                 }
                 $('#content').html(html);
             }
         });
+    }
+
+    function toDetails(id) {
+        window.location.href = "<%=base%>/view/reposDetails?id=" + id;
     }
 </script>
 </body>
