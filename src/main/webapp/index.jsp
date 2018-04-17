@@ -66,7 +66,7 @@
             <div id="body" style="height: 331px">
                 <div class="row" style="height: 61px">
                     <div style="height: 60px">
-                        <p style="font-size: 20px;display: inline-block">每日推荐</p>&nbsp;&nbsp;<a onclick=""><i
+                        <p style="font-size: 20px;display: inline-block">每日推荐</p>&nbsp;&nbsp;<a href="javascript:void(0);" onclick=""><i
                             class="glyphicon glyphicon-repeat"></i>换一批</a>
                     </div>
                 </div>

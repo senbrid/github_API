@@ -54,7 +54,7 @@
 <div id="container">
     <div id="body" class="packages-list-container">
         <div class="container">
-            <div><p style="color: gray">为您找到相关结果约<a style="color: red" id="total">0</a>个</p></div>
+            <div><p style="color: gray">为您找到相关结果约<a style="color: red;text-decoration:none" id="total">0</a>个</p></div>
             <div class="list-group packages" id="common-packages">
                 <div id="content"></div>
             </div>
@@ -91,65 +91,70 @@
             type: "GET",   //请求方式
             success: function (data) {
                 var object = eval("(" + data + ")");
-                var pagination = "";
                 $('#total').html(object.total);
                 $('#pageText').html("当前是第 " + object.pageNum + " 页,共 " + object.size + " 条数据,总共 " + object.pages + " 页,总共 " + object.total + " 条数据");
-                pagination = "<li><a onclick=\"query(" + 1 + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">首页</span></a></li>";
-                if (object.hasPreviousPage) {
-                    pagination += "<li><a onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
-                }
-                if(object.pages > 5){
-                    if(object.pageNum>3){
-                        if(object.pageNum <= (object.pages-2)){
-                            pagination += "<li><a>...</a></li>";
-                            for(var j = (object.pageNum-2);j<=(object.pageNum+2);j++) {
-                                if(j === object.pageNum) {
-                                    pagination += "<li class='active'><a>" + j + "</a></li>";
-                                }
-                                else{
-                                    pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
-                                }
-                            }
-                            if(object.pageNum < (object.pages-2)) {
-                                pagination += "<li><a>...</a></li>";
-                            }
-                        }else{
-                            pagination += "<li><a>...</a></li>";
-                            for(var j = (object.pages-4);j<=object.pages;j++) {
-                                if(j === object.pageNum) {
-                                    pagination += "<li class='active'><a>" + j + "</a></li>";
-                                }
-                                else{
-                                    pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
-                                }
-                            }
-                        }
-
-                    }else{
-                        for (var j = 1;j <= 5; j++) {
-                            if(j === object.pageNum){
-                                pagination += "<li class='active'><a>"+j+"</a></li>";
-                            }else{
-                                pagination += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
-                            }
-                        }
-                        pagination += "<li><a>...</a></li>";
-                    }
-                }
-                else {
-                    for (var j = 1;j <= object.pages; j++) {
-                        if(j === object.pageNum){
-                            pagination += "<li class='active'><a>"+j+"</a></li>";
-                        }else{
-                            pagination += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
-                        }
-                    }
-                }
-                if(object.hasNextPage) {
-                    pagination += "<li><a onclick=\"query(" + object.nextPage + "," + "\'" + text + "')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
-                }
-                pagination += "<li><a onclick=\"query(" + object.pages + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">末页</span></a></li>";
-                $('#pagination').html(pagination);
+                pagination(object,text,'pagination');
+                // var pagination = "";
+                // if(object.total > 0){
+                //     pagination = "<li><a onclick=\"query(" + 1 + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">首页</span></a></li>";
+                // }
+                // if (object.hasPreviousPage) {
+                //     pagination += "<li><a onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+                // }
+                // if(object.pages > 5){
+                //     if(object.pageNum>3){
+                //         if(object.pageNum <= (object.pages-2)){
+                //             pagination += "<li><a>...</a></li>";
+                //             for(var j = (object.pageNum-2);j<=(object.pageNum+2);j++) {
+                //                 if(j === object.pageNum) {
+                //                     pagination += "<li class='active'><a>" + j + "</a></li>";
+                //                 }
+                //                 else{
+                //                     pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
+                //                 }
+                //             }
+                //             if(object.pageNum < (object.pages-2)) {
+                //                 pagination += "<li><a>...</a></li>";
+                //             }
+                //         }else{
+                //             pagination += "<li><a>...</a></li>";
+                //             for(var j = (object.pages-4);j<=object.pages;j++) {
+                //                 if(j === object.pageNum) {
+                //                     pagination += "<li class='active'><a>" + j + "</a></li>";
+                //                 }
+                //                 else{
+                //                     pagination += "<li><a onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
+                //                 }
+                //             }
+                //         }
+                //
+                //     }else{
+                //         for (var j = 1;j <= 5; j++) {
+                //             if(j === object.pageNum){
+                //                 pagination += "<li class='active'><a>"+j+"</a></li>";
+                //             }else{
+                //                 pagination += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                //             }
+                //         }
+                //         pagination += "<li><a>...</a></li>";
+                //     }
+                // }
+                // else {
+                //     for (var j = 1;j <= object.pages; j++) {
+                //         if(j === object.pageNum){
+                //             pagination += "<li class='active'><a>"+j+"</a></li>";
+                //         }else{
+                //             pagination += "<li><a onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                //         }
+                //     }
+                // }
+                // if(object.hasNextPage) {
+                //     pagination += "<li><a onclick=\"query(" + object.nextPage + "," + "\'" + text + "')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+                // }
+                // if(object.total > 0) {
+                //     pagination += "<li><a onclick=\"query(" + object.pages + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">末页</span></a></li>";
+                // }
+                // $('#pagination').html(pagination);
                 var html = "";
                 for (var i in object.list) {
                     html += "<div class=\"package list-group-item\">"+
@@ -172,6 +177,76 @@
 
     function toDetails(id) {
         window.location.href = "<%=base%>/view/reposDetails?id=" + id;
+    }
+
+    /**
+     * 封装的分页插件
+     * @param object  返回的json数据
+     * @param text    搜索的关键字
+     * @param p       添加分页位置的页面标签
+     */
+    function pagination(object,text,p) {
+        var pagination = "";
+        if(object.total > 0){
+            pagination = "<li><a href='javascript:void(0);' onclick=\"query(" + 1 + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">首页</span></a></li>";
+        }
+        if (object.hasPreviousPage) {
+            pagination += "<li><a href='javascript:void(0);' onclick=\"query(" + object.prePage + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+        }
+        if(object.pages > 5){
+            if(object.pageNum>3){
+                if(object.pageNum <= (object.pages-2)){
+                    pagination += "<li><a>...</a></li>";
+                    for(var j = (object.pageNum-2);j<=(object.pageNum+2);j++) {
+                        if(j === object.pageNum) {
+                            pagination += "<li class='active'><a>" + j + "</a></li>";
+                        }
+                        else{
+                            pagination += "<li><a href='javascript:void(0);' onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
+                        }
+                    }
+                    if(object.pageNum < (object.pages-2)) {
+                        pagination += "<li><a>...</a></li>";
+                    }
+                }else{
+                    pagination += "<li><a>...</a></li>";
+                    for(var j = (object.pages-4);j<=object.pages;j++) {
+                        if(j === object.pageNum) {
+                            pagination += "<li class='active'><a>" + j + "</a></li>";
+                        }
+                        else{
+                            pagination += "<li><a href='javascript:void(0);' onclick=\"query(" + j + "," + "\'" + text + "')\">" + j + "</a></li>";
+                        }
+                    }
+                }
+
+            }else{
+                for (var j = 1;j <= 5; j++) {
+                    if(j === object.pageNum){
+                        pagination += "<li class='active'><a>"+j+"</a></li>";
+                    }else{
+                        pagination += "<li><a href='javascript:void(0);' onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                    }
+                }
+                pagination += "<li><a>...</a></li>";
+            }
+        }
+        else {
+            for (var j = 1;j <= object.pages; j++) {
+                if(j === object.pageNum){
+                    pagination += "<li class='active'><a>"+j+"</a></li>";
+                }else{
+                    pagination += "<li><a href='javascript:void(0);' onclick=\"query("+j+","+"\'"+text+"')\">"+j+"</a></li>";
+                }
+            }
+        }
+        if(object.hasNextPage) {
+            pagination += "<li><a href='javascript:void(0);' onclick=\"query(" + object.nextPage + "," + "\'" + text + "')\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+        }
+        if(object.total > 0) {
+            pagination += "<li><a href='javascript:void(0);' onclick=\"query(" + object.pages + "," + "\'" + text + "')\" aria-label=\"Previous\"><span aria-hidden=\"true\">末页</span></a></li>";
+        }
+        $('#'+p).html(pagination);
     }
 </script>
 </body>
