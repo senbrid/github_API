@@ -2,6 +2,7 @@ package com.graduation.util;
 
 import com.alibaba.fastjson.JSON;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.settings.Setting;
@@ -12,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Elasticsearch 5.5.1 的client 和 ElasticsearchTemplate的初始化
@@ -23,16 +26,18 @@ public class ElasticsearchClient {
 
     private Logger logger = LoggerFactory.getLogger(ElasticsearchClient.class);
 
-    protected TransportClient client;
+    private TransportClient client;
 
     public void setUp() throws Exception {
-
         /**
          * 1:通过 setting对象来指定集群配置信息
          */
         Settings settings = Settings.builder()
                 .put("client.transport.sniff", true)
-                .put("cluster.name","elasticsearch")
+                .put("cluster.name","cluster1")
+                .put("node.name","node1")
+                .put("node.data",true)
+                .put("node.name",true)
                 .build();
         /**
          * 2：创建客户端
@@ -40,7 +45,6 @@ public class ElasticsearchClient {
          * 链接使用tcp协议即9300
          */
         client = new PreBuiltTransportClient(settings).addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("47.106.122.83"), 9300));
-
         /**
          * 3：查看集群信息
          * 注意我的集群结构是：
@@ -70,7 +74,7 @@ public class ElasticsearchClient {
      * @return void
      */
     public void getData() {
-        GetResponse getResponse = client.prepareGet("test_developer_index", "test_developer_type", "9919").get();
+        GetResponse getResponse = client.prepareGet("test_developer_index", "test_developer_type", "9919").setOperationThreaded(false).get();
         logger.info("索引库的数据:" + getResponse.getSourceAsString());
     }
 
@@ -78,6 +82,5 @@ public class ElasticsearchClient {
         ElasticsearchClient elasticClient = new ElasticsearchClient();
         elasticClient.setUp();
         elasticClient.getData();
-        elasticClient.tearDown();
     }
 }
