@@ -8,6 +8,7 @@ import com.graduation.model.Repository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,22 +38,28 @@ public class JSONParse {
     /**
      * 字符串转换成日期
      *
-     * @param UTCString
+     * @param UTCStr
      * @return date
      */
-    public static Date UTCStringtODate(String UTCString){
-
-        SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    public static Date UTCStringtODate(String UTCStr){
+        String format;
         Date date = null;
+        if(UTCStr.length() == 20){
+            format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+        }else {
+            format = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
         try {
-            if(UTCString==null || UTCString.isEmpty()){
-                return null;
-            }
-            date = utcFormat.parse(UTCString);
+            date = sdf.parse(UTCStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return date;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 8);
+        //calendar.getTime() 返回的是Date类型，也可以使用calendar.getTimeInMillis()获取时间戳
+        return calendar.getTime();
     }
 
     /**

@@ -27,7 +27,7 @@ public class ATask {
 
     private Logger logger = Logger.getLogger(ATask.class);
 
-    @Scheduled(fixedRate = 1000 * 60 * 30)//@Scheduled 可以作为一个触发源添加到一个方法中
+    @Scheduled(fixedRate = 1000 * 60 * 60)//@Scheduled 可以作为一个触发源添加到一个方法中
     //以一个固定延迟时间10分钟调用一次执行
     // 这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
     public void demo1() {
@@ -49,7 +49,7 @@ public class ATask {
                 List<Repository> repositories = new ArrayList<>();
                 for (Repository repository : repositoryList) {
                     //3天没更新的项目不添加到数据库
-                    if(repository.getUpdatedAt().getTime()  > (begin-1000*60*60*24*3)) {
+                    if(repository.getUpdatedAt().getTime() > (begin-1000*60*60*24*3)) {
                         Repository repository1 = repositoryService.getDataById(repository.getId());
                         if (repository1 == null) {
                             repositories.add(repository);

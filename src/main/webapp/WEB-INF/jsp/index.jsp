@@ -79,6 +79,7 @@
 
     $(document).ready(function(){
         query(1,'${key}');
+        $("#text").val('${key}');
     });
     function query(page,text) {
         //以100的速度跳到页面最上端
