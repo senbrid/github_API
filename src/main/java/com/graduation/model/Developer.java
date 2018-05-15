@@ -7,17 +7,21 @@ public class Developer {
 
     private String login;
 
-    private String name;
-
     private String avatarUrl;
 
+    private String name;
+
     private String company;
+
+    private String location;
 
     private String blog;
 
     private String email;
 
     private String bio;
+
+    private String type;
 
     private Integer publicRepos;
 
@@ -31,15 +35,17 @@ public class Developer {
 
     private Date updated;
 
-    public Developer(Long id, String login, String name, String avatarUrl, String company, String blog, String email, String bio, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt,Date updated) {
+    public Developer(Long id, String login, String avatarUrl, String name, String company, String location, String blog, String email, String bio, String type, Integer publicRepos, Integer followers, Integer following, Date createdAt, Date updatedAt, Date updated) {
         this.id = id;
         this.login = login;
-        this.name = name;
         this.avatarUrl = avatarUrl;
+        this.name = name;
         this.company = company;
+        this.location = location;
         this.blog = blog;
         this.email = email;
         this.bio = bio;
+        this.type = type;
         this.publicRepos = publicRepos;
         this.followers = followers;
         this.following = following;
@@ -68,14 +74,6 @@ public class Developer {
         this.login = login == null ? null : login.trim();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
     public String getAvatarUrl() {
         return avatarUrl;
     }
@@ -84,12 +82,28 @@ public class Developer {
         this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
     public String getCompany() {
         return company;
     }
 
     public void setCompany(String company) {
         this.company = company == null ? null : company.trim();
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location == null ? null : location.trim();
     }
 
     public String getBlog() {
@@ -114,6 +128,14 @@ public class Developer {
 
     public void setBio(String bio) {
         this.bio = bio == null ? null : bio.trim();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public Integer getPublicRepos() {

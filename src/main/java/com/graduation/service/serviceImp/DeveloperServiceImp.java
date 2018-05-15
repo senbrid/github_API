@@ -15,7 +15,7 @@ public class DeveloperServiceImp implements DeveloperService {
     @Autowired
     private DeveloperMapper developerMapper;
     /**
-     * 添加开发者数据
+     * 批量添加开发者数据
      *
      * @param developerList
      * @author Joke
@@ -23,7 +23,20 @@ public class DeveloperServiceImp implements DeveloperService {
      */
     public int addDeveloperByListPO(List<Developer> developerList) {
 
-        return developerMapper.insertBatch(developerList);
+        //return developerMapper.insertBatch(developerList);
+        return 0;
+    }
+
+    /**
+     * 添加开发者数据
+     *
+     * @param developer
+     * @author Joke
+     * Date 2018年3月21日15:36:35
+     */
+    public int addDeveloperByPO(Developer developer) {
+        developerMapper.preDo();
+        return developerMapper.insertSelective(developer);
     }
 
     /**
@@ -35,7 +48,8 @@ public class DeveloperServiceImp implements DeveloperService {
      */
     @Override
     public int updateDeveloperByListPO(List<Developer> developerList) {
-        return developerMapper.updateBatch(developerList);
+        //return developerMapper.updateBatch(developerList);
+        return 0;
     }
 
     /**

@@ -49,6 +49,9 @@
         </property>
     </bean>
 
+    <bean id="operation" class="com.graduation.util.Operation"/>
+    <bean id="mythread" class="com.graduation.listener.MyThread"/>
+
     <!--logger -->
     <bean id="loggerService" class="com.graduation.logger.LoggerService" />
     <bean id="logAspectBean" class="com.graduation.logger.AdminLogger"/>

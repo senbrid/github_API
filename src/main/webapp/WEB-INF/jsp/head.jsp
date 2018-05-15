@@ -27,22 +27,20 @@
             </button>
             <a class="navbar-brand" href="<%=base%>" style="color: white;font-size: 30px"><b>GitHubHOME</b></a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="<%=base%>/view/total" style="color: white">统计</a></li>
+            <li><a href="<%=base%>/view/developerRank" style="color: white">开发者排行榜</a></li>
+            <li><a href="<%=base%>/view/repositoryRank" style="color: white">项目排行榜</a></li>
+            <li><a href="<%=base%>/" style="color: white">关于</a></li>
+        </ul>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" style="margin-left: 300px" action="<%=base%>/view/index" method="get" id="qq">
+            <form class="navbar-form navbar-left" style="margin-left: 200px" action="<%=base%>/view/index" method="get" id="qq">
                 <div class="form-group">
                     <input type="text" style="width: 300px" class="form-control" placeholder="请输入关键词" id="text" name="q" autocomplete="on" autofocus tabindex="0" spellcheck="false">
                 </div>
-                <button type="button" class="btn btn-default" id="search">Search</button>
+                <button type="button" class="btn btn-default" id="search">搜索</button>
             </form>
-            <%--<ul class="nav navbar-nav navbar-right">--%>
-                <%--<li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'api'])"--%>
-                       <%--target=_blank>API</a></li>--%>
-                <%--<li><a style="color: white" href="" onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click','blog'])"--%>
-                       <%--target=_blank>排行榜</a></li>--%>
-                <%--<li><a style="color: white" href=#about onclick="_hmt.push(['_trackEvent', 'main-navbar', 'click', 'about'])">关于</a></li>--%>
-            <%--</ul>--%>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

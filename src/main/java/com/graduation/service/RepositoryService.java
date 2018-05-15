@@ -45,6 +45,6 @@ public interface RepositoryService {
      * 按主键查询
      * @return
      */
-    Repository getDataById(Long id);
+    Repository getRepositoryById(Long id);
 }
 

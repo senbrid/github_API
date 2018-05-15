@@ -2,19 +2,16 @@ package com.graduation.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.graduation.model.Developer;
-import com.graduation.model.DeveloperExample;
 import com.graduation.service.DeveloperService;
 import com.graduation.util.JSONParse;
 import com.graduation.util.URLBuilder;
 import com.graduation.util.URLRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller

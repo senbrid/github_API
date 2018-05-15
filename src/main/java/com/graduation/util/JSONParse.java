@@ -2,17 +2,17 @@ package com.graduation.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.graduation.model.Developer;
-import com.graduation.model.Repository;
+import com.graduation.model.*;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class JSONParse {
+
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(JSONParse.class);
+
     /**
      * 字符串转换成JSON数组
      *
@@ -20,6 +20,9 @@ public class JSONParse {
      * @return List<JSONObject>
      */
     public static List<JSONObject> stringToJson(String string) {
+        if (string == null || string.isEmpty() || string.equals("[]")) {
+            return null;
+        }
         if (string.substring(0, 1).equals("{")) {
             string = "[" + string + "]";
         }
@@ -28,7 +31,7 @@ public class JSONParse {
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.getJSONObject(i).getString("owner") != null) {
                 JSONObject object = JSONObject.parseObject(jsonArray.getJSONObject(i).getString("owner"));
-                jsonArray.getJSONObject(i).put("ownerId", object.getString("id"));
+                jsonArray.getJSONObject(i).put("ownerId", object.getString("login"));
             }
             jsonObjectList.add(jsonArray.getJSONObject(i));
         }
@@ -41,19 +44,23 @@ public class JSONParse {
      * @param UTCStr
      * @return date
      */
-    public static Date UTCStringtODate(String UTCStr){
+    public static Date UTCStringtODate(String UTCStr) {
+        if (UTCStr == null || UTCStr.isEmpty()) {
+            return null;
+        }
         String format;
         Date date = null;
-        if(UTCStr.length() == 20){
+        if (UTCStr.length() == 20) {
             format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-        }else {
+        } else {
             format = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         try {
             date = sdf.parse(UTCStr);
         } catch (ParseException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            logger.info("抛出异常：" + e);
         }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -63,12 +70,113 @@ public class JSONParse {
     }
 
     /**
+     * JSON list转换成fork list
+     *
+     * @param jsonObjectList
+     * @return List<Fork>
+     */
+    public static List<Fork> listJSONObjectToListFork(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
+        List<Fork> forkList = new ArrayList<Fork>();
+        for (int i = 0; i < jsonObjectList.size(); i++) {
+            Fork fork = new Fork();
+            fork.setForklogin(jsonObjectList.get(i).getString("ownerId"));
+            forkList.add(fork);
+        }
+        return forkList;
+    }
+
+    /**
+     * JSON list转换成fork list
+     *
+     * @param jsonObjectList
+     * @return List<Star>
+     */
+    public static List<Star> listJSONObjectToListStar(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
+        List<Star> starList = new ArrayList<Star>();
+        for (int i = 0; i < jsonObjectList.size(); i++) {
+            Star star = new Star();
+            star.setStarlogin(jsonObjectList.get(i).getString("login"));
+            starList.add(star);
+        }
+        return starList;
+    }
+
+    /**
+     * JSON list转换成fork list
+     *
+     * @param jsonObjectList
+     * @return List<ContributorDao>
+     */
+    public static List<Contributor> listJSONObjectToListContributor(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
+        List<Contributor> contributors = new ArrayList<Contributor>();
+        for (int i = 0; i < jsonObjectList.size(); i++) {
+            Contributor contributor = new Contributor();
+            contributor.setContributor(jsonObjectList.get(i).getString("login"));
+            contributor.setContributions(jsonObjectList.get(i).getInteger("contributions"));
+            contributors.add(contributor);
+        }
+        return contributors;
+    }
+
+    /**
+     * JSON list转换成fork list
+     *
+     * @param jsonObjectList
+     * @return List<Language>
+     */
+    public static List<Language> listJSONObjectToListLanguage(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
+        List<Language> languages = new ArrayList<Language>();
+        for (Map.Entry<String, Object> entry : jsonObjectList.get(0).entrySet()) {
+            //System.out.println(entry.getKey() + ":" + entry.getValue());
+            Language language = new Language();
+            language.setLanguage(entry.getKey());
+            language.setSize((int) entry.getValue());
+            languages.add(language);
+        }
+        return languages;
+    }
+
+    /**
+     * JSON list转换成branch list
+     *
+     * @param jsonObjectList
+     * @return List<Branch>
+     */
+    public static List<Branch> listJSONObjectToListBranch(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
+        List<Branch> branchList = new ArrayList<Branch>();
+        for (int i = 0; i < jsonObjectList.size(); i++) {
+            Branch branch = new Branch();
+            branch.setBranchname(jsonObjectList.get(i).getString("name"));
+            branchList.add(branch);
+        }
+        return branchList;
+    }
+
+    /**
      * JSON list转换成develop list
      *
      * @param jsonObjectList
      * @return List<Developer>
      */
     public static List<Developer> listJSONObjectToListDeveloper(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
         List<Developer> developerList = new ArrayList<Developer>();
         for (int i = 0; i < jsonObjectList.size(); i++) {
             Developer developer = new Developer();
@@ -83,9 +191,10 @@ public class JSONParse {
             developer.setPublicRepos(jsonObjectList.get(i).getInteger("public_repos"));
             developer.setFollowers(jsonObjectList.get(i).getInteger("followers"));
             developer.setFollowing(jsonObjectList.get(i).getInteger("following"));
+            developer.setType(jsonObjectList.get(i).getString("type"));
+            developer.setLocation(jsonObjectList.get(i).getString("location"));
             developer.setCreatedAt(UTCStringtODate(jsonObjectList.get(i).getString("created_at")));
             developer.setUpdatedAt(UTCStringtODate(jsonObjectList.get(i).getString("updated_at")));
-            developer.setUpdated(new Date());
             developerList.add(developer);
         }
         return developerList;
@@ -98,6 +207,9 @@ public class JSONParse {
      * @return List<Developer>
      */
     public static List<Developer> listJSONObjectToListDeveloperSearch(List<JSONObject> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
         List<Developer> developerList = new ArrayList<Developer>();
         for (int j = 0; j < list.size(); j++) {
             List<JSONObject> jsonObjectList = stringToJson(list.get(j).getString("items"));
@@ -113,6 +225,9 @@ public class JSONParse {
      * @return List<Developer>
      */
     public static List<Repository> listJSONObjectToListRepository(List<JSONObject> jsonObjectList) {
+        if (jsonObjectList == null || jsonObjectList.isEmpty()) {
+            return null;
+        }
         List<Repository> repositoryList = new ArrayList<Repository>();
         for (int i = 0; i < jsonObjectList.size(); i++) {
             Repository repository = new Repository();
@@ -120,6 +235,7 @@ public class JSONParse {
             repository.setName(jsonObjectList.get(i).getString("name"));
             repository.setFullName(jsonObjectList.get(i).getString("full_name"));
             repository.setDescription(jsonObjectList.get(i).getString("description"));
+            repository.setDefaultBranch(jsonObjectList.get(i).getString("default_branch"));
             repository.setCreatedAt(UTCStringtODate(jsonObjectList.get(i).getString("created_at")));
             repository.setUpdatedAt(UTCStringtODate(jsonObjectList.get(i).getString("updated_at")));
             repository.setPushedAt(UTCStringtODate(jsonObjectList.get(i).getString("pushed_at")));
@@ -128,7 +244,7 @@ public class JSONParse {
             repository.setWatchersCount(jsonObjectList.get(i).getInteger("watchers_count"));
             repository.setForksCount(jsonObjectList.get(i).getInteger("forks_count"));
             repository.setLanguage(jsonObjectList.get(i).getString("language"));
-            repository.setDeveloperid(jsonObjectList.get(i).getLong("ownerId"));
+            repository.setDeveloperlogin(jsonObjectList.get(i).getString("ownerId"));
             repository.setUpdated(new Date());
             repositoryList.add(repository);
         }
@@ -142,6 +258,9 @@ public class JSONParse {
      * @return List<Repository>
      */
     public static List<Repository> listJSONObjectToListRepositorySearch(List<JSONObject> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
         List<Repository> repositoryList = new ArrayList<Repository>();
         for (int j = 0; j < list.size(); j++) {
             List<JSONObject> jsonObjectList = stringToJson(list.get(j).getString("items"));

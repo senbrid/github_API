@@ -45,6 +45,12 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
+
+  <!-- 加载自定义线程 -->
+  <!--<listener>-->
+    <!--<listener-class>com.graduation.listener.Listener</listener-class>-->
+  <!--</listener>-->
+
   <!-- 加载静态资源文件 -->
   <servlet-mapping>
     <servlet-name>default</servlet-name>
@@ -53,6 +59,10 @@
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.png</url-pattern>
   </servlet-mapping>
 
   <!-- spring mvc servlet-->

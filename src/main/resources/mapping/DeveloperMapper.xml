@@ -5,12 +5,14 @@
     <constructor >
       <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="login" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="avatar_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="company" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="blog" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="bio" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="public_repos" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="followers" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="following" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -78,8 +80,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, login, name, avatar_url, company, blog, email, bio, public_repos, followers, 
-    following, created_at, updated_at, updated
+    id, login, avatar_url, name, company, location, blog, email, bio, type, public_repos, 
+    followers, following, created_at, updated_at, updated
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.graduation.model.DeveloperExample" >
     select
@@ -101,6 +103,9 @@
     from tb_developer
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="preDo">
+  SET NAMES UTF8mb4;
+</select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_developer
     where id = #{id,jdbcType=BIGINT}
@@ -112,31 +117,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.graduation.model.Developer" >
-    insert into tb_developer (id, login, name, 
-      avatar_url, company, blog, 
-      email, bio, public_repos, 
-      followers, following, created_at, 
-      updated_at, updated)
-    values (#{id,jdbcType=BIGINT}, #{login,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{avatarUrl,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{bio,jdbcType=VARCHAR}, #{publicRepos,jdbcType=INTEGER}, 
-      #{followers,jdbcType=INTEGER}, #{following,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertBatch" parameterType="java.util.List">
-    insert into tb_developer (id, login, name,
-    avatar_url, company, blog,
-    email, bio, public_repos,
-    followers, following, created_at,
-    updated_at, updated)
-    values
-    <foreach collection="list" item="developer" separator=",">
-      (#{developer.id,jdbcType=BIGINT}, #{developer.login,jdbcType=VARCHAR}, #{developer.name,jdbcType=VARCHAR},
-      #{developer.avatarUrl,jdbcType=VARCHAR}, #{developer.company,jdbcType=VARCHAR}, #{developer.blog,jdbcType=VARCHAR},
-      #{developer.email,jdbcType=VARCHAR}, #{developer.bio,jdbcType=VARCHAR}, #{developer.publicRepos,jdbcType=INTEGER},
-      #{developer.followers,jdbcType=INTEGER}, #{developer.following,jdbcType=INTEGER}, #{developer.createdAt,jdbcType=TIMESTAMP},
-      #{developer.updatedAt,jdbcType=TIMESTAMP},#{developer.updated,jdbcType=TIMESTAMP})
-    </foreach>
+    insert into tb_developer (id, login, avatar_url, 
+      name, company, location, 
+      blog, email, bio, type, 
+      public_repos, followers, following, 
+      created_at, updated_at, updated
+      )
+    values (#{id,jdbcType=BIGINT}, #{login,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{blog,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{bio,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{publicRepos,jdbcType=INTEGER}, #{followers,jdbcType=INTEGER}, #{following,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.graduation.model.Developer" >
     insert into tb_developer
@@ -147,14 +139,17 @@
       <if test="login != null" >
         login,
       </if>
-      <if test="name != null" >
-        name,
-      </if>
       <if test="avatarUrl != null" >
         avatar_url,
       </if>
+      <if test="name != null" >
+        name,
+      </if>
       <if test="company != null" >
         company,
+      </if>
+      <if test="location != null" >
+        location,
       </if>
       <if test="blog != null" >
         blog,
@@ -164,6 +159,9 @@
       </if>
       <if test="bio != null" >
         bio,
+      </if>
+      <if test="type != null" >
+        type,
       </if>
       <if test="publicRepos != null" >
         public_repos,
@@ -191,14 +189,17 @@
       <if test="login != null" >
         #{login,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
       <if test="avatarUrl != null" >
         #{avatarUrl,jdbcType=VARCHAR},
       </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="company != null" >
         #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
       </if>
       <if test="blog != null" >
         #{blog,jdbcType=VARCHAR},
@@ -208,6 +209,9 @@
       </if>
       <if test="bio != null" >
         #{bio,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="publicRepos != null" >
         #{publicRepos,jdbcType=INTEGER},
@@ -244,14 +248,17 @@
       <if test="record.login != null" >
         login = #{record.login,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
       <if test="record.avatarUrl != null" >
         avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
       <if test="record.company != null" >
         company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
       </if>
       <if test="record.blog != null" >
         blog = #{record.blog,jdbcType=VARCHAR},
@@ -261,6 +268,9 @@
       </if>
       <if test="record.bio != null" >
         bio = #{record.bio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.publicRepos != null" >
         public_repos = #{record.publicRepos,jdbcType=INTEGER},
@@ -289,12 +299,14 @@
     update tb_developer
     set id = #{record.id,jdbcType=BIGINT},
       login = #{record.login,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
       company = #{record.company,jdbcType=VARCHAR},
+      location = #{record.location,jdbcType=VARCHAR},
       blog = #{record.blog,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       bio = #{record.bio,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
       public_repos = #{record.publicRepos,jdbcType=INTEGER},
       followers = #{record.followers,jdbcType=INTEGER},
       following = #{record.following,jdbcType=INTEGER},
@@ -311,14 +323,17 @@
       <if test="login != null" >
         login = #{login,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
       <if test="avatarUrl != null" >
         avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="company != null" >
         company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
       </if>
       <if test="blog != null" >
         blog = #{blog,jdbcType=VARCHAR},
@@ -328,6 +343,9 @@
       </if>
       <if test="bio != null" >
         bio = #{bio,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="publicRepos != null" >
         public_repos = #{publicRepos,jdbcType=INTEGER},
@@ -353,12 +371,14 @@
   <update id="updateByPrimaryKey" parameterType="com.graduation.model.Developer" >
     update tb_developer
     set login = #{login,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       company = #{company,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
       blog = #{blog,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       bio = #{bio,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
       public_repos = #{publicRepos,jdbcType=INTEGER},
       followers = #{followers,jdbcType=INTEGER},
       following = #{following,jdbcType=INTEGER},
@@ -366,28 +386,5 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
-         separator=";" 代表着每次循环完，在sql后面放一个分号
-         item="cus" 循环List的每条的结果集
-         collection="list" list 即为 map传过来的参数key -->
-    <foreach collection="list" separator=";" item="dev">
-      update tb_developer
-      set login = #{dev.login,jdbcType=VARCHAR},
-      name = #{dev.name,jdbcType=VARCHAR},
-      avatar_url = #{dev.avatarUrl,jdbcType=VARCHAR},
-      company = #{dev.company,jdbcType=VARCHAR},
-      blog = #{dev.blog,jdbcType=VARCHAR},
-      email = #{dev.email,jdbcType=VARCHAR},
-      bio = #{dev.bio,jdbcType=VARCHAR},
-      public_repos = #{dev.publicRepos,jdbcType=INTEGER},
-      followers = #{dev.followers,jdbcType=INTEGER},
-      following = #{dev.following,jdbcType=INTEGER},
-      created_at = #{dev.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{dev.updatedAt,jdbcType=TIMESTAMP},
-      updated = #{dev.updated,jdbcType=TIMESTAMP}
-      where id = #{dev.id,jdbcType=BIGINT}
-    </foreach>
   </update>
 </mapper>

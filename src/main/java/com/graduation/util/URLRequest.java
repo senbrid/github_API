@@ -21,37 +21,39 @@ public class URLRequest {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try {
-//            if(url.contains("?")){
-//                url += "&access_token=ef8dae6d1c237ff7eae15701fc2ad22a8cb0b58d";
-//            }else {
-//                url += "?access_token=ef8dae6d1c237ff7eae15701fc2ad22a8cb0b58d";
-//            }
             URL realUrl = new URL(url);
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
             // 设置通用的请求属性
             connection.setRequestProperty("accept", "application/vnd.github.v3+json");
-            connection.setRequestProperty("connection", "Keep-Alive");
+            //connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("Authorization", "token 31ea7e75e68219dc93c952f0ac15836a1cc4335d");
             connection.setRequestProperty("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 建立实际的连接
             connection.connect();
             // 获取所有响应头字段
             Map<String, List<String>> map = connection.getHeaderFields();
+            int remaining = Integer.parseInt(map.get("X-RateLimit-Remaining").get(0));
+            if(remaining == 0){
+                Long resetTime = new Long(map.get("X-RateLimit-Reset").get(0)) * 1000;
+                Long currentTime = System.currentTimeMillis();
+                System.out.println("线程将sleep "+ (resetTime - currentTime) +" 毫秒");
+                Thread.sleep(resetTime - currentTime + 20);
+            }
+            //logger.info("Remaining:" + remaining);
             // 遍历所有的响应头字段
 //            for (String key : map.keySet()) {
 //                System.out.println(key + "--->" + map.get(key));
 //            }
             // 定义 BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
                 result.append(line);
             }
         } catch (Exception e) {
-            System.out.println("发送GET请求出现异常！" + e);
             e.printStackTrace();
+            return null;
         }
         // 使用finally块来关闭输入流
         finally {

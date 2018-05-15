@@ -23,8 +23,9 @@ public class RepositoryServiceImp implements RepositoryService {
      */
     @Override
     public int addRepositoryByListPO(List<Repository> repositoryList) {
-        repositoryMapper.preDo();
-        return repositoryMapper.insertBatch(repositoryList);
+        //repositoryMapper.preDo();
+        //return repositoryMapper.insertBatch(repositoryList);
+        return 0;
     }
     /**
      * 单条添加开发者数据
@@ -36,7 +37,7 @@ public class RepositoryServiceImp implements RepositoryService {
     @Override
     public int addRepositoryByPO(Repository repository) {
         repositoryMapper.preDo();
-        return repositoryMapper.insert(repository);
+        return repositoryMapper.insertSelective(repository);
     }
 
     /**
@@ -58,7 +59,7 @@ public class RepositoryServiceImp implements RepositoryService {
      */
     @Override
     public List<Repository> queryRepositoryByExample(RepositoryExample record) {
-        repositoryMapper.preDo();
+        //repositoryMapper.preDo();
         List<Repository> repositories = repositoryMapper.selectByExample(record);
         return repositories;
     }
@@ -71,7 +72,7 @@ public class RepositoryServiceImp implements RepositoryService {
      */
     @Override
     public Integer queryDataTotal(RepositoryExample record) {
-        repositoryMapper.preDo();
+        //repositoryMapper.preDo();
         Integer repositoryCount = repositoryMapper.countByExample(record);
         return repositoryCount;
     }
@@ -83,7 +84,7 @@ public class RepositoryServiceImp implements RepositoryService {
      * @return
      */
     @Override
-    public Repository getDataById(Long id) {
+    public Repository getRepositoryById(Long id) {
         return repositoryMapper.selectByPrimaryKey(id);
     }
 }

@@ -1,13 +1,15 @@
 package com.graduation.dao;
 
 import com.graduation.model.Developer;
-
-import java.util.List;
-
 import com.graduation.model.DeveloperExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface DeveloperMapper {
+
+    void preDo();
+
     int countByExample(DeveloperExample example);
 
     int deleteByExample(DeveloperExample example);
@@ -15,10 +17,6 @@ public interface DeveloperMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(Developer record);
-
-    int insertBatch(List<Developer> developerList);
-
-    int updateBatch(List<Developer> developerList);
 
     int insertSelective(Developer record);
 

@@ -11,12 +11,16 @@
     <title>我的Github - 开源项目免费服务</title>
     <link href="https://cdn.bootcss.com" rel="dns-prefetch">
     <link href="https://api.bootcdn.cn" rel="dns-prefetch">
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <%--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://www.bootcdn.cn/assets/css/site.min.css?1521768396907" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
           href="http://www.bootcdn.cn/assets/ico/apple-touch-icon-144-precomposed.png?1521768396907">
     <link rel="shortcut icon" href="http://www.bootcdn.cn/assets/ico/favicon.ico?1521768396907">
+    <style>
+        #footer{ left:0px; position:fixed; width:100%; height:100px;bottom:0px;text-align: center}
+    </style>
 </head>
 <body class="home-template">
 <div class="site-header">
@@ -32,13 +36,12 @@
                 </button>
                 <a href="" class="navbar-brand lead" style="font-size: 30px;margin-left: auto"><b>GitHubHOME</b></a>
             </div>
-            <nav id="bs-navbar" class="collapse navbar-collapse">
-                <%--<ul class="nav navbar-nav navbar-right">--%>
-                    <%--<li><a href="">API</a></li>--%>
-                    <%--<li><a href="">排行榜</a></li>--%>
-                    <%--<li><a href="">关于</a></li>--%>
-                <%--</ul>--%>
-            </nav>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<%=base%>/view/total">统计</a></li>
+                <li><a href="<%=base%>/view/developerRank">开发者排行榜</a></li>
+                <li><a href="<%=base%>/view/repositoryRank">项目排行榜</a></li>
+                <li><a href="<%=base%>/">关于</a></li>
+            </ul>
         </div>
     </nav>
     <div class="container jumbotron">
@@ -60,73 +63,33 @@
         </div>
     </div>
 </div>
-<main class="packages-list-container" id="all-packages">
-    <div class="container">
-        <div class="list-group packages" id="common-packages">
-            <div id="body" style="height: 331px">
-                <div class="row" style="height: 61px">
-                    <div style="height: 60px">
-                        <p style="font-size: 20px;display: inline-block">每日推荐</p>&nbsp;&nbsp;<a href="javascript:void(0);" onclick=""><i
-                            class="glyphicon glyphicon-repeat"></i>换一批</a>
-                    </div>
-                </div>
-                <div class="row" style="height: 270px">
-                    <div style="height: 270px;margin-left: 30px">
-                        <div id="mrtj">
-                            <div class="col-md-4" style="height: 270px">
-                                <button style="background: rgba(255, 255, 255, 0.7);height: 270px">
-                                    <div class="">
-                                        <img src="https://avatars0.githubusercontent.com/u/12732?v=4&s=64">
-                                        <p>imathis/octopress</p>
-                                    </div>
-                                    <div>
-                                        <label>描述：</label>
-                                        <p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy
-                                            to configure and easy to deploy. Sweet huh?</p>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="col-md-4" style="height: 270px">
-                                <button style="background: rgba(255, 255, 255, 0.7);height: 100%">
-                                    <div class="">
-                                        <img src="https://avatars0.githubusercontent.com/u/12732?v=4&s=64">
-                                        <p>imathis/octopress</p>
-                                    </div>
-                                    <div>
-                                        <label>描述：</label>
-                                        <p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy
-                                            to configure and easy to deploy. Sweet huh?</p>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="col-md-4" style="height: 270px">
-                                <button style="background: rgba(255, 255, 255, 0.7);height: 100%">
-                                    <div class="">
-                                        <img src="https://avatars0.githubusercontent.com/u/12732?v=4&s=64">
-                                        <p>imathis/octopress</p>
-                                    </div>
-                                    <div>
-                                        <label>描述：</label>
-                                        <p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy
-                                            to configure and easy to deploy. Sweet huh?</p>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="list-group packages" id="search-results" style="display: none"></div>
+<div class="container" style="margin-top: 100px">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>统计</h2>
+            <p>你用什么编程语言？看看来自GitHub的数据</p>
+            <p><a class="btn btn-default" href="<%=base%>/view/total" role="button">查看 »</a></p>
         </div>
-</main>
+        <div class="col-sm-4">
+            <h2>星榜</h2>
+            <p>GitHub上的大牛都有谁？让数据告诉你</p>
+            <p><a class="btn btn-default" href="<%=base%>/view/developerRank" role="button">膜拜 »</a></p>
+        </div>
+        <div class="col-sm-4">
+            <h2>搜索</h2>
+            <p>众里寻ta不百度——GitHub人才搜索</p>
+            <p><a class="btn btn-default" href="<%=base%>/view/repositoryRank" role="button">搜人 »</a></p>
+        </div>
+    </div>
+</div>
 <footer id="footer" class="footer hidden-print">
     <div class="copy-right"><span>&copy; 2013-2018</span> <a
             href="http://www.miibeian.gov.cn/" target=_blank>京ICP备11008151号</a> <span>京公网安备11010802014853</span></div>
 </footer>
 <a href=# id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 
 <script>
     $(document).ready(function () {

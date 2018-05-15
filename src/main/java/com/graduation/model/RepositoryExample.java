@@ -305,6 +305,146 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andDescriptionIsNull() {
+            addCriterion("description is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIsNotNull() {
+            addCriterion("description is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionEqualTo(String value) {
+            addCriterion("description =", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotEqualTo(String value) {
+            addCriterion("description <>", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThan(String value) {
+            addCriterion("description >", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("description >=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThan(String value) {
+            addCriterion("description <", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("description <=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLike(String value) {
+            addCriterion("description like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotLike(String value) {
+            addCriterion("description not like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIn(List<String> values) {
+            addCriterion("description in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotIn(List<String> values) {
+            addCriterion("description not in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionBetween(String value1, String value2) {
+            addCriterion("description between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotBetween(String value1, String value2) {
+            addCriterion("description not between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchIsNull() {
+            addCriterion("default_branch is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchIsNotNull() {
+            addCriterion("default_branch is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchEqualTo(String value) {
+            addCriterion("default_branch =", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchNotEqualTo(String value) {
+            addCriterion("default_branch <>", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchGreaterThan(String value) {
+            addCriterion("default_branch >", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchGreaterThanOrEqualTo(String value) {
+            addCriterion("default_branch >=", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchLessThan(String value) {
+            addCriterion("default_branch <", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchLessThanOrEqualTo(String value) {
+            addCriterion("default_branch <=", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchLike(String value) {
+            addCriterion("default_branch like", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchNotLike(String value) {
+            addCriterion("default_branch not like", value, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchIn(List<String> values) {
+            addCriterion("default_branch in", values, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchNotIn(List<String> values) {
+            addCriterion("default_branch not in", values, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchBetween(String value1, String value2) {
+            addCriterion("default_branch between", value1, value2, "defaultBranch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultBranchNotBetween(String value1, String value2) {
+            addCriterion("default_branch not between", value1, value2, "defaultBranch");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatedAtIsNull() {
             addCriterion("created_at is null");
             return (Criteria) this;
@@ -725,76 +865,6 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionIsNull() {
-            addCriterion("description is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIsNotNull() {
-            addCriterion("description is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionEqualTo(String value) {
-            addCriterion("description =", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotEqualTo(String value) {
-            addCriterion("description <>", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionGreaterThan(String value) {
-            addCriterion("description >", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
-            addCriterion("description >=", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLessThan(String value) {
-            addCriterion("description <", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLessThanOrEqualTo(String value) {
-            addCriterion("description <=", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLike(String value) {
-            addCriterion("description like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotLike(String value) {
-            addCriterion("description not like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIn(List<String> values) {
-            addCriterion("description in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotIn(List<String> values) {
-            addCriterion("description not in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionBetween(String value1, String value2) {
-            addCriterion("description between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotBetween(String value1, String value2) {
-            addCriterion("description not between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
         public Criteria andLanguageIsNull() {
             addCriterion("language is null");
             return (Criteria) this;
@@ -865,63 +935,73 @@ public class RepositoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidIsNull() {
-            addCriterion("developerId is null");
+        public Criteria andDeveloperloginIsNull() {
+            addCriterion("developerLogin is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidIsNotNull() {
-            addCriterion("developerId is not null");
+        public Criteria andDeveloperloginIsNotNull() {
+            addCriterion("developerLogin is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidEqualTo(Long value) {
-            addCriterion("developerId =", value, "developerid");
+        public Criteria andDeveloperloginEqualTo(String value) {
+            addCriterion("developerLogin =", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotEqualTo(Long value) {
-            addCriterion("developerId <>", value, "developerid");
+        public Criteria andDeveloperloginNotEqualTo(String value) {
+            addCriterion("developerLogin <>", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidGreaterThan(Long value) {
-            addCriterion("developerId >", value, "developerid");
+        public Criteria andDeveloperloginGreaterThan(String value) {
+            addCriterion("developerLogin >", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidGreaterThanOrEqualTo(Long value) {
-            addCriterion("developerId >=", value, "developerid");
+        public Criteria andDeveloperloginGreaterThanOrEqualTo(String value) {
+            addCriterion("developerLogin >=", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLessThan(Long value) {
-            addCriterion("developerId <", value, "developerid");
+        public Criteria andDeveloperloginLessThan(String value) {
+            addCriterion("developerLogin <", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidLessThanOrEqualTo(Long value) {
-            addCriterion("developerId <=", value, "developerid");
+        public Criteria andDeveloperloginLessThanOrEqualTo(String value) {
+            addCriterion("developerLogin <=", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidIn(List<Long> values) {
-            addCriterion("developerId in", values, "developerid");
+        public Criteria andDeveloperloginLike(String value) {
+            addCriterion("developerLogin like", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotIn(List<Long> values) {
-            addCriterion("developerId not in", values, "developerid");
+        public Criteria andDeveloperloginNotLike(String value) {
+            addCriterion("developerLogin not like", value, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidBetween(Long value1, Long value2) {
-            addCriterion("developerId between", value1, value2, "developerid");
+        public Criteria andDeveloperloginIn(List<String> values) {
+            addCriterion("developerLogin in", values, "developerlogin");
             return (Criteria) this;
         }
 
-        public Criteria andDeveloperidNotBetween(Long value1, Long value2) {
-            addCriterion("developerId not between", value1, value2, "developerid");
+        public Criteria andDeveloperloginNotIn(List<String> values) {
+            addCriterion("developerLogin not in", values, "developerlogin");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeveloperloginBetween(String value1, String value2) {
+            addCriterion("developerLogin between", value1, value2, "developerlogin");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeveloperloginNotBetween(String value1, String value2) {
+            addCriterion("developerLogin not between", value1, value2, "developerlogin");
             return (Criteria) this;
         }
 

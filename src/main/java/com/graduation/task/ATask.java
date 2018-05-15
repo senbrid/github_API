@@ -50,7 +50,7 @@ public class ATask {
                 for (Repository repository : repositoryList) {
                     //3天没更新的项目不添加到数据库
                     if(repository.getUpdatedAt().getTime() > (begin-1000*60*60*24*3)) {
-                        Repository repository1 = repositoryService.getDataById(repository.getId());
+                        Repository repository1 = repositoryService.getRepositoryById(repository.getId());
                         if (repository1 == null) {
                             repositories.add(repository);
                         }
@@ -58,12 +58,18 @@ public class ATask {
                 }
                 if (!repositories.isEmpty()) {
                     //批量添加数据
-                    int count = repositoryService.addRepositoryByListPO(repositories);
+                    int count = 0;
+                    for (Repository repository : repositories){
+                        count += repositoryService.addRepositoryByPO(repository);
+                    }
                     logger.info(" #获取数据# 成功添加" + count + "条 "+language[i]+" 项目数据。");
                     StringBuilder result = new StringBuilder();
                     for (Repository repository : repositories) {
-                        Developer developer = developerService.getDeveloperById(repository.getDeveloperid());
-                        if (developer == null) {
+                        DeveloperExample developerExample = new DeveloperExample();
+                        DeveloperExample.Criteria criteria = developerExample.createCriteria();
+                        criteria.andLoginEqualTo(repository.getDeveloperlogin());
+                        List<Developer> developerList = developerService.getDeveloperByExample(developerExample);
+                        if (developerList.size() == 0) {
                             result.append(URLRequest.sendGet(URLBuilder.urlDeveBuilder(repository.getFullName().split("/")[0])));
                         }
                     }
@@ -72,7 +78,10 @@ public class ATask {
                         List<JSONObject> jsonObjectList = JSONParse.stringToJson(result.toString());
                         //把JSON数据封装到实体类List
                         List<Developer> developerList = JSONParse.listJSONObjectToListDeveloper(jsonObjectList);
-                        int countInsert = developerService.addDeveloperByListPO(removeDupliById(developerList));
+                        int countInsert = 0;
+                        for(Developer developer : developerList){
+                            countInsert += developerService.addDeveloperByPO(developer);
+                        }
                         logger.info(" #获取数据# 成功添加" + countInsert + "条开发者数据。");
                     }else {
                         logger.info(" #获取数据# 没有获取到 "+language[i]+"项目 的开发者新数据。");

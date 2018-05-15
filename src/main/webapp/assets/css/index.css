@@ -1,0 +1,23 @@
+.poster {
+  display: inline-block;
+  width: 45px;
+  margin-top: 10px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.poster .icon {
+  width: 45px;
+  border-radius: 50%;
+}
+
+.tag {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 1px;
+  background-color: #ddd;
+}
+
+.cell {
+  overflow: hidden;
+}

@@ -1,17 +1,14 @@
 package com.graduation.dao;
 
 import com.graduation.model.Repository;
-
-import java.util.List;
-
 import com.graduation.model.RepositoryExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RepositoryMapper {
 
     void preDo();
-
-    List<Repository> selectAll();
 
     int countByExample(RepositoryExample example);
 
@@ -20,8 +17,6 @@ public interface RepositoryMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(Repository record);
-
-    int insertBatch(List<Repository> repositories);
 
     int insertSelective(Repository record);
 
